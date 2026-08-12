@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { supportedLocales } from "../../lib/i18n";
+export function getStaticPaths() { return supportedLocales.map((locale) => ({ params: { locale } })); }
+const { locale } = Astro.params;
+---
+<BaseLayout locale={locale as "en" | "es"} path="">
+  <main><h1>Gaberse</h1><p>Foundation route. Editorial home design is a later milestone.</p></main>
+</BaseLayout>

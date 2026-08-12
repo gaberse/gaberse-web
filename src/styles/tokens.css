@@ -1,0 +1,13 @@
+:root {
+  --color-canvas: #f6f4ef;
+  --color-ink: #171715;
+  --color-muted: #74736e;
+  --color-surface: #edebe5;
+  --font-sans: "Geist Variable", Arial, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, monospace;
+  --radius-object: 1rem;
+  --radius-artifact: 1.5rem;
+  --shadow-object: 0 8px 28px rgb(0 0 0 / 0.04);
+  --space-page: clamp(1.25rem, 3vw, 3rem);
+  --measure-readable: 70ch;
+}

@@ -1,0 +1,9 @@
+@import "@fontsource-variable/geist/wght.css";
+@import "@fontsource-variable/geist-mono/wght.css";
+@import "./tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--color-canvas); color: var(--color-ink); font-family: var(--font-sans); }
+body { margin: 0; min-width: 20rem; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 4px; }

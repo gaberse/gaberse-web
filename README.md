@@ -1,2 +1,11 @@
-# gaberse-web
-The source of gaberse.tech — a living index of things I make, explore, and experience.
+# Gaberse
+
+Static-first bilingual editorial site built with Astro, Content Collections, MDX, and isolated React integration for future interactive islands.
+
+## Commands
+
+- `pnpm dev`
+- `pnpm check`
+- `pnpm test`
+- `pnpm lint`
+- `pnpm build`
