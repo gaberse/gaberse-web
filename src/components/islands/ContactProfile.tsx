@@ -6,22 +6,27 @@ const profileCopy = {
   en: {
     trigger: "Contact",
     dialogLabel: "Gabriela — contact profile",
-    close: "Close profile",
-    photo: "Editorial photograph pending",
-    statement: "Gaberse is where I keep the things I make, explore, and experience.",
-    urlPending: "URL pending",
+    closeLabel: "Close Gabriela profile",
+    closeVisible: "CLOSE",
+    photoAlt: "Gabriela standing on a rocky beach beside the sea.",
+    statement: "I make things, follow curiosities, and document what happens along the way.",
   },
   es: {
     trigger: "Contacto",
     dialogLabel: "Gabriela — perfil de contacto",
-    close: "Cerrar perfil",
-    photo: "Fotografía editorial pendiente",
-    statement: "Gaberse es donde guardo las cosas que hago, exploro y vivo.",
-    urlPending: "URL pendiente",
+    closeLabel: "Cerrar el perfil de Gabriela",
+    closeVisible: "CERRAR",
+    photoAlt: "Gabriela de pie en una playa rocosa junto al mar.",
+    statement:
+      "Hago cosas, me obsesiono con otras y voy dejando registro de lo que pasa en el camino.",
   },
 } as const;
 
-const socialNames = ["GitHub", "LinkedIn", "Instagram"] as const;
+const socialLinks = [
+  { name: "GitHub", href: "https://github.com/gaberse" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/magalopez/" },
+  { name: "Instagram", href: "https://www.instagram.com/gaberse_/" },
+] as const;
 
 export default function ContactProfile({ locale }: { locale: Locale }) {
   const copy = profileCopy[locale];
@@ -85,33 +90,49 @@ export default function ContactProfile({ locale }: { locale: Locale }) {
       >
         <div className="contact-profile__surface">
           <div className="contact-profile__bar">
-            <p aria-hidden="true">GABERSE / 01</p>
             <button
               className="contact-profile__close"
               type="button"
+              aria-label={copy.closeLabel}
               onClick={closeDialog}
               autoFocus
             >
-              {copy.close} <span aria-hidden="true">×</span>
+              {copy.closeVisible} <span aria-hidden="true">×</span>
             </button>
           </div>
 
           <div className="contact-profile__body">
-            <div className="contact-profile__photo" role="img" aria-label={copy.photo}>
-              <span>{copy.photo}</span>
-            </div>
+            <figure className="contact-profile__photo">
+              <img
+                src="/media/profile/gabriela-by-the-sea-800.webp"
+                srcSet={[
+                  "/media/profile/gabriela-by-the-sea-480.webp 480w",
+                  "/media/profile/gabriela-by-the-sea-800.webp 800w",
+                  "/media/profile/gabriela-by-the-sea-1200.webp 1200w",
+                ].join(", ")}
+                sizes="(max-width: 44rem) 100vw, 32vw"
+                width="1200"
+                height="1600"
+                alt={copy.photoAlt}
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
 
             <div className="contact-profile__identity">
-              <p className="contact-profile__eyebrow">GABRIELA</p>
               <h2>GABRIELA</h2>
               <p className="contact-profile__statement">{copy.statement}</p>
 
               <div className="contact-profile__links" aria-label={copy.dialogLabel}>
-                {socialNames.map((name) => (
-                  <span className="contact-profile__pending" key={name}>
-                    <span>{name}</span>
-                    <small>{copy.urlPending}</small>
-                  </span>
+                {socialLinks.map(({ name, href }) => (
+                  <a
+                    href={href}
+                    key={name}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {name} <span aria-hidden="true">↗</span>
+                  </a>
                 ))}
                 <a href="mailto:hello@gaberse.tech">
                   hello@gaberse.tech <span aria-hidden="true">↗</span>
