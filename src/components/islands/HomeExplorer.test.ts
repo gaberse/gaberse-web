@@ -74,6 +74,29 @@ describe("getExplorerState", () => {
     expect(html.match(/aria-pressed="false"/g)).toHaveLength(3);
     expect(html.match(/aria-controls=/g)).toHaveLength(3);
     expect(html).toContain("AI Engineering Path. A living practice · Active. Not published yet");
+    expect(html).toContain("Explore what keeps pulling me in");
+    expect(html).toContain("Design Systems");
+    expect(html).toContain("Travel Photography");
+    expect(html).toContain("Tap or swipe to explore");
+  });
+
+  it("renders the concise touch instruction in Spanish", () => {
+    const html = renderToStaticMarkup(
+      createElement(HomeExplorer, { locale: "es" }),
+    );
+
+    expect(html).toContain("Últimamente, por acá");
+    expect(html).toContain("Toca o desliza para explorar");
+    expect(html).toContain(">AI<");
+    expect(html).toContain("AI Engineering Path");
+    expect(html).toContain("Design System");
+    expect(html).toContain("Sistemas de diseño");
+    expect(html).toContain("Fotografía de viajes");
+    expect(html).not.toContain("Explorá lo que sigue llamando mi atención");
+    expect(html).not.toContain("Tocá o deslizá para explorar");
+    expect(html).not.toContain(">IA<");
+    expect(html).not.toContain("Camino de Ingeniería de IA");
+    expect(html).not.toContain("Sistema de diseño.");
   });
 
   it("cycles through artifacts for touch swipe discovery", () => {

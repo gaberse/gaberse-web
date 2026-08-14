@@ -16,24 +16,26 @@ const copy = isEnglish
       currently: "Currently",
       path: "AI Engineering\nPath",
       phase: "Phase 01\nFoundations",
-      pathText: "I’m expanding my problem-solving\ncapabilities through AI.",
+      pathText: "I'm expanding my problem-solving capabilities through AI.",
       unavailable: "Not published yet",
       selectedLabel: "From the universe",
       placeholder: "Placeholder media",
-      archive: "Archive coming soon",
+      archiveLabel: "Archive",
+      archiveText: "Everything that ended up here",
       contact: "Something caught\nyour attention?",
     }
   : {
-      intro: "Cosas que\nsiguen llamando\nmi atención",
-      currently: "Ahora",
-      path: "Camino de\nIngeniería de IA",
+      intro: "Cosas en las que siempre termino metiéndome",
+      currently: "Ahora mismo",
+      path: "AI Engineering\nPath",
       phase: "Fase 01\nFundamentos",
-      pathText: "Estoy ampliando cómo resuelvo\nproblemas a través de la IA.",
+      pathText: "Estoy explorando hasta dónde puedo llevar mi forma de resolver problemas con AI.",
       unavailable: "Aún no publicado",
       selectedLabel: "Del universo",
       placeholder: "Media provisional",
-      archive: "Archivo próximamente",
-      contact: "¿Algo llamó\ntu atención?",
+      archiveLabel: "Archivo",
+      archiveText: "Todo lo que fue llegando hasta acá",
+      contact: "¿Te llamó la atención algo?",
     };
 const featured = isEnglish
   ? [
@@ -45,8 +47,8 @@ const featured = isEnglish
   : [
       ["React Miami 2025", "Experiencia / 2025", "dark"],
       ["Fotografía de viajes", "Archivo visual", "mid"],
-      ["Sistema de diseño", "En construcción / v0.1", "light"],
-      ["Camino de Ingeniería de IA", "Activo", "ink"],
+      ["Design System", "En construcción / v0.1", "light"],
+      ["AI Engineering Path", "Activo", "ink"],
     ];
 ---
 
@@ -80,7 +82,10 @@ const featured = isEnglish
           </article>
         ))}
       </div>
-      <span class="archive-link archive-link--unavailable" aria-label={copy.archive}>{copy.archive} <span aria-hidden="true">↗</span></span>
+      <div class="archive-transition">
+        <p class="home__eyebrow">{copy.archiveLabel}</p>
+        <p>{copy.archiveText} <span aria-hidden="true">↗</span></p>
+      </div>
     </section>
 
     <section class="contact home__section">
@@ -110,20 +115,24 @@ const featured = isEnglish
   .currently__object b { left: 28%; right: 28%; top: 40%; bottom: 29%; }
   .currently__object::after { content: ""; position: absolute; width: .9rem; height: .9rem; border-radius: 50%; background: #f3f2ee; top: calc(50% - .45rem); left: calc(50% - .45rem); }
   .selected { padding-top: clamp(7rem, 12vw, 12rem); }
-  .selected__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; margin-top: 2.4rem; }
+  .selected__list { display: grid; grid-template-columns: 1.08fr .94fr 1.03fr .95fr; gap: clamp(.85rem, 1.35vw, 1.35rem); align-items: start; margin-top: 2.4rem; }
   .selected__entry { min-width: 0; min-height: 18rem; padding: .8rem; border-radius: var(--radius-object); display: flex; flex-direction: column; }
+  .selected__entry:nth-child(2) { margin-top: 1.8rem; min-height: 19.5rem; }
+  .selected__entry:nth-child(3) { margin-top: .65rem; min-height: 17.25rem; }
+  .selected__entry:nth-child(4) { margin-top: 2.5rem; min-height: 18.75rem; }
   .selected__entry--dark, .selected__entry--ink { background: #242422; color: #f2f1ed; }
   .selected__entry--mid { background: #b6b5b1; color: #1e1e1d; }
   .selected__entry--light { background: #efeeeb; color: #272726; }
-  .selected__object { min-height: 11.5rem; border-radius: .7rem; padding: .6rem; }
+  .selected__object { min-height: 11.5rem; border-radius: .7rem; }
   .selected__object > span { display: block; width: 100%; height: 100%; min-height: 10.3rem; border-radius: .55rem; background: #41413f; }
   .selected__entry--mid .selected__object > span { background: #898886; }
   .selected__entry--light .selected__object > span { background: #d0cfcd; }
   .selected__entry strong { margin-top: 1.1rem; font-size: .98rem; letter-spacing: -.04em; font-weight: 510; }
   .selected__entry small { margin-top: auto; font: 500 .58rem/1.25 var(--font-mono); letter-spacing: .055em; text-transform: uppercase; color: currentColor; opacity: .7; }
-  .archive-link { display: block; width: fit-content; margin: 3.4rem 0 0 auto; color: var(--color-muted); font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
-  .archive-link--unavailable { cursor: not-allowed; }
-  .contact { margin-top: clamp(3rem, 8vw, 7rem); margin-bottom: 3.8rem; padding: clamp(3rem, 5vw, 5rem) clamp(1.8rem, 3vw, 3rem); min-height: 15rem; border-radius: 1.7rem; background: #f1f0ed; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; }
+  .archive-transition { margin-top: clamp(6rem, 10vw, 10rem); max-width: 52rem; cursor: default; }
+  .archive-transition > p:last-child { max-width: 14ch; margin: 1.2rem 0 0; font-size: clamp(3rem, 5.7vw, 6rem); line-height: .92; letter-spacing: -.07em; font-weight: 580; }
+  .archive-transition > p:last-child span { display: inline-block; margin-left: .08em; font-size: .7em; vertical-align: .08em; }
+  .contact { margin-top: clamp(3rem, 6vw, 6rem); margin-bottom: 3.8rem; padding-top: clamp(5rem, 8vw, 8rem); padding-bottom: clamp(5rem, 8vw, 8rem); min-height: 18rem; border-top: 1px solid #d9d6cf; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; }
   .contact h2 { margin: 0; font-size: clamp(2.6rem, 3.5vw, 4rem); max-width: 13ch; }
   .contact__email { justify-self: start; font: 500 clamp(.9rem, 1.25vw, 1.15rem) var(--font-mono); text-decoration: none; }
   @media (min-width: 70rem) { .home__hero { padding-top: 5.55rem; } }
@@ -131,15 +140,21 @@ const featured = isEnglish
     .home__hero { min-height: 0; padding-top: 3.5rem; }
     .home__hero-copy { width: 100%; }
     .home__hero h1 { font-size: clamp(3.7rem, 16.5vw, 5rem); }
-    .home__hero :global(.explorer) { position: relative; inset: auto; padding: 3rem 0 4.2rem; }
+    .home__hero :global(.explorer) { position: relative; inset: auto; padding: 3rem 0 2.8rem; }
+    .currently { padding-top: 4.4rem; }
     .currently { grid-template-columns: 1fr; gap: 2.3rem; }
     .currently__copy h2 { margin: 1.7rem 0 1.8rem; }
     .currently__object { max-width: 32rem; }
-    .selected__list { grid-template-columns: 1fr 1fr; }
-    .selected__entry { min-height: 15.5rem; }
+    .selected__list { grid-template-columns: 1.05fr .95fr; gap: .85rem; }
+    .selected__entry { min-height: 15.5rem; margin-top: 0; }
+    .selected__entry:nth-child(2) { min-height: 17rem; margin-top: 2rem; }
+    .selected__entry:nth-child(3) { min-height: 14.75rem; margin-top: -1rem; }
+    .selected__entry:nth-child(4) { min-height: 16.25rem; margin-top: 1.25rem; }
     .selected__object { min-height: 9rem; }
     .selected__object > span { min-height: 7.8rem; }
-    .contact { display: block; width: auto; margin-inline: var(--space-page); }
+    .archive-transition { margin-top: 5.5rem; }
+    .archive-transition > p:last-child { font-size: clamp(2.9rem, 13vw, 4.3rem); }
+    .contact { display: block; }
     .contact__email { display: block; margin-top: 2.7rem; }
   }
 </style>

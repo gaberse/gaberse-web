@@ -12,8 +12,8 @@ const artifacts: Record<Locale, Artifact[]> = {
     { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c" },
   ],
   es: [
-    { id: "ai", interest: "IA", title: "Camino de Ingeniería de IA", meta: "Una práctica viva · Activa", tone: "a" },
-    { id: "design-systems", interest: "Sistemas de diseño", title: "Sistema de diseño", meta: "Una biblioteca en progreso", tone: "b" },
+    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a" },
+    { id: "design-systems", interest: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b" },
     { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c" },
   ],
 };
@@ -31,8 +31,8 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
   const state = getExplorerState(interaction);
   const { activeInterest, committedInterest } = state;
   const labels = locale === "en"
-    ? { heading: "Explore what keeps pulling me in", interests: "Interests", unavailable: "Not published yet", placeholder: "Placeholder media", touchHint: "Tap an interest or swipe the deck to bring an artifact forward.", pointerHint: "Hover or focus an interest to bring an artifact forward." }
-    : { heading: "Explorá lo que sigue llamando mi atención", interests: "Intereses", unavailable: "Aún no publicado", placeholder: "Media provisional", touchHint: "Tocá un interés o deslizá el mazo para acercar un artefacto.", pointerHint: "Pasá o enfocá un interés para acercar un artefacto." };
+    ? { heading: "Explore what keeps pulling me in", interests: "Interests", unavailable: "Not published yet", placeholder: "Placeholder media", touchHint: "Tap or swipe to explore" }
+    : { heading: "Últimamente, por acá", interests: "Intereses", unavailable: "Aún no publicado", placeholder: "Media provisional", touchHint: "Toca o desliza para explorar" };
 
   useEffect(() => {
     const query = window.matchMedia("(pointer: coarse)");
@@ -87,6 +87,6 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
         </article>;
       })}
     </div>
-    <p className="explorer__hint">{touchMode ? labels.touchHint : labels.pointerHint}</p>
+    <p className="explorer__hint">{labels.touchHint}</p>
   </section>;
 }
