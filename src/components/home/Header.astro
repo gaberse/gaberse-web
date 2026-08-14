@@ -1,0 +1,31 @@
+---
+import { localizedPath, type Locale } from "../../lib/i18n";
+
+const { locale } = Astro.props as { locale: Locale };
+const otherLocale = locale === "en" ? "es" : "en";
+const labels = locale === "en"
+  ? { archive: "Archive", archiveUnavailable: "Archive is not published yet", home: "Gaberse home", navigation: "Primary navigation" }
+  : { archive: "Archivo", archiveUnavailable: "El archivo aún no está publicado", home: "Inicio de Gaberse", navigation: "Navegación principal" };
+---
+
+<header class="site-header">
+  <a class="site-header__brand" href={localizedPath(locale)} aria-label={labels.home}>gaberse</a>
+  <nav aria-label={labels.navigation}>
+    <span class="site-header__archive site-header__archive--unavailable" aria-label={labels.archiveUnavailable}>{labels.archive}<span aria-hidden="true">↗</span><small>{locale === "en" ? "Soon" : "Pronto"}</small></span>
+    <span class="site-header__locales"><span aria-current="page">{locale.toUpperCase()}</span><span aria-hidden="true">/</span><a href={localizedPath(otherLocale)} lang={otherLocale}>{otherLocale.toUpperCase()}</a></span>
+  </nav>
+</header>
+
+<style>
+  .site-header { width: 100%; margin: 0; display: flex; align-items: center; justify-content: space-between; padding: 2rem var(--space-page); font: 500 .58rem/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; }
+  .site-header__brand { font: 620 .82rem/1 var(--font-sans); letter-spacing: .43em; text-decoration: none; }
+  .site-header nav { display: flex; align-items: center; gap: 1.3rem; }
+  .site-header nav a { color: inherit; text-decoration: none; }
+  .site-header__archive { display: grid; gap: .2rem; text-align: left; letter-spacing: .04em; }
+  .site-header__archive--unavailable { color: var(--color-muted); cursor: not-allowed; }
+  .site-header__archive small { font: 500 .46rem/1 var(--font-mono); letter-spacing: .08em; }
+  .site-header__archive span { font-size: .75rem; }
+  .site-header__locales { display: flex; gap: .45rem; align-items: center; padding: .5rem .8rem; border-radius: 999px; background: #f0efec; color: var(--color-muted); letter-spacing: .06em; }
+  .site-header__locales [aria-current="page"] { color: var(--color-ink); }
+  @media (max-width: 44rem) { .site-header { padding-top: 1.5rem; } .site-header__archive { display:none; } }
+</style>

@@ -1,13 +1,17 @@
 :root {
   --color-canvas: #f6f4ef;
   --color-ink: #171715;
-  --color-muted: #74736e;
+  --color-muted: #686762;
   --color-surface: #edebe5;
   --font-sans: "Geist Variable", Arial, sans-serif;
   --font-mono: "Geist Mono Variable", ui-monospace, monospace;
   --radius-object: 1rem;
   --radius-artifact: 1.5rem;
   --shadow-object: 0 8px 28px rgb(0 0 0 / 0.04);
-  --space-page: clamp(1.25rem, 3vw, 3rem);
+  --shadow-artifact: 0 18px 54px rgb(41 38 31 / 0.12), 0 3px 10px rgb(41 38 31 / 0.06);
+  --text-meta: 0.8125rem;
+  --leading-meta: 1.45;
+  --tracking-meta: 0.085em;
+  --space-page: clamp(1.25rem, 3.89vw, 3.5rem);
   --measure-readable: 70ch;
 }

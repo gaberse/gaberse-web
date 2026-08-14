@@ -1,9 +1,145 @@
 ---
+import Header from "../../components/home/Header.astro";
+import HomeExplorer from "../../components/islands/HomeExplorer";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { supportedLocales } from "../../lib/i18n";
-export function getStaticPaths() { return supportedLocales.map((locale) => ({ params: { locale } })); }
-const { locale } = Astro.params;
+import { supportedLocales, type Locale } from "../../lib/i18n";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const isEnglish = locale === "en";
+const copy = isEnglish
+  ? {
+      intro: "Things that\nkeep pulling\nmy attention",
+      currently: "Currently",
+      path: "AI Engineering\nPath",
+      phase: "Phase 01\nFoundations",
+      pathText: "I’m expanding my problem-solving\ncapabilities through AI.",
+      unavailable: "Not published yet",
+      selectedLabel: "From the universe",
+      placeholder: "Placeholder media",
+      archive: "Archive coming soon",
+      contact: "Something caught\nyour attention?",
+    }
+  : {
+      intro: "Cosas que\nsiguen llamando\nmi atención",
+      currently: "Ahora",
+      path: "Camino de\nIngeniería de IA",
+      phase: "Fase 01\nFundamentos",
+      pathText: "Estoy ampliando cómo resuelvo\nproblemas a través de la IA.",
+      unavailable: "Aún no publicado",
+      selectedLabel: "Del universo",
+      placeholder: "Media provisional",
+      archive: "Archivo próximamente",
+      contact: "¿Algo llamó\ntu atención?",
+    };
+const featured = isEnglish
+  ? [
+      ["React Miami 2025", "Experience / 2025", "dark"],
+      ["Travel Photography", "Visual archive", "mid"],
+      ["Design System", "Building / v0.1", "light"],
+      ["AI Engineering Path", "Active", "ink"],
+    ]
+  : [
+      ["React Miami 2025", "Experiencia / 2025", "dark"],
+      ["Fotografía de viajes", "Archivo visual", "mid"],
+      ["Sistema de diseño", "En construcción / v0.1", "light"],
+      ["Camino de Ingeniería de IA", "Activo", "ink"],
+    ];
 ---
-<BaseLayout locale={locale as "en" | "es"} path="">
-  <main><h1>Gaberse</h1><p>Foundation route. Editorial home design is a later milestone.</p></main>
+
+<BaseLayout locale={locale} description={copy.intro.replaceAll("\n", " ")} path="">
+  <Header locale={locale} />
+  <main class="home">
+    <section class="home__hero">
+      <div class="home__hero-copy"><h1>{copy.intro}</h1></div>
+      <HomeExplorer client:load locale={locale} />
+    </section>
+
+    <section class="currently home__section">
+      <div class="currently__copy">
+        <p class="home__eyebrow">{copy.currently}</p>
+        <h2>{copy.path}</h2>
+        <p>{copy.pathText}</p>
+      </div>
+      <div class="currently__object" aria-label={copy.placeholder}>
+        <span>{copy.phase}</span><i aria-hidden="true"></i><b aria-hidden="true"></b>
+      </div>
+    </section>
+
+    <section class="selected home__section">
+      <p class="home__eyebrow">{copy.selectedLabel}</p>
+      <div class="selected__list">
+        {featured.map(([title, metadata, tone]) => (
+          <article class={`selected__entry selected__entry--${tone}`}>
+            <div class="selected__object" aria-label={copy.placeholder}><span aria-hidden="true"></span></div>
+            <strong>{title}</strong>
+            <small>{metadata}</small>
+          </article>
+        ))}
+      </div>
+      <span class="archive-link archive-link--unavailable" aria-label={copy.archive}>{copy.archive} <span aria-hidden="true">↗</span></span>
+    </section>
+
+    <section class="contact home__section">
+      <h2>{copy.contact}</h2>
+      <a class="contact__email" href="mailto:hello@gaberse.tech">hello@gaberse.tech <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
 </BaseLayout>
+
+<style>
+  /* Keep wide editorial objects from creating horizontal scroll without
+     clipping the Hero deck when its rotation/drift crosses the top edge. */
+  .home { overflow-x: clip; overflow-y: visible; }
+  .home__hero, .home__section { width: 100%; max-width: none; margin-inline: 0; }
+  .home__hero { min-height: 662px; position: relative; padding: 4.85rem var(--space-page) 0; }
+  .home__hero-copy { position: relative; z-index: 1; width: 43%; pointer-events: none; }
+  .home__hero h1 { white-space: pre-line; margin: 0; font-size: clamp(4.75rem, 7.3vw, 7.4rem); letter-spacing: -.09em; line-height: .88; font-weight: 620; }
+  .home__hero :global(.explorer) { position: absolute; inset: 0; padding: 0 var(--space-page); }
+  .home__eyebrow { font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); margin: 0; }
+  .home__section { padding: clamp(6rem, 10vw, 10rem) var(--space-page); }
+  .currently { display: grid; grid-template-columns: minmax(0, .95fr) minmax(32rem, 1.05fr); gap: clamp(4.5rem, 15vw, 15rem); align-items: center; }
+  .currently__copy h2, .contact h2 { white-space: pre-line; font-size: clamp(3.3rem, 5vw, 5.3rem); line-height: .9; letter-spacing: -.075em; font-weight: 600; margin: 2.4rem 0 2.7rem; }
+  .currently__copy > p:last-child { white-space: pre-line; font-size: clamp(1.05rem, 1.5vw, 1.3rem); line-height: 1.36; margin: 0; color: #464540; }
+  .currently__object { position: relative; width: 100%; aspect-ratio: 1.65 / 1; min-height: 16rem; overflow: hidden; border-radius: 1.5rem; background: #1c1c1a; color: #d5d4d0; box-shadow: var(--shadow-object); }
+  .currently__object > span { position: absolute; z-index: 1; top: 1.45rem; left: 1.45rem; white-space: pre-line; font: 500 var(--text-meta)/1.25 var(--font-mono); text-transform: uppercase; }
+  .currently__object i, .currently__object b { position: absolute; display: block; border: 1px solid #60605d; border-radius: 50%; left: 16%; right: 16%; top: 29%; bottom: 18%; }
+  .currently__object b { left: 28%; right: 28%; top: 40%; bottom: 29%; }
+  .currently__object::after { content: ""; position: absolute; width: .9rem; height: .9rem; border-radius: 50%; background: #f3f2ee; top: calc(50% - .45rem); left: calc(50% - .45rem); }
+  .selected { padding-top: clamp(7rem, 12vw, 12rem); }
+  .selected__list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.1rem; margin-top: 2.4rem; }
+  .selected__entry { min-width: 0; min-height: 18rem; padding: .8rem; border-radius: var(--radius-object); display: flex; flex-direction: column; }
+  .selected__entry--dark, .selected__entry--ink { background: #242422; color: #f2f1ed; }
+  .selected__entry--mid { background: #b6b5b1; color: #1e1e1d; }
+  .selected__entry--light { background: #efeeeb; color: #272726; }
+  .selected__object { min-height: 11.5rem; border-radius: .7rem; padding: .6rem; }
+  .selected__object > span { display: block; width: 100%; height: 100%; min-height: 10.3rem; border-radius: .55rem; background: #41413f; }
+  .selected__entry--mid .selected__object > span { background: #898886; }
+  .selected__entry--light .selected__object > span { background: #d0cfcd; }
+  .selected__entry strong { margin-top: 1.1rem; font-size: .98rem; letter-spacing: -.04em; font-weight: 510; }
+  .selected__entry small { margin-top: auto; font: 500 .58rem/1.25 var(--font-mono); letter-spacing: .055em; text-transform: uppercase; color: currentColor; opacity: .7; }
+  .archive-link { display: block; width: fit-content; margin: 3.4rem 0 0 auto; color: var(--color-muted); font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
+  .archive-link--unavailable { cursor: not-allowed; }
+  .contact { margin-top: clamp(3rem, 8vw, 7rem); margin-bottom: 3.8rem; padding: clamp(3rem, 5vw, 5rem) clamp(1.8rem, 3vw, 3rem); min-height: 15rem; border-radius: 1.7rem; background: #f1f0ed; display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; }
+  .contact h2 { margin: 0; font-size: clamp(2.6rem, 3.5vw, 4rem); max-width: 13ch; }
+  .contact__email { justify-self: start; font: 500 clamp(.9rem, 1.25vw, 1.15rem) var(--font-mono); text-decoration: none; }
+  @media (min-width: 70rem) { .home__hero { padding-top: 5.55rem; } }
+  @media (max-width: 44rem) {
+    .home__hero { min-height: 0; padding-top: 3.5rem; }
+    .home__hero-copy { width: 100%; }
+    .home__hero h1 { font-size: clamp(3.7rem, 16.5vw, 5rem); }
+    .home__hero :global(.explorer) { position: relative; inset: auto; padding: 3rem 0 4.2rem; }
+    .currently { grid-template-columns: 1fr; gap: 2.3rem; }
+    .currently__copy h2 { margin: 1.7rem 0 1.8rem; }
+    .currently__object { max-width: 32rem; }
+    .selected__list { grid-template-columns: 1fr 1fr; }
+    .selected__entry { min-height: 15.5rem; }
+    .selected__object { min-height: 9rem; }
+    .selected__object > span { min-height: 7.8rem; }
+    .contact { display: block; width: auto; margin-inline: var(--space-page); }
+    .contact__email { display: block; margin-top: 2.7rem; }
+  }
+</style>
