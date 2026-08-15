@@ -70,10 +70,14 @@ describe("getExplorerState", () => {
       createElement(HomeExplorer, { locale: "en" }),
     );
 
-    expect(html.match(/<button/g)).toHaveLength(3);
-    expect(html.match(/aria-pressed="false"/g)).toHaveLength(3);
-    expect(html.match(/aria-controls=/g)).toHaveLength(3);
-    expect(html).toContain("AI Engineering Path. A living practice · Active. Not published yet");
+    // All three interests now have real destination pages, so they're genuine links, not toggle buttons.
+    expect(html.match(/<a href="\/en\/ai-engineering-path"/g)).toHaveLength(1);
+    expect(html.match(/<a href="\/en\/design-system"/g)).toHaveLength(1);
+    expect(html.match(/<a href="\/en\/travel-photography"/g)).toHaveLength(1);
+    expect(html.match(/<button/g)).toBeNull();
+    expect(html.match(/aria-pressed=/g)).toBeNull();
+    expect(html.match(/aria-controls=/g)).toBeNull();
+    expect(html).toContain('AI Engineering Path. A living practice · Active."');
     expect(html).toContain("Explore what keeps pulling me in");
     expect(html).toContain("Design Systems");
     expect(html).toContain("Travel Photography");

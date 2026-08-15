@@ -1,10 +1,11 @@
 import { useEffect, useId, useReducer, useRef, useState, type FocusEvent, type TouchEvent } from "react";
 import { getExplorerState, initialExplorerState, reduceExplorerInteraction, shouldResetExplorerOnFocusExit, shouldResetExplorerOnPointerExit, type InterestId } from "./home-explorer-state";
+import { localizedPath } from "../../lib/i18n";
 import "./home-explorer.css";
 
 type Locale = "en" | "es";
 type ArtifactMedia = { src: string; srcSet: string; alt: string };
-type Artifact = { id: InterestId; interest: string; title: string; meta: string; tone: string; media?: ArtifactMedia };
+type Artifact = { id: InterestId; interest: string; title: string; meta: string; tone: string; media?: ArtifactMedia; href?: string };
 
 const travelPhoto = {
   srcSet: [
@@ -17,14 +18,14 @@ const travelPhoto = {
 
 const artifacts: Record<Locale, Artifact[]> = {
   en: [
-    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a" },
-    { id: "design-systems", interest: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b" },
-    { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c", media: { ...travelPhoto, alt: "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead." } },
+    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a", href: localizedPath("en", "ai-engineering-path") },
+    { id: "design-systems", interest: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b", href: localizedPath("en", "design-system") },
+    { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c", href: localizedPath("en", "travel-photography"), media: { ...travelPhoto, alt: "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead." } },
   ],
   es: [
-    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a" },
-    { id: "design-systems", interest: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b" },
-    { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c", media: { ...travelPhoto, alt: "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando." } },
+    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a", href: localizedPath("es", "ai-engineering-path") },
+    { id: "design-systems", interest: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b", href: localizedPath("es", "design-system") },
+    { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c", href: localizedPath("es", "travel-photography"), media: { ...travelPhoto, alt: "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando." } },
   ],
 };
 
@@ -80,15 +81,28 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
     <div className="explorer__intro">
       <p id={labelId} className="explorer__label">{labels.heading}</p>
       <div className="explorer__interests" aria-label={labels.interests}>
-        {copy.map((artifact, index) => <button key={artifact.id} type="button" className={`explorer__interest ${activeInterest === artifact.id ? "is-active" : ""}`} onMouseEnter={() => !touchMode && dispatch({ type: "preview", id: artifact.id })} onFocus={() => dispatch({ type: "preview", id: artifact.id })} onClick={() => dispatch({ type: "activate", id: artifact.id })} aria-pressed={committedInterest === artifact.id} aria-controls={`${labelId}-${artifact.id}`}>
-          <span>{String(index + 1).padStart(2, "0")}</span>{artifact.interest}
-        </button>)}
+        {copy.map((artifact, index) => {
+          const label = <><span>{String(index + 1).padStart(2, "0")}</span>{artifact.interest}</>;
+          const className = `explorer__interest ${activeInterest === artifact.id ? "is-active" : ""}`;
+          const onMouseEnter = () => !touchMode && dispatch({ type: "preview", id: artifact.id });
+          const onFocus = () => dispatch({ type: "preview", id: artifact.id });
+
+          return artifact.href ? (
+            <a key={artifact.id} href={artifact.href} className={className} onMouseEnter={onMouseEnter} onFocus={onFocus}>
+              {label}
+            </a>
+          ) : (
+            <button key={artifact.id} type="button" className={className} onMouseEnter={onMouseEnter} onFocus={onFocus} onClick={() => dispatch({ type: "activate", id: artifact.id })} aria-pressed={committedInterest === artifact.id} aria-controls={`${labelId}-${artifact.id}`}>
+              {label}
+            </button>
+          );
+        })}
       </div>
     </div>
     <div className="explorer__stage" aria-live="polite" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
       {copy.map((artifact, index) => {
         const active = activeInterest === artifact.id;
-        const status = artifact.media ? "" : ` ${labels.unavailable}`;
+        const status = (artifact.media || artifact.href) ? "" : ` ${labels.unavailable}`;
         return <article id={`${labelId}-${artifact.id}`} key={artifact.id} className={`explorer__artifact explorer__artifact--${artifact.tone} ${active ? "is-focused" : ""} ${activeInterest && !active ? "is-muted" : ""}`} aria-label={`${artifact.title}. ${artifact.meta}.${status}`}>
           <div className="explorer__artifact-drift">
             <span className="explorer__number">0{index + 1}</span>
