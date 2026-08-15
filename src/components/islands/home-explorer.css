@@ -20,8 +20,9 @@
 .explorer__artifact.is-focused { z-index: 5; transform: translateY(-.9rem) scale(1.055) rotate(0); }
 .explorer__artifact.is-muted { opacity: .22; filter: grayscale(1) contrast(.85); transform: scale(.91); }
 .explorer__number { display: none; }
-.explorer__placeholder { height: 73%; margin: 3.35rem .75rem 0; border-radius: .7rem; display: grid; place-items: center; background: var(--tone-explorer-placeholder-bg); color: var(--tone-explorer-placeholder-fg); }
+.explorer__placeholder { height: 73%; margin: 3.35rem .75rem 0; border-radius: .7rem; display: grid; place-items: center; background: var(--tone-explorer-placeholder-bg); color: var(--tone-explorer-placeholder-fg); overflow: hidden; }
 .explorer__placeholder span { font: 500 .56rem var(--font-mono); letter-spacing: .035em; text-transform: uppercase; text-align: center; }
+.explorer__placeholder--photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .explorer__artifact--a .explorer__placeholder { background: var(--tone-explorer-a-placeholder); }
 .explorer__artifact--b .explorer__placeholder { background: var(--tone-explorer-b-placeholder); }
 .explorer__artifact--c .explorer__placeholder { background: var(--tone-explorer-c-placeholder); }

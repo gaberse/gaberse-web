@@ -3,18 +3,28 @@ import { getExplorerState, initialExplorerState, reduceExplorerInteraction, shou
 import "./home-explorer.css";
 
 type Locale = "en" | "es";
-type Artifact = { id: InterestId; interest: string; title: string; meta: string; tone: string };
+type ArtifactMedia = { src: string; srcSet: string; alt: string };
+type Artifact = { id: InterestId; interest: string; title: string; meta: string; tone: string; media?: ArtifactMedia };
+
+const travelPhoto = {
+  srcSet: [
+    "/media/travel/patagonia-glacier-480.webp 480w",
+    "/media/travel/patagonia-glacier-800.webp 800w",
+    "/media/travel/patagonia-glacier-1200.webp 1200w",
+  ].join(", "),
+  src: "/media/travel/patagonia-glacier-480.webp",
+};
 
 const artifacts: Record<Locale, Artifact[]> = {
   en: [
     { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a" },
     { id: "design-systems", interest: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b" },
-    { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c" },
+    { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c", media: { ...travelPhoto, alt: "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead." } },
   ],
   es: [
     { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a" },
     { id: "design-systems", interest: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b" },
-    { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c" },
+    { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c", media: { ...travelPhoto, alt: "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando." } },
   ],
 };
 
@@ -78,10 +88,26 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
     <div className="explorer__stage" aria-live="polite" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
       {copy.map((artifact, index) => {
         const active = activeInterest === artifact.id;
-        return <article id={`${labelId}-${artifact.id}`} key={artifact.id} className={`explorer__artifact explorer__artifact--${artifact.tone} ${active ? "is-focused" : ""} ${activeInterest && !active ? "is-muted" : ""}`} aria-label={`${artifact.title}. ${artifact.meta}. ${labels.unavailable}`}>
+        const status = artifact.media ? "" : ` ${labels.unavailable}`;
+        return <article id={`${labelId}-${artifact.id}`} key={artifact.id} className={`explorer__artifact explorer__artifact--${artifact.tone} ${active ? "is-focused" : ""} ${activeInterest && !active ? "is-muted" : ""}`} aria-label={`${artifact.title}. ${artifact.meta}.${status}`}>
           <div className="explorer__artifact-drift">
             <span className="explorer__number">0{index + 1}</span>
-            <div className="explorer__placeholder" aria-hidden="true"><span>{labels.placeholder}</span></div>
+            {artifact.media ? (
+              <div className="explorer__placeholder explorer__placeholder--photo">
+                <img
+                  src={artifact.media.src}
+                  srcSet={artifact.media.srcSet}
+                  sizes="(max-width: 44rem) 60vw, 21rem"
+                  width="480"
+                  height="640"
+                  alt={artifact.media.alt}
+                  loading="eager"
+                  decoding="async"
+                />
+              </div>
+            ) : (
+              <div className="explorer__placeholder" aria-hidden="true"><span>{labels.placeholder}</span></div>
+            )}
             <div className="explorer__detail"><strong>{artifact.title}</strong><span>{artifact.meta}</span></div>
           </div>
         </article>;
