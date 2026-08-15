@@ -1,35 +1,38 @@
-import { useEffect, useId, useReducer, useRef, useState, type FocusEvent, type TouchEvent } from "react";
-import { getExplorerState, initialExplorerState, reduceExplorerInteraction, shouldResetExplorerOnFocusExit, shouldResetExplorerOnPointerExit, type InterestId } from "./home-explorer-state";
-import { localizedPath } from "../../lib/i18n";
+import { useEffect, useId, useReducer, useRef, useState, type FocusEvent, type ReactNode, type TouchEvent } from "react";
+import { getExplorerState, initialExplorerState, reduceExplorerInteraction, shouldResetExplorerOnFocusExit, shouldResetExplorerOnPointerExit } from "./home-explorer-state";
 import "./home-explorer.css";
 
-type Locale = "en" | "es";
-type ArtifactMedia = { src: string; srcSet: string; alt: string };
-type Artifact = { id: InterestId; interest: string; title: string; meta: string; tone: string; media?: ArtifactMedia; href?: string };
+export type ExplorerCardMedia = { src: string; srcSet: string; sizes?: string; alt: string };
 
-const travelPhoto = {
-  srcSet: [
-    "/media/travel/patagonia-glacier-480.webp 480w",
-    "/media/travel/patagonia-glacier-800.webp 800w",
-    "/media/travel/patagonia-glacier-1200.webp 1200w",
-  ].join(", "),
-  src: "/media/travel/patagonia-glacier-480.webp",
+export type ExplorerCard = {
+  id: string;
+  /** Text shown in the interests row. Unused when `showInterests` is false. */
+  label: string;
+  title: string;
+  meta: string;
+  tone: "a" | "b" | "c";
+  /** Present → the card navigates. Absent → the card toggles focus in place. */
+  href?: string;
+  media?: ExplorerCardMedia;
 };
 
-const artifacts: Record<Locale, Artifact[]> = {
-  en: [
-    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a", href: localizedPath("en", "ai-engineering-path") },
-    { id: "design-systems", interest: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b", href: localizedPath("en", "design-system") },
-    { id: "travel-photography", interest: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c", href: localizedPath("en", "travel-photography"), media: { ...travelPhoto, alt: "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead." } },
-  ],
-  es: [
-    { id: "ai", interest: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a", href: localizedPath("es", "ai-engineering-path") },
-    { id: "design-systems", interest: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b", href: localizedPath("es", "design-system") },
-    { id: "travel-photography", interest: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c", href: localizedPath("es", "travel-photography"), media: { ...travelPhoto, alt: "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando." } },
-  ],
+export type ExplorerLabels = {
+  heading: string;
+  interests: string;
+  unavailable: string;
+  placeholder: string;
+  touchHint: string;
 };
 
-export default function HomeExplorer({ locale }: { locale: Locale }) {
+type Props = {
+  cards: ExplorerCard[];
+  labels: ExplorerLabels;
+  showInterests?: boolean;
+};
+
+const DEFAULT_MEDIA_SIZES = "(max-width: 44rem) 60vw, 21rem";
+
+export default function HomeExplorer({ cards, labels, showInterests = true }: Props) {
   const [interaction, dispatch] = useReducer(
     reduceExplorerInteraction,
     initialExplorerState,
@@ -38,12 +41,9 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
   const touchStartX = useRef<number | null>(null);
   const scopeRef = useRef<HTMLElement>(null);
   const labelId = useId();
-  const copy = artifacts[locale];
   const state = getExplorerState(interaction);
   const { activeInterest, committedInterest } = state;
-  const labels = locale === "en"
-    ? { heading: "Explore what keeps pulling me in", interests: "Interests", unavailable: "Not published yet", placeholder: "Placeholder media", touchHint: "Tap or swipe to explore" }
-    : { heading: "Últimamente, por acá", interests: "Intereses", unavailable: "Aún no publicado", placeholder: "Media provisional", touchHint: "Toca o desliza para explorar" };
+  const ids = cards.map((card) => card.id);
 
   useEffect(() => {
     const query = window.matchMedia("(pointer: coarse)");
@@ -74,59 +74,103 @@ export default function HomeExplorer({ locale }: { locale: Locale }) {
     const end = event.changedTouches[0]?.clientX;
     touchStartX.current = null;
     if (start === null || end === undefined || Math.abs(start - end) < 36) return;
-    dispatch({ type: "swipe", direction: end < start ? 1 : -1 });
+    dispatch({ type: "swipe", direction: end < start ? 1 : -1, ids });
   }
 
-  return <section ref={scopeRef} className={`explorer ${state.isInteractive ? "explorer--active" : ""}`} aria-labelledby={labelId} onBlurCapture={onBlurCapture} onMouseLeave={leave}>
-    <div className="explorer__intro">
+  const preview = (id: string) => dispatch({ type: "preview", id });
+  const hover = (id: string) => () => !touchMode && preview(id);
+
+  function cardBody(card: ExplorerCard, index: number): ReactNode {
+    return <div className="explorer__artifact-drift">
+      <span className="explorer__number">0{index + 1}</span>
+      {card.media ? (
+        <div className="explorer__placeholder explorer__placeholder--photo">
+          <img
+            src={card.media.src}
+            srcSet={card.media.srcSet}
+            sizes={card.media.sizes ?? DEFAULT_MEDIA_SIZES}
+            width="480"
+            height="640"
+            alt={card.media.alt}
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+      ) : (
+        <div className="explorer__placeholder" aria-hidden="true">{labels.placeholder && <span>{labels.placeholder}</span>}</div>
+      )}
+      {(card.title || card.meta) && (
+        <div className="explorer__detail"><strong>{card.title}</strong><span>{card.meta}</span></div>
+      )}
+    </div>;
+  }
+
+  return <section
+    ref={scopeRef}
+    className={`explorer ${state.isInteractive ? "explorer--active" : ""}`}
+    aria-labelledby={showInterests ? labelId : undefined}
+    aria-label={showInterests ? undefined : labels.heading}
+    onBlurCapture={onBlurCapture}
+    onMouseLeave={leave}
+  >
+    {showInterests && <div className="explorer__intro">
       <p id={labelId} className="explorer__label">{labels.heading}</p>
       <div className="explorer__interests" aria-label={labels.interests}>
-        {copy.map((artifact, index) => {
-          const label = <><span>{String(index + 1).padStart(2, "0")}</span>{artifact.interest}</>;
-          const className = `explorer__interest ${activeInterest === artifact.id ? "is-active" : ""}`;
-          const onMouseEnter = () => !touchMode && dispatch({ type: "preview", id: artifact.id });
-          const onFocus = () => dispatch({ type: "preview", id: artifact.id });
+        {cards.map((card, index) => {
+          const label = <><span>{String(index + 1).padStart(2, "0")}</span>{card.label}</>;
+          const className = `explorer__interest ${activeInterest === card.id ? "is-active" : ""}`;
 
-          return artifact.href ? (
-            <a key={artifact.id} href={artifact.href} className={className} onMouseEnter={onMouseEnter} onFocus={onFocus}>
+          return card.href ? (
+            <a key={card.id} href={card.href} className={className} onMouseEnter={hover(card.id)} onFocus={() => preview(card.id)}>
               {label}
             </a>
           ) : (
-            <button key={artifact.id} type="button" className={className} onMouseEnter={onMouseEnter} onFocus={onFocus} onClick={() => dispatch({ type: "activate", id: artifact.id })} aria-pressed={committedInterest === artifact.id} aria-controls={`${labelId}-${artifact.id}`}>
+            <button key={card.id} type="button" className={className} onMouseEnter={hover(card.id)} onFocus={() => preview(card.id)} onClick={() => dispatch({ type: "activate", id: card.id })} aria-pressed={committedInterest === card.id} aria-controls={`${labelId}-${card.id}`}>
               {label}
             </button>
           );
         })}
       </div>
-    </div>
+    </div>}
     <div className="explorer__stage" aria-live="polite" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-      {copy.map((artifact, index) => {
-        const active = activeInterest === artifact.id;
-        const status = (artifact.media || artifact.href) ? "" : ` ${labels.unavailable}`;
-        return <article id={`${labelId}-${artifact.id}`} key={artifact.id} className={`explorer__artifact explorer__artifact--${artifact.tone} ${active ? "is-focused" : ""} ${activeInterest && !active ? "is-muted" : ""}`} aria-label={`${artifact.title}. ${artifact.meta}.${status}`}>
-          <div className="explorer__artifact-drift">
-            <span className="explorer__number">0{index + 1}</span>
-            {artifact.media ? (
-              <div className="explorer__placeholder explorer__placeholder--photo">
-                <img
-                  src={artifact.media.src}
-                  srcSet={artifact.media.srcSet}
-                  sizes="(max-width: 44rem) 60vw, 21rem"
-                  width="480"
-                  height="640"
-                  alt={artifact.media.alt}
-                  loading="eager"
-                  decoding="async"
-                />
-              </div>
-            ) : (
-              <div className="explorer__placeholder" aria-hidden="true"><span>{labels.placeholder}</span></div>
-            )}
-            <div className="explorer__detail"><strong>{artifact.title}</strong><span>{artifact.meta}</span></div>
-          </div>
-        </article>;
+      {cards.map((card, index) => {
+        const active = activeInterest === card.id;
+        const status = (card.media || card.href) ? "" : ` ${labels.unavailable}`;
+        const named = [card.title, card.meta].filter(Boolean);
+        const ariaLabel = named.length ? `${named.join(". ")}.${status}` : undefined;
+        // No detail text means no reserved room for it — the surface fills the card.
+        const bare = !card.title && !card.meta ? " explorer__artifact--bare" : "";
+        const className = `explorer__artifact explorer__artifact--${card.tone}${bare} ${active ? "is-focused" : ""} ${activeInterest && !active ? "is-muted" : ""}`;
+        const id = `${labelId}-${card.id}`;
+
+        if (showInterests) {
+          return <article id={id} key={card.id} className={className} aria-label={ariaLabel}>
+            {cardBody(card, index)}
+          </article>;
+        }
+
+        // A card with nothing to say and nowhere to go is decoration: it keeps the
+        // pointer-driven reveal but stays out of the tab order and the a11y tree,
+        // rather than becoming a focusable control with no accessible name.
+        if (!card.href && !card.title && !card.meta) {
+          return <article id={id} key={card.id} className={className} aria-hidden="true" onMouseEnter={hover(card.id)}>
+            {cardBody(card, index)}
+          </article>;
+        }
+
+        // With the interests row hidden, the cards themselves carry the interaction —
+        // otherwise the reveal is unreachable by pointer or keyboard.
+        return card.href ? (
+          <a id={id} key={card.id} href={card.href} className={className} aria-label={ariaLabel} onMouseEnter={hover(card.id)} onFocus={() => preview(card.id)}>
+            {cardBody(card, index)}
+          </a>
+        ) : (
+          <button id={id} key={card.id} type="button" className={className} aria-label={ariaLabel} aria-pressed={committedInterest === card.id} onMouseEnter={hover(card.id)} onFocus={() => preview(card.id)} onClick={() => dispatch({ type: "activate", id: card.id })}>
+            {cardBody(card, index)}
+          </button>
+        );
       })}
     </div>
-    <p className="explorer__hint">{labels.touchHint}</p>
+    {labels.touchHint && <p className="explorer__hint">{labels.touchHint}</p>}
   </section>;
 }

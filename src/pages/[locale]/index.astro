@@ -38,6 +38,34 @@ const copy = isEnglish
       archiveText: "Todo lo que fue llegando hasta acá",
       contact: "¿Te llamó la atención algo?",
     };
+const glacier = {
+  src: "/media/travel/patagonia-glacier-480.webp",
+  srcSet: [
+    "/media/travel/patagonia-glacier-480.webp 480w",
+    "/media/travel/patagonia-glacier-800.webp 800w",
+    "/media/travel/patagonia-glacier-1200.webp 1200w",
+  ].join(", "),
+  alt: isEnglish
+    ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
+    : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+};
+
+const explorerLabels = isEnglish
+  ? { heading: "Explore what keeps pulling me in", interests: "Interests", unavailable: "Not published yet", placeholder: "Placeholder media", touchHint: "Tap or swipe to explore" }
+  : { heading: "Últimamente, por acá", interests: "Intereses", unavailable: "Aún no publicado", placeholder: "Media provisional", touchHint: "Toca o desliza para explorar" };
+
+const explorerCards = isEnglish
+  ? [
+      { id: "ai", label: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a" as const, href: localizedPath(locale, "ai-engineering-path") },
+      { id: "design-systems", label: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b" as const, href: localizedPath(locale, "design-system") },
+      { id: "travel-photography", label: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: glacier },
+    ]
+  : [
+      { id: "ai", label: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a" as const, href: localizedPath(locale, "ai-engineering-path") },
+      { id: "design-systems", label: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b" as const, href: localizedPath(locale, "design-system") },
+      { id: "travel-photography", label: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: glacier },
+    ];
+
 const featured = isEnglish
   ? [
       ["React Miami 2025", "Experience / 2025", "dark", "react-miami-2025"],
@@ -58,7 +86,7 @@ const featured = isEnglish
   <main class="home site-shell">
     <section class="home__hero">
       <div class="home__hero-copy"><h1>{copy.intro}</h1></div>
-      <HomeExplorer client:load locale={locale} />
+      <HomeExplorer client:load cards={explorerCards} labels={explorerLabels} />
     </section>
 
     <section class="currently home__section">
