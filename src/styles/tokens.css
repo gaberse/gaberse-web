@@ -13,5 +13,6 @@
   --leading-meta: 1.45;
   --tracking-meta: 0.085em;
   --space-page: clamp(1.25rem, 3.89vw, 3.5rem);
+  --content-max-width: 112.5rem;
   --measure-readable: 70ch;
 }

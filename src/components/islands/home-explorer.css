@@ -3,7 +3,7 @@
 .explorer__label { display: none; }
 .explorer__intro { position: absolute; z-index: 7; bottom: 1.5rem; left: var(--space-page); right: var(--space-page); }
 .explorer__interests { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 0; }
-.explorer__interest { background: none; border: 0; padding: .25rem 0; color: var(--color-ink); font: 540 clamp(1rem, 1.55vw, 1.34rem)/1.1 var(--font-sans); cursor: pointer; text-align: left; transition: color 160ms ease; }
+.explorer__interest { background: none; border: 0; padding: .25rem 0; color: var(--color-ink); font: 540 clamp(1rem, 1.55cqw, 1.34rem)/1.1 var(--font-sans); cursor: pointer; text-align: left; transition: color 160ms ease; }
 .explorer__interest span { display: none; }
 .explorer__interest::after { content: "↗"; margin-left: .25rem; font-size: .8em; }
 .explorer__interest.is-active, .explorer__interest:hover { color: var(--color-muted); }
@@ -35,7 +35,7 @@
   50% { transform: translate3d(var(--drift-x), var(--drift-y), 0); }
 }
 @media (prefers-reduced-motion: reduce) { .explorer__artifact, .explorer__interest { transition: none; } .explorer__artifact-drift { animation: none; will-change: auto; } .explorer__stage::before { filter: none; } }
-@media (max-width: 70rem) and (min-width: 44.01rem) { .explorer__stage { width: min(50.5%, 34rem); } .explorer__artifact { width: clamp(14rem, 22vw, 17rem); } .explorer__artifact--a { top: 5.3rem; } .explorer__artifact--b { right: 4.25rem; top: 1.8rem; } .explorer__artifact--c { left: .4rem; top: .35rem; } }
+@media (max-width: 70rem) and (min-width: 44.01rem) { .explorer__stage { width: min(50.5%, 34rem); } .explorer__artifact { width: clamp(14rem, 22cqw, 17rem); } .explorer__artifact--a { top: 5.3rem; } .explorer__artifact--b { right: 4.25rem; top: 1.8rem; } .explorer__artifact--c { left: .4rem; top: .35rem; } }
 @media (max-width: 44rem) {
   .explorer { padding-bottom: 0; }
   .explorer__intro { position: static; }
@@ -45,7 +45,7 @@
   .explorer__interest span { display: inline; font: 500 var(--text-meta) var(--font-mono); color: var(--color-muted); margin-right: .55rem; vertical-align: middle; }
   .explorer__stage { position: relative; top: auto; right: auto; width: 100%; height: 32rem; min-height: 0; margin-top: 1rem; }
   .explorer__stage::before { inset: 15% 0 5%; }
-  .explorer__artifact { width: clamp(13.5rem,57vw,17rem); }
+  .explorer__artifact { width: clamp(13.5rem,57cqw,17rem); }
   .explorer__artifact-drift { display: grid; grid-template-rows: auto minmax(0, 1fr); gap: .7rem; padding: .85rem; }
   .explorer__artifact--a { left: -1.2rem; right: auto; top: 4.2rem; }
   .explorer__artifact--b { left: 50%; right: auto; top: .2rem; transform: translateX(-50%) rotate(-1.25deg); }
