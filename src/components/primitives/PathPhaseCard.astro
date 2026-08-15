@@ -1,0 +1,28 @@
+---
+interface Props {
+  index: string;
+  status: string;
+  title: string;
+  description: string;
+  current?: boolean;
+  currentLabel?: string;
+}
+const { index, status, title, description, current = false, currentLabel } = Astro.props;
+---
+<article class={`path-phase-card ${current ? "is-current" : ""}`}>
+  <p class="path-phase-card__eyebrow">{index} / {status}</p>
+  <h3>{title}</h3>
+  <p class="path-phase-card__description">{description}</p>
+  {current && currentLabel && (
+    <p class="path-phase-card__current"><span aria-hidden="true">●</span> {currentLabel}</p>
+  )}
+</article>
+<style>
+  .path-phase-card { display: flex; flex-direction: column; min-height: 20rem; padding: 1.6rem; border-radius: var(--radius-object); background: var(--color-surface); color: var(--color-ink); }
+  .path-phase-card.is-current { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
+  .path-phase-card__eyebrow { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .75; }
+  .path-phase-card h3 { margin: 1.6rem 0 0; font-size: clamp(1.35rem, 1.8cqw, 1.65rem); letter-spacing: -.03em; font-weight: 640; }
+  .path-phase-card__description { margin: .85rem 0 0; font-size: .95rem; line-height: 1.4; max-width: 26ch; }
+  .path-phase-card__current { margin: auto 0 0; padding-top: 2.5rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .75; }
+  .path-phase-card__current span { font-size: .6em; vertical-align: .1em; }
+</style>
