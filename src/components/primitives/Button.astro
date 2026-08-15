@@ -1,0 +1,12 @@
+---
+interface Props {
+  label: string;
+  dark?: boolean;
+}
+const { label, dark = false } = Astro.props;
+---
+<span class={`ui-button ${dark ? "is-dark" : ""}`}>{label}</span>
+<style>
+  .ui-button { display: inline-flex; align-items: center; padding: .75rem 1.3rem; border-radius: 999px; background: var(--color-canvas); color: var(--color-ink); font: 500 .88rem/1 var(--font-sans); letter-spacing: -.01em; box-shadow: var(--shadow-object); }
+  .ui-button.is-dark { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
+</style>
