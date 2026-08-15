@@ -1,0 +1,332 @@
+---
+import Header from "../../components/home/Header.astro";
+import HomeExplorer from "../../components/islands/HomeExplorer";
+import PhaseIndicator from "../../components/primitives/PhaseIndicator.astro";
+import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { localizedPath, supportedLocales, type Locale } from "../../lib/i18n";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const isEnglish = locale === "en";
+
+const copy = isEnglish
+  ? {
+      name: "GABRIELA LÓPEZ",
+      headline: "Frontend engineer building thoughtful interfaces and systems for the web.",
+      territory: "FRONTEND · REACT · REACT NATIVE · ARCHITECTURE · AI-ASSISTED ENGINEERING",
+      placeholder: "Placeholder media",
+      workLabel: "SELECTED WORK",
+      capabilitiesLabel: "WHAT I WORK WITH",
+      currently: "Currently",
+      currentlyObject: "AI-ASSISTED",
+      currentlyTitle: "Going deeper into AI-assisted engineering.",
+      currentlyText: "Exploring how AI can amplify the way I reason, build and solve problems.",
+      experienceLabel: "EXPERIENCE",
+      experienceRole: "Frontend Developer",
+      experienceDetail: "Web products · frontend systems · React Native migration",
+      universeLabel: "From the universe",
+      contact: "Something caught\nyour attention?",
+    }
+  : {
+      name: "GABRIELA LÓPEZ",
+      headline: "Frontend engineer que construye interfaces y sistemas bien pensados para la web.",
+      territory: "FRONTEND · REACT · REACT NATIVE · ARQUITECTURA · AI-ASSISTED ENGINEERING",
+      placeholder: "Media provisional",
+      workLabel: "TRABAJO SELECCIONADO",
+      capabilitiesLabel: "CON LO QUE TRABAJO",
+      currently: "Ahora mismo",
+      currentlyObject: "AI-ASSISTED",
+      currentlyTitle: "Profundizando en AI-assisted engineering.",
+      currentlyText: "Explorando cómo la AI puede amplificar mi forma de razonar, construir y resolver problemas.",
+      experienceLabel: "EXPERIENCIA",
+      experienceRole: "Frontend Developer",
+      experienceDetail: "Productos web · sistemas frontend · migración a React Native",
+      universeLabel: "Del universo",
+      contact: "¿Te llamó la atención algo?",
+    };
+
+const work = isEnglish
+  ? [
+      { label: "MOBILE / ARCHITECTURE", body: "Researching and shaping a path from native mobile toward React Native." },
+      { label: "WEB / PRODUCT", body: "Building and evolving product interfaces used in real-world insurance experiences." },
+    ]
+  : [
+      { label: "MOBILE / ARQUITECTURA", body: "Investigando y armando un camino desde mobile nativo hacia React Native." },
+      { label: "WEB / PRODUCTO", body: "Construyendo y evolucionando interfaces de producto que se usan en experiencias reales de seguros." },
+    ];
+
+const capabilities = isEnglish
+  ? [
+      { name: "Product frontend", line: "Turning product requirements into interfaces that remain understandable under real constraints." },
+      { name: "Complex interfaces" },
+      { name: "Frontend architecture", line: "Patterns, boundaries and decisions that help interfaces stay maintainable as products grow." },
+      { name: "React" },
+      { name: "React Native" },
+      { name: "Performance & accessibility" },
+      { name: "AI-assisted engineering", line: "Using AI as a tool that amplifies reasoning and execution, with the decisions staying mine." },
+    ]
+  : [
+      { name: "Frontend de producto", line: "Convertir requerimientos de producto en interfaces que siguen siendo entendibles bajo restricciones reales." },
+      { name: "Interfaces complejas" },
+      { name: "Arquitectura frontend", line: "Patrones, límites y decisiones que ayudan a que las interfaces sigan siendo mantenibles a medida que el producto crece." },
+      { name: "React" },
+      { name: "React Native" },
+      { name: "Performance y accesibilidad" },
+      { name: "AI-assisted engineering", line: "Usar AI como una herramienta que amplifica el razonamiento y la ejecución, con las decisiones siempre de mi lado." },
+    ];
+
+const glacier = {
+  src: "/media/travel/patagonia-glacier-480.webp",
+  srcSet: [
+    "/media/travel/patagonia-glacier-480.webp 480w",
+    "/media/travel/patagonia-glacier-800.webp 800w",
+    "/media/travel/patagonia-glacier-1200.webp 1200w",
+  ].join(", "),
+  alt: isEnglish
+    ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
+    : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+};
+
+/* Abstract objects: no titles, no destinations — the hero must not imply projects
+   it does not have. They drift and respond to the pointer, nothing more. */
+const heroDeck = isEnglish
+  ? [
+      { id: "one", label: "Placeholder 01", title: "Placeholder 01", meta: "", tone: "a" as const },
+      { id: "two", label: "Placeholder 02", title: "Placeholder 02", meta: "", tone: "b" as const },
+      { id: "three", label: "Placeholder 03", title: "Placeholder 03", meta: "", tone: "c" as const },
+    ]
+  : [
+      { id: "one", label: "Provisional 01", title: "Provisional 01", meta: "", tone: "a" as const },
+      { id: "two", label: "Provisional 02", title: "Provisional 02", meta: "", tone: "b" as const },
+      { id: "three", label: "Provisional 03", title: "Provisional 03", meta: "", tone: "c" as const },
+    ];
+
+const heroDeckLabels = {
+  heading: isEnglish ? "Editorial objects" : "Objetos editoriales",
+  interests: "",
+  unavailable: "",
+  placeholder: "",
+  touchHint: "",
+};
+
+const universe = isEnglish
+  ? [
+      { title: "React Miami 2025", meta: "Experience / 2025", slug: "react-miami-2025", tone: "dark" as const },
+      { title: "Laboratoria", meta: "Origin / Tech", slug: "laboratoria", tone: "light" as const },
+      { title: "Travel Photography", meta: "Visual archive", slug: "travel-photography", tone: "mid" as const },
+    ]
+  : [
+      { title: "React Miami 2025", meta: "Experiencia / 2025", slug: "react-miami-2025", tone: "dark" as const },
+      { title: "Laboratoria", meta: "Origen / Tech", slug: "laboratoria", tone: "light" as const },
+      { title: "Fotografía de viajes", meta: "Archivo visual", slug: "travel-photography", tone: "mid" as const },
+    ];
+---
+
+<BaseLayout locale={locale} description={copy.headline} path="pivot">
+  <Header locale={locale} />
+  <main class="pivot site-shell">
+    <section class="pivot__hero">
+      <div class="pivot__hero-copy">
+        <p class="pivot__eyebrow">{copy.name}</p>
+        <h1>{copy.headline}</h1>
+        <p class="pivot__territory">{copy.territory}</p>
+      </div>
+      <div class="pivot__deck">
+        <HomeExplorer client:load cards={heroDeck} labels={heroDeckLabels} showInterests={false} />
+      </div>
+    </section>
+
+    <section class="pivot__section work">
+      <p class="pivot__eyebrow">{copy.workLabel}</p>
+      <div class="work__list">
+        <article class="work__entry work__entry--lead">
+          <PhotoFrame class="work__object work__object--lead" tone="dark" ariaLabel={copy.placeholder} />
+          <p class="work__label">{work[0].label}</p>
+          <p class="work__body">{work[0].body}</p>
+        </article>
+        <article class="work__entry work__entry--counter">
+          <p class="work__label">{work[1].label}</p>
+          <p class="work__body">{work[1].body}</p>
+          <PhotoFrame class="work__object work__object--counter" tone="light" ariaLabel={copy.placeholder} />
+        </article>
+      </div>
+    </section>
+
+    <section class="pivot__section capabilities">
+      <p class="pivot__eyebrow">{copy.capabilitiesLabel}</p>
+      <ul class="capabilities__list">
+        {capabilities.map((capability) => (
+          <li class="capabilities__row">
+            <strong>{capability.name}</strong>
+            {capability.line && <p>{capability.line}</p>}
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="pivot__section currently">
+      <div class="currently__copy">
+        <p class="pivot__eyebrow">{copy.currently}</p>
+        <h2>{copy.currentlyTitle}</h2>
+        <p>{copy.currentlyText}</p>
+      </div>
+      <PhaseIndicator class="currently__object" ariaLabel={copy.placeholder}>
+        <span class="currently__object-text">{copy.currentlyObject}</span>
+      </PhaseIndicator>
+    </section>
+
+    <section class="pivot__section experience">
+      <p class="pivot__eyebrow">{copy.experienceLabel}</p>
+      <div class="experience__entry">
+        <h2>Rimac Seguros</h2>
+        <p class="experience__role">{copy.experienceRole}</p>
+        <p class="experience__detail">{copy.experienceDetail}</p>
+      </div>
+    </section>
+
+    <section class="pivot__section universe">
+      <p class="pivot__eyebrow">{copy.universeLabel}</p>
+      <div class="universe__list">
+        {universe.map(({ title, meta, slug, tone }) => (
+          <a class={`universe__entry universe__entry--${slug}`} href={localizedPath(locale, slug)}>
+            {slug === "travel-photography" ? (
+              <PhotoFrame
+                class="universe__object"
+                src={glacier.src}
+                srcSet={glacier.srcSet}
+                sizes="(max-width: 44rem) 100vw, 26rem"
+                alt={glacier.alt}
+              />
+            ) : (
+              <PhotoFrame class="universe__object" tone={tone} ariaLabel={copy.placeholder} />
+            )}
+            <strong>{title} <span aria-hidden="true">↗</span></strong>
+            <small>{meta}</small>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section class="pivot__section contact">
+      <h2>{copy.contact}</h2>
+      <a class="contact__email" href="mailto:hello@gaberse.tech">hello@gaberse.tech <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Keep the layered hero deck from creating horizontal scroll while it
+     overlaps and rotates past its own column edge. */
+  .pivot { overflow-x: clip; overflow-y: visible; container-type: inline-size; }
+  .pivot__eyebrow { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
+  .pivot__section { padding: clamp(6rem, 10cqw, 10rem) var(--space-page) 0; }
+
+  /* Hero — professional positioning first, artifacts second. */
+  .pivot__hero { display: grid; grid-template-columns: minmax(0, 1.12fr) minmax(17rem, .78fr); gap: clamp(2.5rem, 6cqw, 5rem); align-items: center; padding: clamp(3.5rem, 6cqw, 5.5rem) var(--space-page) 0; min-height: 34rem; }
+  /* Sized so the longer ES headline still lands in three lines. */
+  .pivot__hero h1 { margin: 1.5rem 0 0; max-width: 27ch; font-size: clamp(2.6rem, 3.7cqw, 4.15rem); line-height: .98; letter-spacing: -.05em; font-weight: 620; }
+  .pivot__territory { margin: clamp(2.2rem, 4cqw, 3.4rem) 0 0; font: 500 var(--text-meta)/1.9 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
+
+  /* The shared explorer deck, dropped into the hero column: it anchors its stage
+     to this box instead of the full-bleed hero it uses on the Home. */
+  .pivot__deck { position: relative; height: clamp(20rem, 27cqw, 28rem); }
+  .pivot__deck :global(.explorer) { position: absolute; inset: 0; }
+  /* Match the Home deck's proportions: each card is ~62% of the stage, which is
+     what makes the three overlap and read as one stack of objects rather than
+     three separate cards. Positions mirror the Home's offsets as percentages. */
+  .pivot__deck :global(.explorer__stage) { position: absolute; top: 0; right: 0; left: auto; width: min(100%, 34rem); height: 100%; }
+  .pivot__deck :global(.explorer__artifact) { width: 61.5%; }
+  .pivot__deck :global(.explorer__artifact--a) { right: .5%; top: 18.5%; }
+  .pivot__deck :global(.explorer__artifact--b) { right: 14%; top: 5%; }
+  .pivot__deck :global(.explorer__artifact--c) { left: .5%; top: 1%; }
+
+  /* Selected work — two hand-composed entries, deliberately not one card twice. */
+  .work__list { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr); gap: clamp(1.5rem, 3.5cqw, 3.5rem); align-items: start; margin-top: 2.6rem; }
+  .work__entry { min-width: 0; padding: clamp(1.1rem, 1.9cqw, 1.7rem); border-radius: var(--radius-artifact); display: flex; flex-direction: column; }
+  .work__entry--lead { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
+  .work__entry--counter { background: var(--tone-light-bg); color: var(--tone-light-fg); margin-top: clamp(2rem, 5cqw, 5rem); }
+  .work__label { margin: 0; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .7; }
+  .work__entry--lead .work__label { margin-top: 1.5rem; }
+  .work__body { margin: 1rem 0 0; font-size: clamp(1.15rem, 1.75cqw, 1.6rem); line-height: 1.28; letter-spacing: -.025em; font-weight: 540; }
+  .work__entry--lead .work__body { max-width: 22ch; }
+  .work__entry--counter .work__body { max-width: 20ch; margin-bottom: 2rem; }
+  :global(.work__object--lead) { width: 100%; aspect-ratio: 1.62 / 1; }
+  :global(.work__object--counter) { width: 100%; aspect-ratio: 1.08 / 1; margin-top: auto; }
+
+  /* Capabilities — an editorial list, never a logo wall or a meter. */
+  .capabilities__list { list-style: none; margin: 2.6rem 0 0; padding: 0; display: grid; gap: clamp(1.8rem, 2.8cqw, 2.6rem); }
+  .capabilities__row { display: grid; grid-template-columns: minmax(0, 25rem) minmax(0, 1fr); gap: clamp(1.5rem, 4cqw, 4rem); align-items: baseline; }
+  .capabilities__row strong { font-size: clamp(1.3rem, 2.05cqw, 1.85rem); line-height: 1.1; letter-spacing: -.035em; font-weight: 600; }
+  .capabilities__row p { margin: 0; max-width: 62ch; font-size: clamp(1rem, 1.15cqw, 1.08rem); line-height: 1.5; color: var(--color-ink-soft); }
+
+  /* Currently — same contrast as the established block, honest framing. */
+  .currently { display: grid; grid-template-columns: minmax(0, .95fr) minmax(28rem, 1.05fr); gap: clamp(3.5rem, 11cqw, 11rem); align-items: center; }
+  .currently__copy h2 { font-size: clamp(2.4rem, 3.9cqw, 4.2rem); line-height: .96; letter-spacing: -.055em; font-weight: 600; margin: 1.9rem 0 2.1rem; max-width: 16ch; }
+  .currently__copy > p:last-child { margin: 0; max-width: 40ch; font-size: clamp(1.05rem, 1.5cqw, 1.3rem); line-height: 1.36; color: var(--color-ink-soft); }
+  :global(.currently__object) { width: 100%; aspect-ratio: 1.65 / 1; min-height: 16rem; }
+  .currently__object-text { font: 500 var(--text-meta)/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
+
+  /* Experience — an anchor, not a résumé. */
+  .experience__entry { margin-top: 2.2rem; }
+  .experience__entry h2 { margin: 0; font-size: clamp(1.9rem, 2.9cqw, 2.7rem); line-height: 1.05; letter-spacing: -.045em; font-weight: 620; }
+  .experience__role { margin: .8rem 0 0; font-size: clamp(1rem, 1.3cqw, 1.15rem); font-weight: 540; }
+  .experience__detail { margin: .7rem 0 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
+
+  /* From the universe — three real Items, three different proportions. */
+  .universe__list { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, .86fr) minmax(0, .92fr); gap: clamp(1.1rem, 2.2cqw, 2.2rem); align-items: start; margin-top: 2.6rem; }
+  .universe__entry { min-width: 0; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  .universe__entry--laboratoria { margin-top: clamp(2.5rem, 6cqw, 6rem); }
+  .universe__entry--travel-photography { margin-top: clamp(1rem, 2.5cqw, 2.5rem); }
+  :global(.universe__entry--react-miami-2025 .universe__object) { aspect-ratio: 1.24 / 1; }
+  :global(.universe__entry--laboratoria .universe__object) { aspect-ratio: 1.02 / 1; }
+  :global(.universe__entry--travel-photography .universe__object) { aspect-ratio: .82 / 1; }
+  .universe__entry strong { margin-top: 1.2rem; font-size: clamp(1.05rem, 1.45cqw, 1.35rem); letter-spacing: -.035em; font-weight: 560; transition: color 160ms ease; }
+  .universe__entry strong span { display: inline-block; margin-left: .1em; font-size: .78em; vertical-align: .06em; }
+  .universe__entry:hover strong { color: var(--color-muted); }
+  .universe__entry small { margin-top: .5rem; font: 500 .6rem/1.25 var(--font-mono); letter-spacing: .055em; text-transform: uppercase; color: var(--color-muted); }
+
+  /* Contact — kept directly on the canvas, no card, no footer columns. */
+  .contact { margin-top: clamp(3rem, 6cqw, 6rem); margin-bottom: 3.8rem; padding-top: clamp(5rem, 8cqw, 8rem); padding-bottom: clamp(5rem, 8cqw, 8rem); min-height: 18rem; border-top: 1px solid var(--color-border-muted); display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; }
+  .contact h2 { margin: 0; white-space: pre-line; font-size: clamp(2.6rem, 3.5cqw, 4rem); line-height: .9; letter-spacing: -.075em; font-weight: 600; max-width: 13ch; }
+  .contact__email { justify-self: start; font: 500 clamp(.9rem, 1.25cqw, 1.15rem) var(--font-mono); text-decoration: none; }
+
+  @container (min-width: 100rem) { .pivot__hero { min-height: 38rem; } }
+
+  @media (max-width: 44rem) {
+    /* Mobile reinterprets the composition: the deck stops overlapping,
+       every multi-column rhythm collapses to a single reading column. */
+    .pivot__hero { grid-template-columns: 1fr; gap: 3rem; min-height: 0; padding-top: 3rem; }
+    .pivot__hero h1 { max-width: none; font-size: clamp(2.5rem, 10.5cqw, 3.4rem); }
+    .pivot__territory { line-height: 1.7; }
+    .pivot__deck { height: 22rem; }
+    .pivot__deck :global(.explorer__artifact) { width: clamp(9rem, 34cqw, 12rem); }
+    .pivot__deck :global(.explorer__artifact--a) { left: auto; right: 0; top: 16%; }
+    .pivot__deck :global(.explorer__artifact--b) { left: 50%; right: auto; top: 0; transform: translateX(-50%) rotate(-1.25deg); }
+    .pivot__deck :global(.explorer__artifact--c) { left: 0; right: auto; top: 28%; }
+
+    .work__list { grid-template-columns: 1fr; gap: 1.5rem; }
+    .work__entry--counter { margin-top: 0; }
+    .work__entry--counter .work__body { margin-bottom: 1.5rem; }
+    :global(.work__object--counter) { aspect-ratio: 1.4 / 1; }
+
+    .capabilities__row { grid-template-columns: 1fr; gap: .6rem; }
+
+    .currently { grid-template-columns: 1fr; gap: 2.3rem; }
+    .currently__copy h2 { margin: 1.7rem 0 1.8rem; }
+    :global(.currently__object) { max-width: 32rem; }
+
+    .universe__list { grid-template-columns: 1fr; gap: 2.6rem; }
+    .universe__entry { margin-top: 0; }
+    .universe__entry--laboratoria, .universe__entry--travel-photography { margin-top: 0; }
+    :global(.universe__entry--react-miami-2025 .universe__object),
+    :global(.universe__entry--laboratoria .universe__object),
+    :global(.universe__entry--travel-photography .universe__object) { aspect-ratio: 1.3 / 1; }
+
+    .contact { display: block; }
+    .contact__email { display: block; margin-top: 2.7rem; }
+  }
+</style>
