@@ -8,23 +8,23 @@
 .explorer__interest::after { content: "↗"; margin-left: .25rem; font-size: .8em; }
 .explorer__interest.is-active, .explorer__interest:hover { color: var(--color-muted); }
 .explorer__stage { position: absolute; z-index: 2; right: var(--space-page); top: 1.05rem; width: 34.5rem; height: 31rem; isolation: isolate; touch-action: pan-y; }
-.explorer__stage::before { content: ""; position: absolute; inset: 12% 0 2% 6%; background: radial-gradient(ellipse at center, #e4e2de 0%, transparent 69%); filter: blur(20px); opacity: .65; }
+.explorer__stage::before { content: ""; position: absolute; inset: 12% 0 2% 6%; background: radial-gradient(ellipse at center, var(--tone-explorer-glow) 0%, transparent 69%); filter: blur(20px); opacity: .65; }
 .explorer__artifact { position: absolute; display: block; width: 20.65rem; aspect-ratio: .75; color: var(--artifact-color, var(--color-ink)); transition: transform 280ms cubic-bezier(.2,.8,.2,1), opacity 180ms ease, filter 180ms ease; }
 .explorer__artifact-drift { position: absolute; inset: 0; border-radius: 1.25rem; background: var(--artifact-background, var(--color-surface)); box-shadow: var(--shadow-artifact); overflow: hidden; animation: artifact-drift var(--drift-duration, 8s) ease-in-out infinite; will-change: transform; }
-.explorer__artifact--a { --drift-x: .38rem; --drift-y: -.86rem; --drift-duration: 8.6s; --artifact-background: #1d1d1b; --artifact-color: #e6e5e1; right: .15rem; top: 5.8rem; transform: rotate(1.2deg); z-index: 1; }
-.explorer__artifact--b { --drift-x: -.42rem; --drift-y: .68rem; --drift-duration: 9.4s; --artifact-background: #e8e7e4; right: 4.75rem; top: 1.65rem; transform: rotate(-1.25deg); z-index: 2; }
+.explorer__artifact--a { --drift-x: .38rem; --drift-y: -.86rem; --drift-duration: 8.6s; --artifact-background: var(--tone-explorer-a-bg); --artifact-color: var(--tone-explorer-a-fg); right: .15rem; top: 5.8rem; transform: rotate(1.2deg); z-index: 1; }
+.explorer__artifact--b { --drift-x: -.42rem; --drift-y: .68rem; --drift-duration: 9.4s; --artifact-background: var(--tone-explorer-b-bg); right: 4.75rem; top: 1.65rem; transform: rotate(-1.25deg); z-index: 2; }
 .explorer__artifact--b .explorer__artifact-drift { animation-delay: -3.15s; }
-.explorer__artifact--c { --drift-x: .28rem; --drift-y: -.64rem; --drift-duration: 8.1s; --artifact-background: #b9b9b7; left: .25rem; top: .25rem; transform: rotate(1.3deg); z-index: 3; }
+.explorer__artifact--c { --drift-x: .28rem; --drift-y: -.64rem; --drift-duration: 8.1s; --artifact-background: var(--tone-explorer-c-bg); left: .25rem; top: .25rem; transform: rotate(1.3deg); z-index: 3; }
 .explorer__artifact--c .explorer__artifact-drift { animation-delay: -6.7s; }
 .explorer--active .explorer__artifact-drift { animation-play-state: paused; }
 .explorer__artifact.is-focused { z-index: 5; transform: translateY(-.9rem) scale(1.055) rotate(0); }
 .explorer__artifact.is-muted { opacity: .22; filter: grayscale(1) contrast(.85); transform: scale(.91); }
 .explorer__number { display: none; }
-.explorer__placeholder { height: 73%; margin: 3.35rem .75rem 0; border-radius: .7rem; display: grid; place-items: center; background: #82817c; color: #565550; }
+.explorer__placeholder { height: 73%; margin: 3.35rem .75rem 0; border-radius: .7rem; display: grid; place-items: center; background: var(--tone-explorer-placeholder-bg); color: var(--tone-explorer-placeholder-fg); }
 .explorer__placeholder span { font: 500 .56rem var(--font-mono); letter-spacing: .035em; text-transform: uppercase; text-align: center; }
-.explorer__artifact--a .explorer__placeholder { background: #41413e; }
-.explorer__artifact--b .explorer__placeholder { background: #e1e0dd; }
-.explorer__artifact--c .explorer__placeholder { background: #83827d; }
+.explorer__artifact--a .explorer__placeholder { background: var(--tone-explorer-a-placeholder); }
+.explorer__artifact--b .explorer__placeholder { background: var(--tone-explorer-b-placeholder); }
+.explorer__artifact--c .explorer__placeholder { background: var(--tone-explorer-c-placeholder); }
 .explorer__detail { position: absolute; inset: .9rem .95rem auto; display: grid; gap: .1rem; }
 .explorer__detail strong { font: 500 .64rem/1.05 var(--font-mono); letter-spacing: -.04em; text-transform: uppercase; max-width: 18ch; }
 .explorer__detail span { display: none; }

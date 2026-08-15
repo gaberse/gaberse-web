@@ -73,7 +73,7 @@
   align-items: center;
   justify-content: flex-end;
   padding-bottom: 1.25rem;
-  border-bottom: 1px solid #d9d6cf;
+  border-bottom: 1px solid var(--color-border-muted);
   font: 500 .62rem/1 var(--font-mono);
   letter-spacing: .09em;
   text-transform: uppercase;
@@ -99,7 +99,7 @@
   margin: 0;
   min-height: 0;
   overflow: hidden;
-  background: #d4d2cd;
+  background: var(--color-media-placeholder);
 }
 
 .contact-profile__photo img {
@@ -136,7 +136,7 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: auto;
-  border-top: 1px solid #d9d6cf;
+  border-top: 1px solid var(--color-border-muted);
   font: 500 clamp(.72rem, .9vw, .88rem)/1.2 var(--font-mono);
 }
 
@@ -148,12 +148,12 @@
   align-items: center;
   justify-content: space-between;
   gap: .75rem;
-  border-bottom: 1px solid #d9d6cf;
+  border-bottom: 1px solid var(--color-border-muted);
 }
 
 .contact-profile__links > :nth-child(odd) {
   padding-right: 1rem;
-  border-right: 1px solid #d9d6cf;
+  border-right: 1px solid var(--color-border-muted);
 }
 
 .contact-profile__links > :nth-child(even) {
