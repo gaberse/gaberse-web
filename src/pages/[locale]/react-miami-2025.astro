@@ -1,0 +1,206 @@
+---
+import Header from "../../components/home/Header.astro";
+import SurfaceCard from "../../components/primitives/SurfaceCard.astro";
+import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { supportedLocales, type Locale } from "../../lib/i18n";
+import "../../styles/item-page.css";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const isEnglish = locale === "en";
+
+const copy = isEnglish
+  ? {
+      itemEyebrow: "ITEM / EXPERIENCE / 2025",
+      title: "React Miami 2025",
+      intro: "My first time in the United States, surrounded by people from the industry I had only known from a screen.",
+      heroLabel: "MIAMI / 2025",
+      placeholder: "Placeholder media",
+      arrivalEyebrow: "THE ARRIVAL",
+      arrivalTitle: "A conference, but also a threshold.",
+      arrivalText: "I went for React. What stayed with me was everything around it: being in a new country, speaking English all day, meeting people whose work I respected, and realizing that this world felt much closer than it had from home.",
+      rememberEyebrow: "THREE THINGS I REMEMBER",
+      framesEyebrow: "FRAMES FROM THE WEEK",
+      changedEyebrow: "WHAT CHANGED",
+      changedTitle: "The distance became smaller.",
+      changedText: "Before the trip, conferences like this belonged to a version of the industry I watched from afar. After it, I had memories inside it — conversations, faces, mistakes in English, jokes, questions, and a sense that I could return.",
+      quote: "“I didn't come back feeling like I had arrived.\nI came back feeling like I could keep going.”",
+      quoteTag: "REACT MIAMI / 2025",
+      detailsEyebrow: "A FEW DETAILS",
+      nextEyebrow: "NEXT IN THE UNIVERSE",
+      nextTitle: "Travel Photography",
+      nextText: "Selected frames from places that stayed with me.",
+    }
+  : {
+      itemEyebrow: "ITEM / EXPERIENCIA / 2025",
+      title: "React Miami 2025",
+      intro: "Mi primera vez en Estados Unidos, rodeada de gente de la industria que solo conocía a través de una pantalla.",
+      heroLabel: "MIAMI / 2025",
+      placeholder: "Media provisional",
+      arrivalEyebrow: "LA LLEGADA",
+      arrivalTitle: "Una conferencia, pero también un umbral.",
+      arrivalText: "Fui por React. Lo que se me quedó fue todo lo que estaba alrededor: estar en un país nuevo, hablar inglés todo el día, conocer a gente cuyo trabajo respetaba, y darme cuenta de que ese mundo estaba mucho más cerca de lo que parecía desde casa.",
+      rememberEyebrow: "TRES COSAS QUE RECUERDO",
+      framesEyebrow: "IMÁGENES DE LA SEMANA",
+      changedEyebrow: "QUÉ CAMBIÓ",
+      changedTitle: "La distancia se hizo más chica.",
+      changedText: "Antes del viaje, conferencias como esta pertenecían a una versión de la industria que miraba de lejos. Después, tenía recuerdos por dentro — conversaciones, caras, errores en inglés, chistes, preguntas, y la sensación de que podía volver.",
+      quote: "“No volví sintiendo que había llegado.\nVolví sintiendo que podía seguir.”",
+      quoteTag: "REACT MIAMI / 2025",
+      detailsEyebrow: "ALGUNOS DETALLES",
+      nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
+      nextTitle: "Fotografía de viajes",
+      nextText: "Fotos elegidas de lugares que se me quedaron grabados.",
+    };
+
+const remember = isEnglish
+  ? [
+      { eyebrow: "01", title: "THE PEOPLE", description: "Meeting developers I had followed online made the industry feel less abstract — more human, more reachable." },
+      { eyebrow: "02", title: "THE LANGUAGE", description: "Using English in real conversations all day was uncomfortable at first, then surprisingly normal.", dark: true },
+      { eyebrow: "03", title: "THE SCALE", description: "Being there changed my sense of what “being part of the industry” could mean for me." },
+    ]
+  : [
+      { eyebrow: "01", title: "LA GENTE", description: "Conocer en persona a developers que seguía online hizo que la industria se sintiera menos abstracta — más humana, más alcanzable." },
+      { eyebrow: "02", title: "EL IDIOMA", description: "Hablar inglés en conversaciones reales todo el día fue incómodo al principio, y después sorprendentemente normal.", dark: true },
+      { eyebrow: "03", title: "LA ESCALA", description: "Estar ahí me cambió la idea de lo que “ser parte de la industria” podía significar para mí." },
+    ];
+
+const details = isEnglish
+  ? [
+      { label: "FIRST TIME", value: "UNITED STATES" },
+      { label: "CONTEXT", value: "DEVELOPER CONFERENCE" },
+      { label: "LANGUAGE", value: "ENGLISH" },
+      { label: "YEAR", value: "2025" },
+    ]
+  : [
+      { label: "PRIMERA VEZ", value: "ESTADOS UNIDOS" },
+      { label: "CONTEXTO", value: "CONFERENCIA DE DESARROLLADORES" },
+      { label: "IDIOMA", value: "INGLÉS" },
+      { label: "AÑO", value: "2025" },
+    ];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="react-miami-2025">
+  <Header locale={locale} />
+  <main class="item site-shell">
+    <section class="item__hero rm__hero">
+      <div class="item__hero-copy">
+        <p class="item__eyebrow">{copy.itemEyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="item__intro">{copy.intro}</p>
+      </div>
+      <PhotoFrame class="rm__hero-photo" tone="mid" label={copy.heroLabel} ariaLabel={copy.placeholder} />
+    </section>
+
+    <section class="item__section rm__arrival">
+      <div class="rm__arrival-copy">
+        <p class="item__eyebrow">{copy.arrivalEyebrow}</p>
+        <h2>{copy.arrivalTitle}</h2>
+        <p>{copy.arrivalText}</p>
+      </div>
+      <div class="rm__arrival-photos">
+        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--tall" tone="dark" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--short" tone="light" ariaLabel={copy.placeholder} />
+      </div>
+    </section>
+
+    <section class="item__section rm__remember">
+      <p class="item__eyebrow">{copy.rememberEyebrow}</p>
+      <div class="rm__remember-grid">
+        {remember.map((item) => <SurfaceCard {...item} />)}
+      </div>
+    </section>
+
+    <section class="item__section rm__frames">
+      <p class="item__eyebrow">{copy.framesEyebrow}</p>
+      <div class="rm__frames-grid">
+        <PhotoFrame class="rm__frame rm__frame--main" tone="dark" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="rm__frame rm__frame--wide" tone="mid" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="rm__frame rm__frame--small" tone="dark" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="rm__frame rm__frame--small" tone="light" ariaLabel={copy.placeholder} />
+      </div>
+    </section>
+
+    <section class="item__section rm__changed">
+      <div class="rm__changed-copy">
+        <p class="item__eyebrow">{copy.changedEyebrow}</p>
+        <h2>{copy.changedTitle}</h2>
+        <p>{copy.changedText}</p>
+      </div>
+      <div class="rm__quote">
+        <p>{copy.quote}</p>
+        <span>{copy.quoteTag}</span>
+      </div>
+    </section>
+
+    <section class="item__section rm__details">
+      <div class="rm__details-panel">
+        {details.map((detail) => (
+          <div class="rm__detail">
+            <p class="item__eyebrow">{detail.label}</p>
+            <strong>{detail.value}</strong>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="item__next">
+      <p class="item__eyebrow">{copy.nextEyebrow}</p>
+      <a class="item__next-link" href={`/${locale}/travel-photography`}>
+        <span>{copy.nextTitle} <span aria-hidden="true">→</span></span>
+        <small>{copy.nextText}</small>
+      </a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  :global(.rm__hero-photo) { aspect-ratio: 1.05 / 1; min-height: 20rem; }
+
+  .rm__arrival { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .85fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
+  .rm__arrival-copy h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .rm__arrival-copy p:last-child { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .rm__arrival-photos { position: relative; display: grid; }
+  :global(.rm__arrival-photo) { position: relative; }
+  :global(.rm__arrival-photo--tall) { width: 68%; aspect-ratio: .8 / 1; }
+  :global(.rm__arrival-photo--short) { width: 62%; aspect-ratio: 1 / 1; margin: -3rem 0 0 auto; }
+
+  .rm__remember-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+
+  .rm__frames-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+  :global(.rm__frame--main) { grid-row: 1 / 3; min-height: 34rem; }
+  :global(.rm__frame--wide) { min-height: 16.5rem; }
+  .rm__frames-grid > :global(.rm__frame--small) { min-height: 16.5rem; }
+  .rm__frames-grid { grid-template-rows: repeat(2, auto); }
+  .rm__frames-grid > :nth-child(3),
+  .rm__frames-grid > :nth-child(4) { grid-column: 2 / 3; }
+  .rm__frames-grid > :nth-child(3) { display: grid; }
+
+  .rm__changed { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
+  .rm__changed-copy h2 { margin: 1.4rem 0 0; font-size: clamp(1.8rem, 3cqw, 2.7rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .rm__changed-copy p:last-child { margin: 1.4rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .rm__quote { padding: 1.8rem; border-radius: var(--radius-artifact); background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
+  .rm__quote p { margin: 0; white-space: pre-line; font-size: clamp(1.15rem, 1.8cqw, 1.4rem); line-height: 1.3; letter-spacing: -.01em; }
+  .rm__quote span { display: block; margin-top: 1.6rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .7; }
+
+  .rm__details-panel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; padding: 1.8rem; border-radius: var(--radius-object); background: var(--color-surface); }
+  .rm__detail strong { display: block; margin-top: .9rem; font-size: 1.05rem; letter-spacing: -.02em; font-weight: 600; }
+
+  @media (max-width: 44rem) {
+    .rm__arrival { grid-template-columns: 1fr; }
+    .rm__arrival-photos { margin-top: 1.5rem; height: 20rem; }
+    :global(.rm__arrival-photo--tall) { width: 62%; }
+    :global(.rm__arrival-photo--short) { width: 56%; margin-top: -2rem; }
+    .rm__remember-grid { grid-template-columns: 1fr; }
+    .rm__frames-grid { grid-template-columns: 1fr; }
+    :global(.rm__frame--main) { grid-row: auto; min-height: 18rem; }
+    .rm__frames-grid > :nth-child(3),
+    .rm__frames-grid > :nth-child(4) { grid-column: auto; }
+    .rm__changed { grid-template-columns: 1fr; }
+    .rm__details-panel { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
