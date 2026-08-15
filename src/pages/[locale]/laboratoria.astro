@@ -1,0 +1,168 @@
+---
+import Header from "../../components/home/Header.astro";
+import SurfaceCard from "../../components/primitives/SurfaceCard.astro";
+import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { supportedLocales, type Locale } from "../../lib/i18n";
+import "../../styles/item-page.css";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const isEnglish = locale === "en";
+
+const copy = isEnglish
+  ? {
+      itemEyebrow: "ITEM / ORIGIN STORY",
+      title: "Laboratoria",
+      intro: "Where my path into technology actually began.",
+      heroLabel: "PHOTO / THAT TIME",
+      placeholder: "Placeholder media",
+      enterText: "I entered tech through a bootcamp that felt less like school and more like being dropped into a real working environment.",
+      beforeEyebrow: "BEFORE",
+      beforeTitle: "The route wasn't linear.",
+      beforeText: "I had moved to Peru at 20 without finishing university. Technology wasn't the plan I had started with. Laboratoria became the place where a different path became possible.",
+      learningLabel: "01 / LEARNING",
+      peopleLabel: "02 / PEOPLE",
+      shiftEyebrow: "THE SHIFT",
+      shiftTitle: "Learning by doing changed everything.",
+      archiveLabel: "PHOTO / ARCHIVE",
+      thenEyebrow: "FROM THEN",
+      thenTitle: "It wasn't the finish line. It was the door.",
+      thenText: "The first developer job came after it. Everything since — frontend, architecture, AI, the things I'm building now — traces back to that decision to enter.",
+      nextEyebrow: "NEXT IN THE UNIVERSE",
+      nextTitle: "Gabriela",
+      nextText: "The person behind all of this.",
+    }
+  : {
+      itemEyebrow: "ITEM / ORIGEN",
+      title: "Laboratoria",
+      intro: "Donde realmente empezó mi camino en tecnología.",
+      heroLabel: "FOTO / DE ESA ÉPOCA",
+      placeholder: "Media provisional",
+      enterText: "Entré a la tecnología a través de un bootcamp que se sintió menos como una escuela y más como si me hubieran soltado en un ambiente de trabajo real.",
+      beforeEyebrow: "ANTES",
+      beforeTitle: "El camino no fue lineal.",
+      beforeText: "Me había mudado a Perú a los 20 sin haber terminado la universidad. La tecnología no era el plan con el que había arrancado. Laboratoria se convirtió en el lugar donde un camino distinto se volvió posible.",
+      learningLabel: "01 / APRENDIZAJE",
+      peopleLabel: "02 / PERSONAS",
+      shiftEyebrow: "EL CAMBIO",
+      shiftTitle: "Aprender haciendo lo cambió todo.",
+      archiveLabel: "FOTO / ARCHIVO",
+      thenEyebrow: "DESDE ENTONCES",
+      thenTitle: "No fue la meta. Fue la puerta.",
+      thenText: "El primer trabajo como developer vino después. Todo lo que siguió — frontend, arquitectura, AI, las cosas que estoy construyendo ahora — se puede rastrear hasta esa decisión de entrar.",
+      nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
+      nextTitle: "Gabriela",
+      nextText: "La persona detrás de todo esto.",
+    };
+
+const shift = isEnglish
+  ? [
+      { eyebrow: "01", title: "BUILD", description: "Projects instead of abstract exercises." },
+      { eyebrow: "02", title: "WORK TOGETHER", description: "Feedback, ambiguity, people and deadlines." },
+      { eyebrow: "03", title: "BECOME", description: "The moment “maybe I can do this” became a career.", dark: true },
+    ]
+  : [
+      { eyebrow: "01", title: "CONSTRUIR", description: "Proyectos en vez de ejercicios abstractos." },
+      { eyebrow: "02", title: "TRABAJAR EN EQUIPO", description: "Feedback, ambigüedad, gente y deadlines." },
+      { eyebrow: "03", title: "CONVERTIRME", description: "El momento en el que “tal vez pueda hacer esto” se convirtió en una carrera.", dark: true },
+    ];
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="laboratoria">
+  <Header locale={locale} />
+  <main class="item site-shell">
+    <section class="item__hero">
+      <div class="item__hero-copy">
+        <p class="item__eyebrow">{copy.itemEyebrow}</p>
+        <h1>{copy.title}</h1>
+        <p class="item__intro">{copy.intro}</p>
+      </div>
+      <PhotoFrame class="lab__hero-photo" tone="mid" label={copy.heroLabel} ariaLabel={copy.placeholder} />
+    </section>
+
+    <section class="item__section lab__enter">
+      <p>{copy.enterText}</p>
+    </section>
+
+    <section class="item__section lab__before">
+      <div class="lab__before-copy">
+        <p class="item__eyebrow">{copy.beforeEyebrow}</p>
+        <h2>{copy.beforeTitle}</h2>
+        <p>{copy.beforeText}</p>
+      </div>
+      <div class="lab__before-photos">
+        <PhotoFrame class="lab__before-photo lab__before-photo--tall" tone="dark" label={copy.learningLabel} ariaLabel={copy.placeholder} />
+        <PhotoFrame class="lab__before-photo lab__before-photo--short" tone="light" label={copy.peopleLabel} ariaLabel={copy.placeholder} />
+      </div>
+    </section>
+
+    <section class="item__section lab__shift">
+      <p class="item__eyebrow">{copy.shiftEyebrow}</p>
+      <h2>{copy.shiftTitle}</h2>
+      <div class="lab__shift-grid">
+        {shift.map((item) => <SurfaceCard {...item} />)}
+      </div>
+    </section>
+
+    <section class="item__section lab__then">
+      <div class="lab__then-photos">
+        <PhotoFrame class="lab__then-photo lab__then-photo--main" tone="mid" label={copy.archiveLabel} ariaLabel={copy.placeholder} />
+        <PhotoFrame class="lab__then-photo lab__then-photo--small" tone="dark" label={copy.archiveLabel} ariaLabel={copy.placeholder} />
+      </div>
+      <div class="lab__then-copy">
+        <p class="item__eyebrow">{copy.thenEyebrow}</p>
+        <h2>{copy.thenTitle}</h2>
+        <p>{copy.thenText}</p>
+      </div>
+    </section>
+
+    <section class="item__next">
+      <p class="item__eyebrow">{copy.nextEyebrow}</p>
+      <a class="item__next-link" href={`/${locale}/gabriela`}>
+        <span>{copy.nextTitle} <span aria-hidden="true">→</span></span>
+        <small>{copy.nextText}</small>
+      </a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  :global(.lab__hero-photo) { aspect-ratio: 1.05 / 1; min-height: 20rem; }
+
+  .lab__enter p { margin: 0; max-width: 42ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.4; color: var(--color-ink-soft); }
+
+  .lab__before { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .85fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
+  .lab__before-copy h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .lab__before-copy p:last-child { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .lab__before-photos { position: relative; display: grid; }
+  :global(.lab__before-photo) { position: relative; }
+  :global(.lab__before-photo--tall) { width: 68%; aspect-ratio: .8 / 1; }
+  :global(.lab__before-photo--short) { width: 62%; aspect-ratio: 1 / 1; margin: -3rem 0 0 auto; }
+
+  .lab__shift h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .lab__shift-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+
+  .lab__then { display: grid; grid-template-columns: minmax(20rem, .85fr) minmax(0, 1fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
+  .lab__then-photos { position: relative; display: grid; }
+  :global(.lab__then-photo) { position: relative; }
+  :global(.lab__then-photo--main) { width: 82%; aspect-ratio: .95 / 1; }
+  :global(.lab__then-photo--small) { width: 55%; aspect-ratio: 1 / 1; margin: -3.5rem 0 0 auto; }
+  .lab__then-copy h2 { margin: 1.4rem 0 0; max-width: 20ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .lab__then-copy p:last-child { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+
+  @media (max-width: 44rem) {
+    .lab__before { grid-template-columns: 1fr; }
+    .lab__before-photos { margin-top: 1.5rem; height: 20rem; }
+    :global(.lab__before-photo--tall) { width: 62%; }
+    :global(.lab__before-photo--short) { width: 56%; margin-top: -2rem; }
+    .lab__shift-grid { grid-template-columns: 1fr; }
+    .lab__then { grid-template-columns: 1fr; }
+    .lab__then-photos { height: 20rem; margin-bottom: 1.5rem; }
+    :global(.lab__then-photo--main) { width: 62%; }
+    :global(.lab__then-photo--small) { width: 56%; margin-top: -2rem; }
+  }
+</style>
