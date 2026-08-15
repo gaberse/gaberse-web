@@ -1,0 +1,136 @@
+---
+import Header from "../../components/home/Header.astro";
+import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { supportedLocales, type Locale } from "../../lib/i18n";
+import "../../styles/item-page.css";
+
+export function getStaticPaths() {
+  return supportedLocales.map((locale) => ({ params: { locale } }));
+}
+
+const locale = Astro.params.locale as Locale;
+const isEnglish = locale === "en";
+
+const heroPhoto = {
+  src: "/media/travel/patagonia-glacier-480.webp",
+  srcSet: [
+    "/media/travel/patagonia-glacier-480.webp 480w",
+    "/media/travel/patagonia-glacier-800.webp 800w",
+    "/media/travel/patagonia-glacier-1200.webp 1200w",
+  ].join(", "),
+  alt: isEnglish
+    ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
+    : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+};
+
+const copy = isEnglish
+  ? {
+      itemEyebrow: "ITEM / VISUAL ARCHIVE",
+      title: "Travel Photography",
+      intro: "Selected frames from places that stayed with me.",
+      heroMeta: "PLACE / YEAR",
+      placeholder: "Placeholder media",
+      memoryTitle: "Sometimes a place becomes a memory before the trip is even over.",
+      memoryText: "I keep the photographs that feel like fragments — not proof that I was somewhere, just the pieces I still want to look at.",
+      selectedEyebrow: "SELECTED FRAMES",
+      closing: "No ranking. No chronology. Just the photographs I keep returning to.",
+      nextEyebrow: "NEXT IN THE UNIVERSE",
+      nextTitle: "React Miami 2025",
+      nextText: "A first trip to the US, developers I admired, and a lot of English.",
+    }
+  : {
+      itemEyebrow: "ITEM / ARCHIVO VISUAL",
+      title: "Fotografía de viajes",
+      intro: "Fotos elegidas de lugares que se me quedaron grabados.",
+      heroMeta: "LUGAR / AÑO",
+      placeholder: "Media provisional",
+      memoryTitle: "A veces un lugar se vuelve un recuerdo antes de que el viaje termine.",
+      memoryText: "Me quedo con las fotos que se sienten como fragmentos — no como prueba de que estuve en un lugar, sino como los pedazos que todavía quiero volver a mirar.",
+      selectedEyebrow: "FOTOS SELECCIONADAS",
+      closing: "Sin ranking. Sin cronología. Solo las fotos a las que vuelvo una y otra vez.",
+      nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
+      nextTitle: "React Miami 2025",
+      nextText: "Un primer viaje a Estados Unidos, developers que admiraba, y mucho inglés.",
+    };
+---
+
+<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="travel-photography">
+  <Header locale={locale} />
+  <main class="item site-shell">
+    <section class="item__hero tp__hero">
+      <div class="item__hero-copy">
+        <p class="item__eyebrow">{copy.itemEyebrow}</p>
+        <h1>{copy.title}</h1>
+        <div class="tp__hero-row">
+          <p class="item__intro">{copy.intro}</p>
+          <p class="tp__hero-meta">{copy.heroMeta}</p>
+        </div>
+      </div>
+      <PhotoFrame class="tp__hero-photo" {...heroPhoto} />
+    </section>
+
+    <section class="item__section tp__memory">
+      <div class="tp__memory-head">
+        <h2>{copy.memoryTitle}</h2>
+        <p>{copy.memoryText}</p>
+      </div>
+      <div class="tp__memory-photos">
+        <PhotoFrame class="tp__memory-photo tp__memory-photo--tall" tone="dark" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__memory-photo tp__memory-photo--short" tone="light" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__memory-photo tp__memory-photo--extra" tone="mid" ariaLabel={copy.placeholder} />
+      </div>
+    </section>
+
+    <section class="item__section tp__selected">
+      <p class="item__eyebrow">{copy.selectedEyebrow}</p>
+      <div class="tp__filmstrip">
+        <PhotoFrame class="tp__filmstrip-frame" tone="dark" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__filmstrip-frame" tone="mid" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__filmstrip-frame" tone="light" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__filmstrip-frame" tone="light" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__filmstrip-frame" tone="mid" ariaLabel={copy.placeholder} />
+      </div>
+      <p class="tp__closing">{copy.closing}</p>
+    </section>
+
+    <section class="item__next">
+      <p class="item__eyebrow">{copy.nextEyebrow}</p>
+      <a class="item__next-link" href={`/${locale}/react-miami-2025`}>
+        <span>{copy.nextTitle} <span aria-hidden="true">→</span></span>
+        <small>{copy.nextText}</small>
+      </a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .tp__hero { grid-template-columns: 1fr; row-gap: 2.5rem; }
+  .tp__hero-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; }
+  .tp__hero-row .item__intro { margin: 0; }
+  .tp__hero-meta { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); white-space: nowrap; }
+  :global(.tp__hero-photo) { aspect-ratio: 1.75 / 1; min-height: 22rem; }
+
+  .tp__memory-head { display: flex; gap: clamp(2rem, 6cqw, 5rem); align-items: baseline; }
+  .tp__memory-head h2 { flex: 1.2 1 0; margin: 1.4rem 0 0; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
+  .tp__memory-head p { flex: .8 1 0; margin: 1.4rem 0 0; max-width: 34ch; font-size: 1rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .tp__memory-photos { position: relative; display: grid; margin-top: 3rem; min-height: 26rem; }
+  :global(.tp__memory-photo) { position: relative; }
+  :global(.tp__memory-photo--tall) { width: 58%; aspect-ratio: .8 / 1; }
+  :global(.tp__memory-photo--short) { width: 44%; aspect-ratio: 1 / 1; margin: -3rem 0 0 auto; }
+  :global(.tp__memory-photo--extra) { width: 38%; aspect-ratio: .9 / 1; margin: -2.5rem 0 0 38%; }
+
+  .tp__filmstrip { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(.7rem, 1.2cqw, 1.2rem); margin-top: 2.4rem; }
+  :global(.tp__filmstrip-frame) { aspect-ratio: .78 / 1; }
+  .tp__closing { margin: 2.2rem 0 0; font-size: .98rem; color: var(--color-ink-soft); }
+
+  @media (max-width: 44rem) {
+    :global(.tp__hero-photo) { aspect-ratio: 1.2 / 1; min-height: 16rem; }
+    .tp__memory-head { flex-direction: column; gap: 1.5rem; }
+    .tp__memory-photos { margin-top: 1.5rem; min-height: 20rem; }
+    :global(.tp__memory-photo--tall) { width: 62%; }
+    :global(.tp__memory-photo--short) { width: 52%; margin-top: -2rem; }
+    :global(.tp__memory-photo--extra) { width: 46%; margin-left: 30%; }
+    .tp__filmstrip { grid-template-columns: 1fr; }
+  }
+</style>
