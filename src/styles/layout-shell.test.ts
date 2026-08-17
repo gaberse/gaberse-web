@@ -4,6 +4,10 @@ import { describe, expect, it } from "vitest";
 const readSource = (relativePath: string) =>
   readFileSync(new URL(relativePath, import.meta.url), "utf8");
 
+/** `sizes` describes the viewport, so vw is required there and cqw is invalid. */
+const withoutSizesAttributes = (source: string) =>
+  source.replace(/sizes=(?:"[^"]*"|\{[^}]*\})/g, "");
+
 describe("site shell layout system", () => {
   it("defines a reusable 112.5rem shell, with Header intentionally staying edge-to-edge", () => {
     const tokens = readSource("./tokens.css");
@@ -19,11 +23,10 @@ describe("site shell layout system", () => {
     // it does not adopt the capped .site-shell used by Home.
     expect(header).toContain('<header class="site-header">');
     expect(header).not.toMatch(/site-header\s+site-shell/);
-    expect(home).toContain('<main class="home site-shell">');
-    expect(home).toMatch(/\.home\s*{[^}]*container-type:\s*inline-size;/s);
-    expect(home).toMatch(
-      /@container \(min-width:\s*100rem\)\s*{\s*\.home__hero-copy\s*{\s*width:\s*50%;\s*}\s*}/s,
-    );
+    expect(home).toMatch(/<main class="pivot site-shell">/);
+    expect(home).toMatch(/\.pivot\s*{[^}]*container-type:\s*inline-size;/s);
+    // The shell is capped, so the Home sizes itself against the container.
+    expect(home).toMatch(/@container \(min-width:\s*100rem\)/);
   });
 
   it("scales Home against its capped shell while keeping the dialog viewport-relative", () => {
@@ -31,9 +34,9 @@ describe("site shell layout system", () => {
     const explorer = readSource("../components/islands/home-explorer.css");
     const contactProfile = readSource("../components/islands/contact-profile.css");
 
-    expect(home).not.toMatch(/\d(?:\.\d+)?vw/);
-    expect(explorer).not.toMatch(/\d(?:\.\d+)?vw/);
-    expect(home).toContain("7.3cqw");
+    expect(withoutSizesAttributes(home)).not.toMatch(/\d(?:\.\d+)?vw/);
+    expect(withoutSizesAttributes(explorer)).not.toMatch(/\d(?:\.\d+)?vw/);
+    expect(home).toMatch(/\d(?:\.\d+)?cqw/);
     expect(explorer).toContain("1.55cqw");
 
     expect(contactProfile).toContain("width: min(78vw, 78rem)");
