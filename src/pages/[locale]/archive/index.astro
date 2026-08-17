@@ -1,9 +1,0 @@
----
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { supportedLocales } from "../../../lib/i18n";
-export function getStaticPaths() { return supportedLocales.map((locale) => ({ params: { locale } })); }
-const { locale } = Astro.params;
----
-<BaseLayout locale={locale as "en" | "es"} title="Archive" path="archive">
-  <main><h1>Archive</h1><p>Foundation route. Archive design is a later milestone.</p></main>
-</BaseLayout>

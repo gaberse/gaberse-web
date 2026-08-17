@@ -15,9 +15,9 @@ const seo = createSeo({ locale, title, description, path });
     <title>{seo.pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={seo.canonical} />
-    <link rel="alternate" hreflang="en" href={seo.canonical.replace(`/${locale}/`, "/en/")} />
-    <link rel="alternate" hreflang="es" href={seo.canonical.replace(`/${locale}/`, "/es/")} />
-    <link rel="alternate" hreflang="x-default" href={seo.canonical.replace(`/${locale}/`, "/en/")} />
+    <link rel="alternate" hreflang="en" href={seo.alternates.en} />
+    <link rel="alternate" hreflang="es" href={seo.alternates.es} />
+    <link rel="alternate" hreflang="x-default" href={seo.alternates.en} />
   </head>
   <body><slot /></body>
 </html>
