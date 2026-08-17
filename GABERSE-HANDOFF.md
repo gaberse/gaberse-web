@@ -64,6 +64,7 @@ Do not turn it into:
 > Anything that keeps pulling your attention.
 
 Initial examples:
+
 - AI
 - Design Systems
 - Travel Photography
@@ -75,6 +76,7 @@ Interests are not rigid categories.
 > Something Gabriela has made, explored, or experienced.
 
 Initial Items:
+
 1. AI Engineering Path
 2. Design System
 3. Travel Photography
@@ -87,15 +89,19 @@ Do **not** create a core `Project` entity.
 # 3. Visitor journey
 
 ## First 5 seconds
+
 The visitor understands the things currently pulling Gabriela's attention.
 
 ## Around 30 seconds
+
 The visitor discovers what Gabriela is working on now.
 
 ## Around 2 minutes
+
 The visitor discovers more of the person behind the work, including that Gabriela is a woman in technology.
 
 ## Around 5 minutes
+
 The visitor should feel enough familiarity and trust to contact Gabriela if something resonated.
 
 Accessibility/contactability is a product requirement.
@@ -103,12 +109,14 @@ Accessibility/contactability is a product requirement.
 # 4. Homepage requirements
 
 Must:
+
 - Interests
 - selected Items/artifacts
 - route into the full Archive
 - direct contact invitation
 
 Useful:
+
 - Currently / what Gabriela is doing now
 
 Do not overcrowd the homepage.
@@ -139,6 +147,7 @@ Large typography should carry real weight.
 Do not rely on decorative divider lines.
 
 Use:
+
 - warm off-white canvas
 - near-black text
 - neutral grayscale surfaces
@@ -167,6 +176,7 @@ Approved hero sequence:
 `REST → INTEREST HOVER → ARTIFACT FOCUS → EXIT`
 
 Desktop:
+
 - slow ambient artifact movement
 - hover on Interest interrupts ambient motion
 - related artifact moves forward
@@ -176,6 +186,7 @@ Desktop:
 - hover/focus pauses ambient motion
 
 Mobile:
+
 - no fake hover
 - tactile deck
 - swipe/tap discovery
@@ -192,6 +203,7 @@ Desktop and mobile are first-class.
 Mobile is not simply compressed desktop.
 
 Mobile favors:
+
 - vertical flow
 - tactile deck
 - horizontal rails where appropriate
@@ -202,24 +214,28 @@ Mobile favors:
 Gaberse is bilingual from the beginning.
 
 Locales:
+
 - `en`
 - `es`
 
 Both are first-class.
 
 Suggested routes:
+
 - `/en/...`
 - `/es/...`
 
 Keep Item slugs stable across locales.
 
 Example:
+
 - `/en/items/ai-engineering-path`
 - `/es/items/ai-engineering-path`
 
 The language switch should preserve the current route.
 
 Initial direction:
+
 - English may be the default for global reach.
 - Remember explicit user locale selection.
 - Use localized metadata and hreflang.
@@ -236,6 +252,7 @@ It must not read like “I completed an AI course.”
 It should feel like an evolving practice accumulating knowledge, experiments and things built.
 
 Conceptual phases used in design:
+
 1. Foundations
 2. Building
 3. Agents
@@ -244,6 +261,7 @@ Conceptual phases used in design:
 These labels are provisional.
 
 Possible data:
+
 - current phase
 - phases
 - latest update
@@ -253,6 +271,7 @@ Possible data:
 - external sources
 
 Mock artifact names used only for design:
+
 - Context Explorer
 - Eval Notes
 - Agent Lab
@@ -280,6 +299,7 @@ Mallorca was only an example. The architecture must support arbitrary trips/sele
 A personal experience/story, not a technical conference report.
 
 Known real context:
+
 - conference already happened
 - first time in the United States
 - met people from the industry
@@ -296,6 +316,7 @@ Origin/transition story.
 Tell how Gabriela entered technology through Laboratoria.
 
 Relevant background available for later public-content review:
+
 - moved to Peru at 20
 - had not completed prior university studies
 - previous field: Sound Engineering / Music Production
@@ -308,6 +329,7 @@ Only publish details Gabriela approves.
 Person/About, not a conventional CV.
 
 Themes:
+
 - curiosity
 - empathy
 - confidence
@@ -346,6 +368,7 @@ URL:
 `https://www.figma.com/design/7aNV0w4jq8PLmbfOM3tul0`
 
 Important frames:
+
 - Home desktop refined
 - Hero Motion / Interaction
 - Home mobile
@@ -367,6 +390,7 @@ Prefer boring, legible architecture over clever abstractions.
 Do not over-model before real content requires it.
 
 Requirements:
+
 - strong SEO
 - excellent image performance
 - accessibility
@@ -384,6 +408,7 @@ The architecture should allow Items to have different layouts while sharing prim
 # 13. Open decisions
 
 Not decided yet:
+
 - framework: Next.js vs Astro vs another appropriate option
 - content storage: MDX vs typed TS/JSON vs CMS vs hybrid
 - deployment provider

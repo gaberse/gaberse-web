@@ -1,15 +1,56 @@
 ---
-interface Props { ariaLabel: string; class?: string; }
+interface Props {
+  ariaLabel: string;
+  class?: string;
+}
 const { ariaLabel, class: className } = Astro.props;
 ---
+
 <div class:list={["phase-indicator", className]} aria-label={ariaLabel}>
   <div class="phase-indicator__content"><slot /></div>
   <i aria-hidden="true"></i><b aria-hidden="true"></b>
 </div>
 <style>
-  .phase-indicator { position: relative; overflow: hidden; border-radius: var(--radius-artifact); background: var(--tone-hero-bg); color: var(--tone-hero-fg); box-shadow: var(--shadow-object); }
-  .phase-indicator__content { position: absolute; z-index: 1; top: 1.45rem; left: 1.45rem; right: 1.45rem; }
-  .phase-indicator i, .phase-indicator b { position: absolute; display: block; border: 1px solid var(--tone-hero-ring); border-radius: 50%; left: 16%; right: 16%; top: 29%; bottom: 18%; }
-  .phase-indicator b { left: 28%; right: 28%; top: 40%; bottom: 29%; }
-  .phase-indicator::after { content: ""; position: absolute; width: .9rem; height: .9rem; border-radius: 50%; background: var(--tone-hero-dot); top: calc(50% - .45rem); left: calc(50% - .45rem); }
+  .phase-indicator {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-artifact);
+    background: var(--tone-hero-bg);
+    color: var(--tone-hero-fg);
+    box-shadow: var(--shadow-object);
+  }
+  .phase-indicator__content {
+    position: absolute;
+    z-index: 1;
+    top: 1.45rem;
+    left: 1.45rem;
+    right: 1.45rem;
+  }
+  .phase-indicator i,
+  .phase-indicator b {
+    position: absolute;
+    display: block;
+    border: 1px solid var(--tone-hero-ring);
+    border-radius: 50%;
+    left: 16%;
+    right: 16%;
+    top: 29%;
+    bottom: 18%;
+  }
+  .phase-indicator b {
+    left: 28%;
+    right: 28%;
+    top: 40%;
+    bottom: 29%;
+  }
+  .phase-indicator::after {
+    content: "";
+    position: absolute;
+    width: 0.9rem;
+    height: 0.9rem;
+    border-radius: 50%;
+    background: var(--tone-hero-dot);
+    top: calc(50% - 0.45rem);
+    left: calc(50% - 0.45rem);
+  }
 </style>

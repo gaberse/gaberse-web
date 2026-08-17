@@ -68,7 +68,11 @@ export function getNextInterest(
   ids: InterestId[],
 ): InterestId | null {
   if (ids.length === 0) return null;
-  const currentIndex = current ? ids.indexOf(current) : direction === 1 ? -1 : 0;
+  const currentIndex = current
+    ? ids.indexOf(current)
+    : direction === 1
+      ? -1
+      : 0;
   return ids[(currentIndex + direction + ids.length) % ids.length];
 }
 
@@ -76,7 +80,9 @@ export function shouldResetExplorerOnFocusExit(
   scope: Pick<HTMLElement, "contains">,
   nextFocusedElement: EventTarget | null,
 ) {
-  return nextFocusedElement === null || !scope.contains(nextFocusedElement as Node);
+  return (
+    nextFocusedElement === null || !scope.contains(nextFocusedElement as Node)
+  );
 }
 
 export function shouldResetExplorerOnPointerExit(

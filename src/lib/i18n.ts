@@ -19,5 +19,7 @@ export function localizedPath(locale: Locale, path = ""): string {
  */
 export function equivalentPath(pathname: string, target: Locale): string {
   const [first, ...rest] = pathname.replace(/^\/+/, "").split("/");
-  return isLocale(first) ? localizedPath(target, rest.join("/")) : localizedPath(target);
+  return isLocale(first)
+    ? localizedPath(target, rest.join("/"))
+    : localizedPath(target);
 }

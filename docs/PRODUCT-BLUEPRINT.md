@@ -34,15 +34,18 @@ The site should make people want to continue exploring and make it easy to reach
 ## Homepage
 
 Must:
+
 - Interests
 - selected Items
 - Archive access
 - direct contact
 
 Useful:
+
 - Currently
 
 Optional:
+
 - only content that adds real meaning
 
 ## Initial Interests

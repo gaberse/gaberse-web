@@ -5,7 +5,9 @@ import ContactProfile from "./ContactProfile";
 
 describe("ContactProfile", () => {
   it("renders a semantic English contact surface with safe external social links", () => {
-    const html = renderToStaticMarkup(createElement(ContactProfile, { locale: "en" }));
+    const html = renderToStaticMarkup(
+      createElement(ContactProfile, { locale: "en" }),
+    );
 
     expect(html).toContain("<dialog");
     expect(html).toContain('aria-haspopup="dialog"');
@@ -17,7 +19,9 @@ describe("ContactProfile", () => {
     expect(html).toContain('src="/media/profile/gabriela-by-the-sea-800.webp"');
     expect(html).toContain("/media/profile/gabriela-by-the-sea-480.webp 480w");
     expect(html).toContain('sizes="(max-width: 44rem) 100vw, 32vw"');
-    expect(html).toContain("Gabriela standing on a rocky beach beside the sea.");
+    expect(html).toContain(
+      "Gabriela standing on a rocky beach beside the sea.",
+    );
     expect(html).toContain("GitHub");
     expect(html).toContain("LinkedIn");
     expect(html).toContain("Instagram");
@@ -37,7 +41,9 @@ describe("ContactProfile", () => {
   });
 
   it("localizes interface and temporary profile copy for Spanish", () => {
-    const html = renderToStaticMarkup(createElement(ContactProfile, { locale: "es" }));
+    const html = renderToStaticMarkup(
+      createElement(ContactProfile, { locale: "es" }),
+    );
 
     expect(html).toContain("Contacto");
     expect(html).toContain('aria-label="Cerrar el perfil de Gabriela"');
@@ -46,7 +52,9 @@ describe("ContactProfile", () => {
     expect(html).toContain(
       "Hago cosas, me obsesiono con otras y voy dejando registro de lo que pasa en el camino.",
     );
-    expect(html).not.toContain("Gaberse es donde guardo las cosas que hago, exploro y vivo.");
+    expect(html).not.toContain(
+      "Gaberse es donde guardo las cosas que hago, exploro y vivo.",
+    );
     expect(html).not.toContain("URL pendiente");
   });
 });

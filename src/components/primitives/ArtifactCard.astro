@@ -7,8 +7,10 @@ interface Props {
   tone: "dark" | "mid" | "light";
   placeholderLabel: string;
 }
-const { index, status, title, description, tone, placeholderLabel } = Astro.props;
+const { index, status, title, description, tone, placeholderLabel } =
+  Astro.props;
 ---
+
 <article class={`artifact-card artifact-card--${tone}`}>
   <p class="artifact-card__eyebrow">{index} / {status}</p>
   <div class="artifact-card__thumb" aria-label={placeholderLabel}></div>
@@ -16,14 +18,51 @@ const { index, status, title, description, tone, placeholderLabel } = Astro.prop
   <p class="artifact-card__description">{description}</p>
 </article>
 <style>
-  .artifact-card { display: flex; flex-direction: column; padding: 1.1rem; border-radius: var(--radius-object); }
-  .artifact-card--dark { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
-  .artifact-card--mid { background: var(--tone-mid-bg); color: var(--tone-mid-fg); }
-  .artifact-card--light { background: var(--tone-light-bg); color: var(--tone-light-fg); }
-  .artifact-card__eyebrow { margin: 0 0 .9rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .75; }
-  .artifact-card__thumb { aspect-ratio: 1.35 / 1; border-radius: .7rem; background: var(--tone-dark-surface); }
-  .artifact-card--mid .artifact-card__thumb { background: var(--tone-mid-surface); }
-  .artifact-card--light .artifact-card__thumb { background: var(--tone-light-surface); }
-  .artifact-card strong { margin-top: 1.2rem; font-size: 1.15rem; letter-spacing: -.03em; font-weight: 640; }
-  .artifact-card__description { margin: .6rem 0 0; font-size: .92rem; line-height: 1.4; }
+  .artifact-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.1rem;
+    border-radius: var(--radius-object);
+  }
+  .artifact-card--dark {
+    background: var(--tone-dark-bg);
+    color: var(--tone-dark-fg);
+  }
+  .artifact-card--mid {
+    background: var(--tone-mid-bg);
+    color: var(--tone-mid-fg);
+  }
+  .artifact-card--light {
+    background: var(--tone-light-bg);
+    color: var(--tone-light-fg);
+  }
+  .artifact-card__eyebrow {
+    margin: 0 0 0.9rem;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .artifact-card__thumb {
+    aspect-ratio: 1.35 / 1;
+    border-radius: 0.7rem;
+    background: var(--tone-dark-surface);
+  }
+  .artifact-card--mid .artifact-card__thumb {
+    background: var(--tone-mid-surface);
+  }
+  .artifact-card--light .artifact-card__thumb {
+    background: var(--tone-light-surface);
+  }
+  .artifact-card strong {
+    margin-top: 1.2rem;
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .artifact-card__description {
+    margin: 0.6rem 0 0;
+    font-size: 0.92rem;
+    line-height: 1.4;
+  }
 </style>

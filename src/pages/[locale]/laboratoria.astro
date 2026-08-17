@@ -19,16 +19,19 @@ const copy = isEnglish
       itemEyebrow: "THE ORIGIN",
       title: "Laboratoria",
       meta: "FEB — AUG 2019 / LIMA",
-      opening: "I'd left a degree behind and no real idea how I was going to get into tech. This is what happened next.",
+      opening:
+        "I'd left a degree behind and no real idea how I was going to get into tech. This is what happened next.",
       arrivingEyebrow: "01 / ARRIVING",
-      arrivingText: "I got in through a side door, not a university. Six months in Lima learning frontend the only way it was taught there: by building things.",
+      arrivingText:
+        "I got in through a side door, not a university. Six months in Lima learning frontend the only way it was taught there: by building things.",
       makingEyebrow: "02 / MAKING",
       peopleAnnotation: "9TH GENERATION / FRONT END DEVELOPMENT / LIMA / 2019",
       hackathonAnnotation: "36 HOURS / 1ER HACKATHON DE IMPACTO SOCIAL",
       hackathonCaption: "With social entrepreneurs from the Kunan network.",
       afterEyebrow: "03 / AFTER",
       afterTitle: "My first job in tech came out of that.",
-      afterText: "And then another. And another. Six years later I'm still doing the same thing I started doing there: building things and trying to understand them a little better.",
+      afterText:
+        "And then another. And another. Six years later I'm still doing the same thing I started doing there: building things and trying to understand them a little better.",
       nextEyebrow: "NEXT IN THE UNIVERSE",
       nextTitle: "Travel Photography",
       nextText: "Selected frames from places that stayed with me.",
@@ -37,16 +40,19 @@ const copy = isEnglish
       itemEyebrow: "EL ORIGEN",
       title: "Laboratoria",
       meta: "FEB — AGO 2019 / LIMA",
-      opening: "Había dejado una carrera atrás y no tenía muy claro cómo iba a entrar a tecnología. Esto fue lo que pasó después.",
+      opening:
+        "Había dejado una carrera atrás y no tenía muy claro cómo iba a entrar a tecnología. Esto fue lo que pasó después.",
       arrivingEyebrow: "01 / LLEGAR",
-      arrivingText: "Entré por una puerta lateral, no por la universidad. Seis meses en Lima aprendiendo frontend de la única forma que había ahí: construyendo cosas.",
+      arrivingText:
+        "Entré por una puerta lateral, no por la universidad. Seis meses en Lima aprendiendo frontend de la única forma que había ahí: construyendo cosas.",
       makingEyebrow: "02 / HACER",
       peopleAnnotation: "9NA GENERACIÓN / FRONT END DEVELOPMENT / LIMA / 2019",
       hackathonAnnotation: "36 HORAS / 1ER HACKATHON DE IMPACTO SOCIAL",
       hackathonCaption: "Con emprendedores sociales de la red Kunan.",
       afterEyebrow: "03 / DESPUÉS",
       afterTitle: "De ahí salió mi primer trabajo en tech.",
-      afterText: "Y después otro. Y otro. Seis años más tarde sigo haciendo lo mismo que empecé a hacer ahí: construir cosas y tratar de entenderlas un poco mejor.",
+      afterText:
+        "Y después otro. Y otro. Seis años más tarde sigo haciendo lo mismo que empecé a hacer ahí: construir cosas y tratar de entenderlas un poco mejor.",
       nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
       nextTitle: "Fotografía de viajes",
       nextText: "Fotos elegidas de lugares que se me quedaron grabados.",
@@ -54,7 +60,9 @@ const copy = isEnglish
 
 const media = (name: string, widths: number[]) => ({
   src: `/media/laboratoria/laboratoria-${name}-${widths[0]}.webp`,
-  srcSet: widths.map((w) => `/media/laboratoria/laboratoria-${name}-${w}.webp ${w}w`).join(", "),
+  srcSet: widths
+    .map((w) => `/media/laboratoria/laboratoria-${name}-${w}.webp ${w}w`)
+    .join(", "),
 });
 
 const photos = {
@@ -79,7 +87,12 @@ const photos = {
 };
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.opening} path="laboratoria">
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.opening}
+  path="laboratoria"
+>
   <Header locale={locale} />
   <main class="item site-shell">
     <section class="item__hero">
@@ -89,7 +102,12 @@ const photos = {
         <p class="lab__meta">{copy.meta}</p>
         <p class="item__intro">{copy.opening}</p>
       </div>
-      <PhotoFrame class="lab__hero-photo" priority sizes="(max-width: 44rem) 90vw, 30rem" {...photos.portrait} />
+      <PhotoFrame
+        class="lab__hero-photo"
+        priority
+        sizes="(max-width: 44rem) 90vw, 30rem"
+        {...photos.portrait}
+      />
     </section>
 
     <section class="item__section lab__arriving">
@@ -101,11 +119,21 @@ const photos = {
       <p class="item__eyebrow">{copy.makingEyebrow}</p>
       <div class="lab__plates">
         <figure class="lab__plate lab__plate--people">
-          <PhotoFrame class="lab__plate-photo lab__plate-photo--people" sizes="(max-width: 44rem) 88vw, 34vw" {...photos.people} />
-          <figcaption class="lab__annotation">{copy.peopleAnnotation}</figcaption>
+          <PhotoFrame
+            class="lab__plate-photo lab__plate-photo--people"
+            sizes="(max-width: 44rem) 88vw, 34vw"
+            {...photos.people}
+          />
+          <figcaption class="lab__annotation">
+            {copy.peopleAnnotation}
+          </figcaption>
         </figure>
         <figure class="lab__plate lab__plate--hackathon">
-          <PhotoFrame class="lab__plate-photo lab__plate-photo--hackathon" sizes="(max-width: 44rem) 92vw, 60vw" {...photos.hackathon} />
+          <PhotoFrame
+            class="lab__plate-photo lab__plate-photo--hackathon"
+            sizes="(max-width: 44rem) 92vw, 60vw"
+            {...photos.hackathon}
+          />
           <figcaption class="lab__annotation">
             {copy.hackathonAnnotation}
             <span class="lab__annotation-note">{copy.hackathonCaption}</span>
@@ -131,37 +159,104 @@ const photos = {
 </BaseLayout>
 
 <style>
-  .lab__meta { margin: 1.3rem 0 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .lab__meta + .item__intro { margin-top: 1.5rem; }
+  .lab__meta {
+    margin: 1.3rem 0 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .lab__meta + .item__intro {
+    margin-top: 1.5rem;
+  }
   /* No min-height: with a 1/1 ratio it would force a width wider than a 320px
      screen can hold. The aspect ratio alone gives it enough presence. */
-  :global(.lab__hero-photo) { aspect-ratio: 1 / 1; }
+  :global(.lab__hero-photo) {
+    aspect-ratio: 1 / 1;
+  }
 
-  .lab__note { margin: 1.6rem 0 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.45; color: var(--color-ink-soft); }
+  .lab__note {
+    margin: 1.6rem 0 0;
+    max-width: 46ch;
+    font-size: clamp(1.05rem, 1.4cqw, 1.25rem);
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+  }
 
   /* Plates laid out on a table, not a grid: each photograph sits on its own
      line, offset from the last, with its annotation pencilled underneath. */
   /* minmax(0,1fr) + min-width:0 so the track can shrink below the photograph's
      intrinsic width; without them the image forces the column past the viewport. */
-  .lab__plates { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(3.5rem, 7cqw, 7rem); margin-top: clamp(2.2rem, 4cqw, 3.4rem); }
-  .lab__plate { margin: 0; min-width: 0; }
-  .lab__plate--people { width: min(100%, 34%); }
-  .lab__plate--hackathon { width: min(100%, 62%); margin-left: auto; }
-  :global(.lab__plate-photo--people) { aspect-ratio: .75 / 1; }
-  :global(.lab__plate-photo--hackathon) { aspect-ratio: 1.34 / 1; }
-  .lab__annotation { margin: 1.1rem 0 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
+  .lab__plates {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(3.5rem, 7cqw, 7rem);
+    margin-top: clamp(2.2rem, 4cqw, 3.4rem);
+  }
+  .lab__plate {
+    margin: 0;
+    min-width: 0;
+  }
+  .lab__plate--people {
+    width: min(100%, 34%);
+  }
+  .lab__plate--hackathon {
+    width: min(100%, 62%);
+    margin-left: auto;
+  }
+  :global(.lab__plate-photo--people) {
+    aspect-ratio: 0.75 / 1;
+  }
+  :global(.lab__plate-photo--hackathon) {
+    aspect-ratio: 1.34 / 1;
+  }
+  .lab__annotation {
+    margin: 1.1rem 0 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
   /* The annotation sets font: 500 …/… mono; the note has to reset weight and
      line-height too, or it inherits a semibold that no other body copy uses. */
-  .lab__annotation-note { display: block; margin-top: .55rem; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--color-ink-soft); }
+  .lab__annotation-note {
+    display: block;
+    margin-top: 0.55rem;
+    font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans);
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--color-ink-soft);
+  }
 
-  .lab__after h2 { margin: 1.4rem 0 0; max-width: 18ch; font-size: clamp(2.4rem, 4.2cqw, 4rem); line-height: 1; letter-spacing: -.05em; font-weight: 620; }
+  .lab__after h2 {
+    margin: 1.4rem 0 0;
+    max-width: 18ch;
+    font-size: clamp(2.4rem, 4.2cqw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.05em;
+    font-weight: 620;
+  }
   /* :not(.item__eyebrow) because the eyebrow is a <p> in this section too, and a
      bare `p` rule was rendering "03 / DESPUÉS" at body size instead of meta size. */
-  .lab__after p:not(.item__eyebrow) { margin: 1.8rem 0 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.45; color: var(--color-ink-soft); }
+  .lab__after p:not(.item__eyebrow) {
+    margin: 1.8rem 0 0;
+    max-width: 46ch;
+    font-size: clamp(1.05rem, 1.4cqw, 1.25rem);
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+  }
 
   @media (max-width: 44rem) {
-    .lab__plates { gap: 2.8rem; }
-    .lab__plate--people, .lab__plate--hackathon { width: 100%; margin-left: 0; }
-    :global(.lab__plate-photo--hackathon) { aspect-ratio: 1.15 / 1; }
+    .lab__plates {
+      gap: 2.8rem;
+    }
+    .lab__plate--people,
+    .lab__plate--hackathon {
+      width: 100%;
+      margin-left: 0;
+    }
+    :global(.lab__plate-photo--hackathon) {
+      aspect-ratio: 1.15 / 1;
+    }
   }
 </style>

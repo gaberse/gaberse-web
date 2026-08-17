@@ -9,7 +9,8 @@ const profileCopy = {
     closeLabel: "Close Gabriela profile",
     closeVisible: "CLOSE",
     photoAlt: "Gabriela standing on a rocky beach beside the sea.",
-    statement: "I make things, follow curiosities, and document what happens along the way.",
+    statement:
+      "I make things, follow curiosities, and document what happens along the way.",
   },
   es: {
     trigger: "Contacto",
@@ -37,7 +38,12 @@ type Props = {
   description?: string;
 };
 
-export default function ContactProfile({ locale, variant = "inline", title, description }: Props) {
+export default function ContactProfile({
+  locale,
+  variant = "inline",
+  title,
+  description,
+}: Props) {
   const copy = profileCopy[locale];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -65,13 +71,22 @@ export default function ContactProfile({ locale, variant = "inline", title, desc
     triggerRef.current?.focus();
   };
 
-  useEffect(() => () => {
-    if (dialogRef.current?.open) dialogRef.current.close();
-    restoreBodyScroll();
-  }, []);
+  useEffect(
+    () => () => {
+      if (dialogRef.current?.open) dialogRef.current.close();
+      restoreBodyScroll();
+    },
+    [],
+  );
 
   return (
-    <div className={variant === "block" ? "contact-profile contact-profile--block" : "contact-profile"}>
+    <div
+      className={
+        variant === "block"
+          ? "contact-profile contact-profile--block"
+          : "contact-profile"
+      }
+    >
       {variant === "block" ? (
         <button
           ref={triggerRef}
@@ -80,7 +95,9 @@ export default function ContactProfile({ locale, variant = "inline", title, desc
           aria-haspopup="dialog"
           onClick={openDialog}
         >
-          <span>{title} <span aria-hidden="true">→</span></span>
+          <span>
+            {title} <span aria-hidden="true">→</span>
+          </span>
           <small>{description}</small>
         </button>
       ) : (
@@ -145,7 +162,10 @@ export default function ContactProfile({ locale, variant = "inline", title, desc
               <h2>GABRIELA</h2>
               <p className="contact-profile__statement">{copy.statement}</p>
 
-              <div className="contact-profile__links" aria-label={copy.dialogLabel}>
+              <div
+                className="contact-profile__links"
+                aria-label={copy.dialogLabel}
+              >
                 {socialLinks.map(({ name, href }) => (
                   <a
                     href={href}

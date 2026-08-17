@@ -18,6 +18,7 @@ type LocalizedText = {
 ```
 
 For rich content, Codex should evaluate:
+
 - localized block arrays; or
 - locale-specific MDX tied to one Item identity.
 
@@ -44,20 +45,10 @@ Interests are associations, not strict categories.
 
 ```ts
 type ItemKind =
-  | "living"
-  | "project"
-  | "experience"
-  | "visual"
-  | "story"
-  | "person";
+  "living" | "project" | "experience" | "visual" | "story" | "person";
 
 type ItemStatus =
-  | "active"
-  | "building"
-  | "ongoing"
-  | "completed"
-  | "paused"
-  | "archived";
+  "active" | "building" | "ongoing" | "completed" | "paused" | "archived";
 
 type Item = {
   id: string;
@@ -218,7 +209,7 @@ Do not translate slugs in v1 without a compelling reason.
 Store:
 
 ```ts
-status: "active"
+status: "active";
 ```
 
 Translate display labels in UI dictionaries.

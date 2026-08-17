@@ -8,39 +8,100 @@ const otherLocale = locale === "en" ? "es" : "en";
    repeat the slug it already gives BaseLayout, and one that forgot would send the
    reader back to the home. */
 const otherLocaleHref = equivalentPath(Astro.url.pathname, otherLocale);
-const labels = locale === "en"
-  ? { home: "Gaberse home", navigation: "Primary navigation" }
-  : { home: "Inicio de Gaberse", navigation: "Navegación principal" };
+const labels =
+  locale === "en"
+    ? { home: "Gaberse home", navigation: "Primary navigation" }
+    : { home: "Inicio de Gaberse", navigation: "Navegación principal" };
 ---
 
 <div class="site-header__sentinel" aria-hidden="true"></div>
 <header class="site-header">
-  <a class="site-header__brand" href={localizedPath(locale)} aria-label={labels.home}>gaberse<sup aria-hidden="true">©</sup></a>
+  <a
+    class="site-header__brand"
+    href={localizedPath(locale)}
+    aria-label={labels.home}>gaberse<sup aria-hidden="true">©</sup></a
+  >
   <nav aria-label={labels.navigation}>
     <ContactProfile client:load locale={locale} />
-    <span class="site-header__locales"><span aria-current="page">{locale.toUpperCase()}</span><span aria-hidden="true">/</span><a href={otherLocaleHref} lang={otherLocale}>{otherLocale.toUpperCase()}</a></span>
+    <span class="site-header__locales"
+      ><span aria-current="page">{locale.toUpperCase()}</span><span
+        aria-hidden="true">/</span
+      ><a href={otherLocaleHref} lang={otherLocale}
+        >{otherLocale.toUpperCase()}</a
+      ></span
+    >
   </nav>
 </header>
 
 <style>
-  .site-header { width: 100%; margin: 0; display: flex; align-items: center; justify-content: space-between; padding: 2rem var(--space-page); font: 500 .58rem/1 var(--font-mono); letter-spacing: .18em; text-transform: uppercase; }
-  .site-header__brand { font: 620 1.5rem/1 var(--font-sans); letter-spacing: -.045em; text-transform: lowercase; text-decoration: none; }
-  .site-header__brand sup { position: relative; top: -.54em; margin-left: .08em; font: 500 .42em/1 var(--font-sans); letter-spacing: 0; }
-  .site-header nav { display: flex; align-items: center; gap: 1.3rem; }
-  .site-header nav a { color: inherit; text-decoration: none; }
-  .site-header__locales { display: flex; gap: .45rem; align-items: center; padding: .5rem .8rem; border-radius: 999px; background: var(--color-surface-soft); color: var(--color-muted); letter-spacing: .06em; }
-  .site-header__locales [aria-current="page"] { color: var(--color-ink); }
+  .site-header {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem var(--space-page);
+    font: 500 0.58rem/1 var(--font-mono);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .site-header__brand {
+    font: 620 1.5rem/1 var(--font-sans);
+    letter-spacing: -0.045em;
+    text-transform: lowercase;
+    text-decoration: none;
+  }
+  .site-header__brand sup {
+    position: relative;
+    top: -0.54em;
+    margin-left: 0.08em;
+    font: 500 0.42em/1 var(--font-sans);
+    letter-spacing: 0;
+  }
+  .site-header nav {
+    display: flex;
+    align-items: center;
+    gap: 1.3rem;
+  }
+  .site-header nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+  .site-header__locales {
+    display: flex;
+    gap: 0.45rem;
+    align-items: center;
+    padding: 0.5rem 0.8rem;
+    border-radius: 999px;
+    background: var(--color-surface-soft);
+    color: var(--color-muted);
+    letter-spacing: 0.06em;
+  }
+  .site-header__locales [aria-current="page"] {
+    color: var(--color-ink);
+  }
 
   /* Only the brand pins. Swapping space-between for flex-end keeps the nav in
      exactly the same spot once the brand leaves the flex flow, so nothing shifts.
      The fixed offsets subtract the pill's own padding, so the wordmark lands on
      the same pixel it occupied in flow. */
-  .site-header__sentinel { position: absolute; top: 0; left: 0; width: 1px; height: 1px; }
-  .site-header--pinned { justify-content: flex-end; }
+  .site-header__sentinel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 1px;
+  }
+  .site-header--pinned {
+    justify-content: flex-end;
+  }
   .site-header--pinned .site-header__brand {
-    position: fixed; z-index: 20;
-    top: calc(2rem - .5rem); left: calc(var(--space-page) - .95rem);
-    padding: .5rem .95rem; border-radius: 999px;
+    position: fixed;
+    z-index: 20;
+    top: calc(2rem - 0.5rem);
+    left: calc(var(--space-page) - 0.95rem);
+    padding: 0.5rem 0.95rem;
+    border-radius: 999px;
     background: color-mix(in srgb, var(--color-canvas) 68%, transparent);
     backdrop-filter: blur(16px) saturate(180%);
     -webkit-backdrop-filter: blur(16px) saturate(180%);
@@ -48,17 +109,31 @@ const labels = locale === "en"
     animation: brand-settle 220ms ease both;
   }
   @keyframes brand-settle {
-    from { opacity: 0; transform: translateY(-.35rem); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+      opacity: 0;
+      transform: translateY(-0.35rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   @media (prefers-reduced-motion: reduce) {
-    .site-header--pinned .site-header__brand { animation: none; }
+    .site-header--pinned .site-header__brand {
+      animation: none;
+    }
   }
 
   @media (max-width: 44rem) {
-    .site-header { padding-top: 1.5rem; }
-    .site-header nav { gap: .8rem; }
-    .site-header--pinned .site-header__brand { top: calc(1.5rem - .5rem); }
+    .site-header {
+      padding-top: 1.5rem;
+    }
+    .site-header nav {
+      gap: 0.8rem;
+    }
+    .site-header--pinned .site-header__brand {
+      top: calc(1.5rem - 0.5rem);
+    }
   }
 </style>
 
@@ -70,7 +145,8 @@ const labels = locale === "en"
 
   if (header && sentinel) {
     new IntersectionObserver(
-      ([entry]) => header.classList.toggle("site-header--pinned", !entry.isIntersecting),
+      ([entry]) =>
+        header.classList.toggle("site-header--pinned", !entry.isIntersecting),
       { threshold: 0 },
     ).observe(sentinel);
   }

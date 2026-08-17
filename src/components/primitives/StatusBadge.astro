@@ -1,8 +1,21 @@
 ---
-interface Props { label: string; }
+interface Props {
+  label: string;
+}
 const { label } = Astro.props;
 ---
+
 <span class="status-badge">{label}</span>
 <style>
-  .status-badge { display: inline-flex; align-items: center; padding: 1.4rem 1.5rem; border-radius: var(--radius-object); background: var(--tone-dark-bg); color: var(--tone-dark-fg); font-size: 1.1rem; letter-spacing: -.02em; font-weight: 620; }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 1.4rem 1.5rem;
+    border-radius: var(--radius-object);
+    background: var(--tone-dark-bg);
+    color: var(--tone-dark-fg);
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    font-weight: 620;
+  }
 </style>

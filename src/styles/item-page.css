@@ -1,20 +1,77 @@
-.item { overflow-x: clip; container-type: inline-size; padding-bottom: 5rem; }
-.item__eyebrow { font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); margin: 0; }
-.item__section { padding: clamp(4.5rem, 8cqw, 8rem) var(--space-page) 0; }
+.item {
+  overflow-x: clip;
+  container-type: inline-size;
+  padding-bottom: 5rem;
+}
+.item__eyebrow {
+  font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+  letter-spacing: var(--tracking-meta);
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0;
+}
+.item__section {
+  padding: clamp(4.5rem, 8cqw, 8rem) var(--space-page) 0;
+}
 
-.item__hero { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(20rem, .75fr); gap: clamp(3rem, 8cqw, 6rem); align-items: start; padding: clamp(3rem, 6cqw, 5rem) var(--space-page) 0; }
-.item__hero-copy h1 { margin: 1.3rem 0 0; font-size: clamp(3.2rem, 5.6cqw, 5.6rem); line-height: .92; letter-spacing: -.07em; font-weight: 620; }
-.item__intro { margin: 1.6rem 0 0; max-width: 42ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.4; color: var(--color-ink-soft); }
+.item__hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(20rem, 0.75fr);
+  gap: clamp(3rem, 8cqw, 6rem);
+  align-items: start;
+  padding: clamp(3rem, 6cqw, 5rem) var(--space-page) 0;
+}
+.item__hero-copy h1 {
+  margin: 1.3rem 0 0;
+  font-size: clamp(3.2rem, 5.6cqw, 5.6rem);
+  line-height: 0.92;
+  letter-spacing: -0.07em;
+  font-weight: 620;
+}
+.item__intro {
+  margin: 1.6rem 0 0;
+  max-width: 42ch;
+  font-size: clamp(1.05rem, 1.4cqw, 1.25rem);
+  line-height: 1.4;
+  color: var(--color-ink-soft);
+}
 
-.item__next { margin: clamp(4rem, 8cqw, 7rem) var(--space-page) 0; padding: clamp(2.4rem, 5cqw, 3.6rem); border-radius: var(--radius-artifact); background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
-.item__next-link { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline; justify-content: space-between; text-decoration: none; color: inherit; }
-.item__next-link span { font-size: clamp(1.8rem, 3.4cqw, 2.8rem); letter-spacing: -.03em; font-weight: 620; }
-.item__next-link small { max-width: 32ch; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); opacity: .78; }
+.item__next {
+  margin: clamp(4rem, 8cqw, 7rem) var(--space-page) 0;
+  padding: clamp(2.4rem, 5cqw, 3.6rem);
+  border-radius: var(--radius-artifact);
+  background: var(--tone-dark-bg);
+  color: var(--tone-dark-fg);
+}
+.item__next-link {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+.item__next-link span {
+  font-size: clamp(1.8rem, 3.4cqw, 2.8rem);
+  letter-spacing: -0.03em;
+  font-weight: 620;
+}
+.item__next-link small {
+  max-width: 32ch;
+  font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans);
+  opacity: 0.78;
+}
 
 @media (max-width: 44rem) {
   /* minmax(0,1fr), not 1fr: a hero photograph's intrinsic width would otherwise
      push the track past a narrow viewport, since grid items default to
      min-width: auto. */
-  .item__hero { grid-template-columns: minmax(0, 1fr); padding-top: 2.5rem; }
-  .item__next-link { justify-content: flex-start; }
+  .item__hero {
+    grid-template-columns: minmax(0, 1fr);
+    padding-top: 2.5rem;
+  }
+  .item__next-link {
+    justify-content: flex-start;
+  }
 }

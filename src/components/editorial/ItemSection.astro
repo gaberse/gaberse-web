@@ -1,5 +1,8 @@
 ---
-interface Props { eyebrow?: string; }
+interface Props {
+  eyebrow?: string;
+}
 const { eyebrow } = Astro.props;
 ---
+
 <section>{eyebrow && <p>{eyebrow}</p>}<slot /></section>

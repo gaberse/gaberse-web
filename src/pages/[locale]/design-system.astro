@@ -18,13 +18,15 @@ const copy = isEnglish
   ? {
       itemEyebrow: "BUILDING",
       title: "Design System",
-      intro: "A living library of components, patterns and decisions — built to evolve instead of being “finished.”",
+      intro:
+        "A living library of components, patterns and decisions — built to evolve instead of being “finished.”",
       statusEyebrow: "SYSTEM STATUS",
       version: "v0.1",
       stats: ["12 COMPONENTS", "04 PATTERNS", "01 PRINCIPLE"],
       whyEyebrow: "WHY THIS EXISTS",
       whyTitle: "Consistency is not the same as sameness.",
-      whyText: "The system exists to make decisions reusable: spacing, behavior, composition and accessibility become a shared language so products can move faster without losing character.",
+      whyText:
+        "The system exists to make decisions reusable: spacing, behavior, composition and accessibility become a shared language so products can move faster without losing character.",
       foundationsEyebrow: "FOUNDATIONS",
       componentsEyebrow: "COMPONENTS",
       componentsTitle: "Built as objects, not decoration.",
@@ -45,13 +47,15 @@ const copy = isEnglish
   : {
       itemEyebrow: "EN CONSTRUCCIÓN",
       title: "Design System",
-      intro: "Una biblioteca viva de componentes, patrones y decisiones — pensada para evolucionar en vez de estar “terminada.”",
+      intro:
+        "Una biblioteca viva de componentes, patrones y decisiones — pensada para evolucionar en vez de estar “terminada.”",
       statusEyebrow: "ESTADO DEL SISTEMA",
       version: "v0.1",
       stats: ["12 COMPONENTES", "04 PATRONES", "01 PRINCIPIO"],
       whyEyebrow: "POR QUÉ EXISTE ESTO",
       whyTitle: "Consistencia no es lo mismo que uniformidad.",
-      whyText: "El sistema existe para que las decisiones se puedan reusar: el espaciado, el comportamiento, la composición y la accesibilidad se vuelven un lenguaje compartido para que los productos avancen más rápido sin perder personalidad.",
+      whyText:
+        "El sistema existe para que las decisiones se puedan reusar: el espaciado, el comportamiento, la composición y la accesibilidad se vuelven un lenguaje compartido para que los productos avancen más rápido sin perder personalidad.",
       foundationsEyebrow: "FUNDAMENTOS",
       componentsEyebrow: "COMPONENTES",
       componentsTitle: "Construidos como objetos, no como decoración.",
@@ -72,34 +76,119 @@ const copy = isEnglish
 
 const foundations = isEnglish
   ? [
-      { eyebrow: "TYPE", title: "Geist / Geist Mono", description: "A tight type scale with large editorial display and precise metadata." },
-      { eyebrow: "SPACE", title: "4 → 256", description: "A small spacing vocabulary used consistently across layout and components." },
-      { eyebrow: "SURFACE", title: "MONOCHROME", description: "Warm whites, soft gray objects and near-black text." },
-      { eyebrow: "MOTION", title: "REVEAL", description: "Fast interaction, slow atmosphere. Motion explains relationships.", dark: true },
+      {
+        eyebrow: "TYPE",
+        title: "Geist / Geist Mono",
+        description:
+          "A tight type scale with large editorial display and precise metadata.",
+      },
+      {
+        eyebrow: "SPACE",
+        title: "4 → 256",
+        description:
+          "A small spacing vocabulary used consistently across layout and components.",
+      },
+      {
+        eyebrow: "SURFACE",
+        title: "MONOCHROME",
+        description: "Warm whites, soft gray objects and near-black text.",
+      },
+      {
+        eyebrow: "MOTION",
+        title: "REVEAL",
+        description:
+          "Fast interaction, slow atmosphere. Motion explains relationships.",
+        dark: true,
+      },
     ]
   : [
-      { eyebrow: "TIPOGRAFÍA", title: "Geist / Geist Mono", description: "Una escala tipográfica ajustada, con despliegue editorial grande y metadata precisa." },
-      { eyebrow: "ESPACIADO", title: "4 → 256", description: "Un vocabulario de espaciado chiquito que se usa de forma consistente en todo el layout y los componentes." },
-      { eyebrow: "SUPERFICIE", title: "MONOCROMO", description: "Blancos cálidos, objetos gris suave y texto casi negro." },
-      { eyebrow: "MOVIMIENTO", title: "REVELAR", description: "Interacción rápida, atmósfera lenta. El movimiento explica relaciones.", dark: true },
+      {
+        eyebrow: "TIPOGRAFÍA",
+        title: "Geist / Geist Mono",
+        description:
+          "Una escala tipográfica ajustada, con despliegue editorial grande y metadata precisa.",
+      },
+      {
+        eyebrow: "ESPACIADO",
+        title: "4 → 256",
+        description:
+          "Un vocabulario de espaciado chiquito que se usa de forma consistente en todo el layout y los componentes.",
+      },
+      {
+        eyebrow: "SUPERFICIE",
+        title: "MONOCROMO",
+        description: "Blancos cálidos, objetos gris suave y texto casi negro.",
+      },
+      {
+        eyebrow: "MOVIMIENTO",
+        title: "REVELAR",
+        description:
+          "Interacción rápida, atmósfera lenta. El movimiento explica relaciones.",
+        dark: true,
+      },
     ];
 
 const patterns = isEnglish
   ? [
-      { index: "01", title: "ARTIFACT AS OBJECT", description: "Things you can explore or manipulate get surface, radius and depth. Content stays free on the canvas." },
-      { index: "02", title: "PROGRESSIVE REVEAL", description: "Metadata appears when it becomes useful. The interface avoids explaining everything upfront." },
-      { index: "03", title: "LIVING STATES", description: "Components support active, evolving and incomplete content rather than only “done” states." },
+      {
+        index: "01",
+        title: "ARTIFACT AS OBJECT",
+        description:
+          "Things you can explore or manipulate get surface, radius and depth. Content stays free on the canvas.",
+      },
+      {
+        index: "02",
+        title: "PROGRESSIVE REVEAL",
+        description:
+          "Metadata appears when it becomes useful. The interface avoids explaining everything upfront.",
+      },
+      {
+        index: "03",
+        title: "LIVING STATES",
+        description:
+          "Components support active, evolving and incomplete content rather than only “done” states.",
+      },
     ]
   : [
-      { index: "01", title: "ARTEFACTO COMO OBJETO", description: "Las cosas que podés explorar o manipular tienen superficie, radio y profundidad. El contenido queda libre sobre el canvas." },
-      { index: "02", title: "REVELADO PROGRESIVO", description: "La metadata aparece cuando se vuelve útil. La interfaz evita explicar todo de entrada." },
-      { index: "03", title: "ESTADOS VIVOS", description: "Los componentes soportan contenido activo, en evolución e incompleto, no solo estados “terminados”." },
+      {
+        index: "01",
+        title: "ARTEFACTO COMO OBJETO",
+        description:
+          "Las cosas que podés explorar o manipular tienen superficie, radio y profundidad. El contenido queda libre sobre el canvas.",
+      },
+      {
+        index: "02",
+        title: "REVELADO PROGRESIVO",
+        description:
+          "La metadata aparece cuando se vuelve útil. La interfaz evita explicar todo de entrada.",
+      },
+      {
+        index: "03",
+        title: "ESTADOS VIVOS",
+        description:
+          "Los componentes soportan contenido activo, en evolución e incompleto, no solo estados “terminados”.",
+      },
     ];
 
-const swatchTones = ["mid", "light", "dark", "light", "dark", "mid", "dark", "mid", "light"] as const;
+const swatchTones = [
+  "mid",
+  "light",
+  "dark",
+  "light",
+  "dark",
+  "mid",
+  "dark",
+  "mid",
+  "light",
+] as const;
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="design-system">
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.intro}
+  path="design-system"
+>
   <Header locale={locale} />
   <main class="item site-shell">
     <section class="item__hero">
@@ -115,7 +204,13 @@ const swatchTones = ["mid", "light", "dark", "light", "dark", "mid", "dark", "mi
           {copy.stats.map((stat) => <li>{stat}</li>)}
         </ul>
         <div class="design-system__swatches" aria-hidden="true">
-          {swatchTones.map((tone) => <span class={`design-system__swatch design-system__swatch--${tone}`}></span>)}
+          {
+            swatchTones.map((tone) => (
+              <span
+                class={`design-system__swatch design-system__swatch--${tone}`}
+              />
+            ))
+          }
         </div>
       </div>
     </section>
@@ -149,11 +244,16 @@ const swatchTones = ["mid", "light", "dark", "light", "dark", "mid", "dark", "mi
           </div>
         </div>
         <div class="design-system__panel-row">
-          <div class="design-system__panel-item design-system__panel-item--card">
+          <div
+            class="design-system__panel-item design-system__panel-item--card"
+          >
             <p class="design-system__panel-tag">{copy.cardTag}</p>
-            <div class="design-system__thumb" aria-label={copy.placeholder}></div>
+            <div class="design-system__thumb" aria-label={copy.placeholder}>
+            </div>
           </div>
-          <div class="design-system__panel-item design-system__panel-item--input">
+          <div
+            class="design-system__panel-item design-system__panel-item--input"
+          >
             <p class="design-system__panel-tag">{copy.inputTag}</p>
             <div class="design-system__input" aria-hidden="true"></div>
           </div>
@@ -168,13 +268,15 @@ const swatchTones = ["mid", "light", "dark", "light", "dark", "mid", "dark", "mi
     <section class="item__section item__patterns">
       <p class="item__eyebrow">{copy.patternsEyebrow}</p>
       <ul class="design-system__patterns">
-        {patterns.map((pattern) => (
-          <li>
-            <span class="design-system__pattern-index">{pattern.index}</span>
-            <strong>{pattern.title}</strong>
-            <p>{pattern.description}</p>
-          </li>
-        ))}
+        {
+          patterns.map((pattern) => (
+            <li>
+              <span class="design-system__pattern-index">{pattern.index}</span>
+              <strong>{pattern.title}</strong>
+              <p>{pattern.description}</p>
+            </li>
+          ))
+        }
       </ul>
     </section>
 
@@ -189,39 +291,176 @@ const swatchTones = ["mid", "light", "dark", "light", "dark", "mid", "dark", "mi
 </BaseLayout>
 
 <style>
-  .design-system__status { position: relative; padding: 1.45rem; border-radius: var(--radius-artifact); background: var(--color-surface); box-shadow: var(--shadow-object); }
-  .design-system__status-eyebrow { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .design-system__status-version { margin: 1.5rem 0 0; font-size: clamp(2.2rem, 3.6cqw, 3.2rem); line-height: 1; letter-spacing: -.03em; font-weight: 640; }
-  .design-system__status-stats { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: .35rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .design-system__swatches { position: absolute; top: 1.45rem; right: 1.45rem; display: grid; grid-template-columns: repeat(3, 1.6rem); grid-auto-rows: 1.6rem; gap: .5rem; }
-  .design-system__swatch { border-radius: .4rem; }
-  .design-system__swatch--dark { background: var(--tone-dark-surface); }
-  .design-system__swatch--mid { background: var(--tone-mid-surface); }
-  .design-system__swatch--light { background: var(--tone-light-surface); }
+  .design-system__status {
+    position: relative;
+    padding: 1.45rem;
+    border-radius: var(--radius-artifact);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-object);
+  }
+  .design-system__status-eyebrow {
+    margin: 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .design-system__status-version {
+    margin: 1.5rem 0 0;
+    font-size: clamp(2.2rem, 3.6cqw, 3.2rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .design-system__status-stats {
+    list-style: none;
+    margin: 1.4rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.35rem;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .design-system__swatches {
+    position: absolute;
+    top: 1.45rem;
+    right: 1.45rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1.6rem);
+    grid-auto-rows: 1.6rem;
+    gap: 0.5rem;
+  }
+  .design-system__swatch {
+    border-radius: 0.4rem;
+  }
+  .design-system__swatch--dark {
+    background: var(--tone-dark-surface);
+  }
+  .design-system__swatch--mid {
+    background: var(--tone-mid-surface);
+  }
+  .design-system__swatch--light {
+    background: var(--tone-light-surface);
+  }
 
-  .item__foundations-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+  .item__foundations-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.85rem, 1.35cqw, 1.35rem);
+    margin-top: 2.4rem;
+  }
 
-  .item__components h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .design-system__panel { margin-top: 2.4rem; padding: clamp(1.6rem, 3cqw, 2.6rem); border-radius: var(--radius-artifact); background: var(--color-surface); }
-  .design-system__panel-label { margin: 0 0 1.8rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .design-system__panel-buttons { display: flex; flex-wrap: wrap; gap: 1.5rem; }
-  .design-system__panel-row { display: grid; grid-template-columns: 1.1fr 1fr .7fr; gap: 1.5rem; margin-top: 2rem; align-items: end; }
-  .design-system__panel-item { display: flex; flex-direction: column; gap: .7rem; align-items: flex-start; }
-  .design-system__panel-tag { margin: 0; font: 500 .68rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .design-system__thumb { width: 100%; aspect-ratio: 1.35 / 1; border-radius: .7rem; background: var(--tone-mid-surface); }
-  .design-system__panel-item--card, .design-system__panel-item--input { width: 100%; }
-  .design-system__input { width: 100%; border-bottom: 1px solid var(--color-border-muted); padding-bottom: .6rem; min-height: 1.4rem; }
+  .item__components h2 {
+    margin: 1.4rem 0 0;
+    max-width: 22ch;
+    font-size: clamp(2rem, 3.4cqw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .design-system__panel {
+    margin-top: 2.4rem;
+    padding: clamp(1.6rem, 3cqw, 2.6rem);
+    border-radius: var(--radius-artifact);
+    background: var(--color-surface);
+  }
+  .design-system__panel-label {
+    margin: 0 0 1.8rem;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .design-system__panel-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+  .design-system__panel-row {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr 0.7fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    align-items: end;
+  }
+  .design-system__panel-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+  .design-system__panel-tag {
+    margin: 0;
+    font: 500 0.68rem/1.25 var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .design-system__thumb {
+    width: 100%;
+    aspect-ratio: 1.35 / 1;
+    border-radius: 0.7rem;
+    background: var(--tone-mid-surface);
+  }
+  .design-system__panel-item--card,
+  .design-system__panel-item--input {
+    width: 100%;
+  }
+  .design-system__input {
+    width: 100%;
+    border-bottom: 1px solid var(--color-border-muted);
+    padding-bottom: 0.6rem;
+    min-height: 1.4rem;
+  }
 
-  .design-system__patterns { list-style: none; margin: 2.4rem 0 0; padding: 0; display: grid; gap: 2rem; }
-  .design-system__patterns li { display: grid; grid-template-columns: 3rem minmax(0, 16rem) minmax(0, 1fr); gap: 1.5rem; align-items: baseline; padding-top: 1.6rem; border-top: 1px solid var(--color-border-muted); }
-  .design-system__patterns li:first-child { border-top: 0; padding-top: 0; }
-  .design-system__pattern-index { font: 500 var(--text-meta) var(--font-mono); color: var(--color-muted); }
-  .design-system__patterns strong { font-size: 1.1rem; letter-spacing: -.03em; font-weight: 640; }
-  .design-system__patterns p { margin: 0; max-width: 46ch; font-size: .98rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .design-system__patterns {
+    list-style: none;
+    margin: 2.4rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 2rem;
+  }
+  .design-system__patterns li {
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 16rem) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: baseline;
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--color-border-muted);
+  }
+  .design-system__patterns li:first-child {
+    border-top: 0;
+    padding-top: 0;
+  }
+  .design-system__pattern-index {
+    font: 500 var(--text-meta) var(--font-mono);
+    color: var(--color-muted);
+  }
+  .design-system__patterns strong {
+    font-size: 1.1rem;
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .design-system__patterns p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
 
   @media (max-width: 44rem) {
-    .item__foundations-grid { grid-template-columns: 1fr; }
-    .design-system__panel-row { grid-template-columns: 1fr; }
-    .design-system__patterns li { grid-template-columns: 1fr; gap: .5rem; }
+    .item__foundations-grid {
+      grid-template-columns: 1fr;
+    }
+    .design-system__panel-row {
+      grid-template-columns: 1fr;
+    }
+    .design-system__patterns li {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
   }
 </style>

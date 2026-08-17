@@ -20,15 +20,18 @@ const copy = isEnglish
       heroLabel: "PORTRAIT / PLACEHOLDER",
       placeholder: "Placeholder media",
       tagline: "frontend developer. future architect. curious human.",
-      leadText: "I care about making things well, understanding why they work, and staying curious long enough to find unexpected connections.",
+      leadText:
+        "I care about making things well, understanding why they work, and staying curious long enough to find unexpected connections.",
       traitsEyebrow: "A FEW THINGS THAT KEEP SHOWING UP",
       notJustWorkEyebrow: "NOT JUST WORK",
       travelLabel: "TRAVEL / PHOTOGRAPHY",
       animalsLabel: "ANIMALS / CARE",
       lifeLabel: "PLACES / PEOPLE / LIFE",
       closingTitle: "I don't need all my interests to fit into one narrative.",
-      closingLeft: "That's the point of Gaberse. The things I build, learn, photograph, care about and experience can look unrelated. Together, they're simply different parts of me.",
-      closingRight: "Every artifact should reveal a piece of the person behind it.",
+      closingLeft:
+        "That's the point of Gaberse. The things I build, learn, photograph, care about and experience can look unrelated. Together, they're simply different parts of me.",
+      closingRight:
+        "Every artifact should reveal a piece of the person behind it.",
       contactEyebrow: "SAY HELLO",
       contactTitle: "If something here resonated, write to me.",
     }
@@ -39,33 +42,61 @@ const copy = isEnglish
       heroLabel: "RETRATO / PROVISIONAL",
       placeholder: "Media provisional",
       tagline: "frontend developer. futura arquitecta. humana curiosa.",
-      leadText: "Me importa hacer las cosas bien, entender por qué funcionan, y seguir siendo curiosa el tiempo suficiente como para encontrar conexiones inesperadas.",
+      leadText:
+        "Me importa hacer las cosas bien, entender por qué funcionan, y seguir siendo curiosa el tiempo suficiente como para encontrar conexiones inesperadas.",
       traitsEyebrow: "ALGUNAS COSAS QUE SE REPITEN",
       notJustWorkEyebrow: "NO SOLO TRABAJO",
       travelLabel: "VIAJES / FOTOGRAFÍA",
       animalsLabel: "ANIMALES / CUIDADO",
       lifeLabel: "LUGARES / PERSONAS / VIDA",
-      closingTitle: "No necesito que todos mis intereses encajen en una sola narrativa.",
-      closingLeft: "Ese es el punto de Gaberse. Las cosas que construyo, aprendo, fotografío, me importan y vivo pueden parecer sin relación entre sí. Juntas, son simplemente distintas partes de mí.",
-      closingRight: "Cada artefacto debería revelar un pedazo de la persona detrás de él.",
+      closingTitle:
+        "No necesito que todos mis intereses encajen en una sola narrativa.",
+      closingLeft:
+        "Ese es el punto de Gaberse. Las cosas que construyo, aprendo, fotografío, me importan y vivo pueden parecer sin relación entre sí. Juntas, son simplemente distintas partes de mí.",
+      closingRight:
+        "Cada artefacto debería revelar un pedazo de la persona detrás de él.",
       contactEyebrow: "SALUDAME",
       contactTitle: "Si algo de esto te resonó, escribime.",
     };
 
 const traits = isEnglish
   ? [
-      { title: "CONFIDENCE", description: "Trusting myself enough to move through uncertainty." },
-      { title: "EMPATHY", description: "Being able to inhabit a point of view that isn't mine." },
-      { title: "CURIOSITY", description: "The thing that keeps opening new doors." },
+      {
+        title: "CONFIDENCE",
+        description: "Trusting myself enough to move through uncertainty.",
+      },
+      {
+        title: "EMPATHY",
+        description: "Being able to inhabit a point of view that isn't mine.",
+      },
+      {
+        title: "CURIOSITY",
+        description: "The thing that keeps opening new doors.",
+      },
     ]
   : [
-      { title: "CONFIANZA", description: "Confiar lo suficiente en mí misma como para moverme en la incertidumbre." },
-      { title: "EMPATÍA", description: "Poder habitar un punto de vista que no es el mío." },
-      { title: "CURIOSIDAD", description: "Lo que sigue abriendo puertas nuevas." },
+      {
+        title: "CONFIANZA",
+        description:
+          "Confiar lo suficiente en mí misma como para moverme en la incertidumbre.",
+      },
+      {
+        title: "EMPATÍA",
+        description: "Poder habitar un punto de vista que no es el mío.",
+      },
+      {
+        title: "CURIOSIDAD",
+        description: "Lo que sigue abriendo puertas nuevas.",
+      },
     ];
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="gabriela">
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.intro}
+  path="gabriela"
+>
   <Header locale={locale} />
   <main class="item site-shell">
     <section class="item__hero">
@@ -78,27 +109,49 @@ const traits = isEnglish
           <p>{copy.leadText}</p>
         </div>
       </div>
-      <PhotoFrame class="gabriela__hero-photo" tone="dark" label={copy.heroLabel} ariaLabel={copy.placeholder} />
+      <PhotoFrame
+        class="gabriela__hero-photo"
+        tone="dark"
+        label={copy.heroLabel}
+        ariaLabel={copy.placeholder}
+      />
     </section>
 
     <section class="item__section gabriela__traits">
       <p class="item__eyebrow">{copy.traitsEyebrow}</p>
       <div class="gabriela__traits-list">
-        {traits.map((trait) => (
-          <div class="gabriela__trait">
-            <strong>{trait.title}</strong>
-            <p>{trait.description}</p>
-          </div>
-        ))}
+        {
+          traits.map((trait) => (
+            <div class="gabriela__trait">
+              <strong>{trait.title}</strong>
+              <p>{trait.description}</p>
+            </div>
+          ))
+        }
       </div>
     </section>
 
     <section class="item__section gabriela__not-just-work">
       <p class="item__eyebrow">{copy.notJustWorkEyebrow}</p>
       <div class="gabriela__photos">
-        <PhotoFrame class="gabriela__photo gabriela__photo--a" tone="mid" label={copy.travelLabel} ariaLabel={copy.placeholder} />
-        <PhotoFrame class="gabriela__photo gabriela__photo--b" tone="dark" label={copy.animalsLabel} ariaLabel={copy.placeholder} />
-        <PhotoFrame class="gabriela__photo gabriela__photo--c" tone="light" label={copy.lifeLabel} ariaLabel={copy.placeholder} />
+        <PhotoFrame
+          class="gabriela__photo gabriela__photo--a"
+          tone="mid"
+          label={copy.travelLabel}
+          ariaLabel={copy.placeholder}
+        />
+        <PhotoFrame
+          class="gabriela__photo gabriela__photo--b"
+          tone="dark"
+          label={copy.animalsLabel}
+          ariaLabel={copy.placeholder}
+        />
+        <PhotoFrame
+          class="gabriela__photo gabriela__photo--c"
+          tone="light"
+          label={copy.lifeLabel}
+          ariaLabel={copy.placeholder}
+        />
       </div>
       <h2>{copy.closingTitle}</h2>
       <div class="gabriela__closing-text">
@@ -112,41 +165,152 @@ const traits = isEnglish
         <p class="item__eyebrow">{copy.contactEyebrow}</p>
         <h2>{copy.contactTitle}</h2>
       </div>
-      <a class="gabriela__contact-email" href="mailto:hello@gaberse.tech">hello@gaberse.tech <span aria-hidden="true">↗</span></a>
+      <a class="gabriela__contact-email" href="mailto:hello@gaberse.tech"
+        >hello@gaberse.tech <span aria-hidden="true">↗</span></a
+      >
     </section>
   </main>
 </BaseLayout>
 
 <style>
-  :global(.gabriela__hero-photo) { aspect-ratio: .95 / 1; min-height: 20rem; }
-  .gabriela__lead { margin-top: 2.6rem; }
-  .gabriela__tagline { margin: 0; font: 500 .95rem/1.5 var(--font-mono); letter-spacing: -.01em; color: var(--color-muted); }
-  .gabriela__lead p:last-child { margin: 1.3rem 0 0; max-width: 42ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.4; color: var(--color-ink-soft); }
+  :global(.gabriela__hero-photo) {
+    aspect-ratio: 0.95 / 1;
+    min-height: 20rem;
+  }
+  .gabriela__lead {
+    margin-top: 2.6rem;
+  }
+  .gabriela__tagline {
+    margin: 0;
+    font: 500 0.95rem/1.5 var(--font-mono);
+    letter-spacing: -0.01em;
+    color: var(--color-muted);
+  }
+  .gabriela__lead p:last-child {
+    margin: 1.3rem 0 0;
+    max-width: 42ch;
+    font-size: clamp(1.05rem, 1.4cqw, 1.25rem);
+    line-height: 1.4;
+    color: var(--color-ink-soft);
+  }
 
-  .gabriela__traits-list { display: grid; gap: 2.2rem; margin-top: 2.4rem; }
-  .gabriela__trait { display: grid; grid-template-columns: minmax(0, 14rem) minmax(0, 1fr); gap: 1.5rem; align-items: baseline; }
-  .gabriela__trait strong { font-size: clamp(1.3rem, 2cqw, 1.7rem); letter-spacing: -.03em; font-weight: 640; }
-  .gabriela__trait p { margin: 0; max-width: 46ch; font-size: 1rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .gabriela__traits-list {
+    display: grid;
+    gap: 2.2rem;
+    margin-top: 2.4rem;
+  }
+  .gabriela__trait {
+    display: grid;
+    grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: baseline;
+  }
+  .gabriela__trait strong {
+    font-size: clamp(1.3rem, 2cqw, 1.7rem);
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .gabriela__trait p {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
 
-  .gabriela__photos { display: flex; align-items: flex-end; gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; height: 20rem; }
-  :global(.gabriela__photo--a) { width: 32%; height: 78%; }
-  :global(.gabriela__photo--b) { width: 20%; height: 58%; }
-  :global(.gabriela__photo--c) { width: 40%; height: 100%; }
-  .gabriela__not-just-work h2 { margin: clamp(3rem, 6cqw, 5rem) 0 0; max-width: 24ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .gabriela__closing-text { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, .8fr); gap: clamp(2rem, 6cqw, 5rem); margin-top: 2rem; }
-  .gabriela__closing-text p { margin: 0; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .gabriela__photos {
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(0.85rem, 1.35cqw, 1.35rem);
+    margin-top: 2.4rem;
+    height: 20rem;
+  }
+  :global(.gabriela__photo--a) {
+    width: 32%;
+    height: 78%;
+  }
+  :global(.gabriela__photo--b) {
+    width: 20%;
+    height: 58%;
+  }
+  :global(.gabriela__photo--c) {
+    width: 40%;
+    height: 100%;
+  }
+  .gabriela__not-just-work h2 {
+    margin: clamp(3rem, 6cqw, 5rem) 0 0;
+    max-width: 24ch;
+    font-size: clamp(2rem, 3.4cqw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .gabriela__closing-text {
+    display: grid;
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr);
+    gap: clamp(2rem, 6cqw, 5rem);
+    margin-top: 2rem;
+  }
+  .gabriela__closing-text p {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
 
-  .gabriela__contact { margin: clamp(4rem, 8cqw, 7rem) var(--space-page) 5rem; padding: clamp(2.4rem, 5cqw, 3.6rem); border-radius: var(--radius-artifact); background: var(--tone-dark-bg); color: var(--tone-dark-fg); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 1.5rem; }
-  .gabriela__contact-copy { max-width: 34ch; }
-  .gabriela__contact-copy h2 { margin: 1.2rem 0 0; font-size: clamp(1.8rem, 3.4cqw, 2.8rem); letter-spacing: -.03em; font-weight: 620; line-height: 1.05; }
-  .gabriela__contact-email { font: 500 clamp(.9rem, 1.25cqw, 1.15rem) var(--font-mono); text-decoration: none; color: inherit; }
+  .gabriela__contact {
+    margin: clamp(4rem, 8cqw, 7rem) var(--space-page) 5rem;
+    padding: clamp(2.4rem, 5cqw, 3.6rem);
+    border-radius: var(--radius-artifact);
+    background: var(--tone-dark-bg);
+    color: var(--tone-dark-fg);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+  }
+  .gabriela__contact-copy {
+    max-width: 34ch;
+  }
+  .gabriela__contact-copy h2 {
+    margin: 1.2rem 0 0;
+    font-size: clamp(1.8rem, 3.4cqw, 2.8rem);
+    letter-spacing: -0.03em;
+    font-weight: 620;
+    line-height: 1.05;
+  }
+  .gabriela__contact-email {
+    font: 500 clamp(0.9rem, 1.25cqw, 1.15rem) var(--font-mono);
+    text-decoration: none;
+    color: inherit;
+  }
 
   @media (max-width: 44rem) {
-    .gabriela__trait { grid-template-columns: 1fr; gap: .5rem; }
-    .gabriela__photos { flex-wrap: wrap; height: auto; }
-    :global(.gabriela__photo--a), :global(.gabriela__photo--b), :global(.gabriela__photo--c) { width: 100%; height: 12rem; }
-    .gabriela__closing-text { grid-template-columns: 1fr; gap: 1.4rem; }
-    .gabriela__contact { display: block; }
-    .gabriela__contact-email { display: block; margin-top: 1.6rem; }
+    .gabriela__trait {
+      grid-template-columns: 1fr;
+      gap: 0.5rem;
+    }
+    .gabriela__photos {
+      flex-wrap: wrap;
+      height: auto;
+    }
+    :global(.gabriela__photo--a),
+    :global(.gabriela__photo--b),
+    :global(.gabriela__photo--c) {
+      width: 100%;
+      height: 12rem;
+    }
+    .gabriela__closing-text {
+      grid-template-columns: 1fr;
+      gap: 1.4rem;
+    }
+    .gabriela__contact {
+      display: block;
+    }
+    .gabriela__contact-email {
+      display: block;
+      margin-top: 1.6rem;
+    }
   }
 </style>

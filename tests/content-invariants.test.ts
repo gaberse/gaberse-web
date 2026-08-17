@@ -27,10 +27,7 @@ const content = (
 describe("validateItemContentInvariants", () => {
   it("accepts an unpublished Item without every locale", () => {
     expect(() =>
-      validateItemContentInvariants(
-        [item({ published: false })],
-        [content()],
-      ),
+      validateItemContentInvariants([item({ published: false })], [content()]),
     ).not.toThrow();
   });
 
@@ -48,14 +45,20 @@ describe("validateItemContentInvariants", () => {
 
   it("rejects duplicate shared Item ids", () => {
     expect(() =>
-      validateItemContentInvariants([item(), item({ source: "duplicate.yaml" })], []),
+      validateItemContentInvariants(
+        [item(), item({ source: "duplicate.yaml" })],
+        [],
+      ),
     ).toThrow('Duplicate Item id "ai-engineering-path"');
   });
 
   it("rejects duplicate shared Item slugs", () => {
     expect(() =>
       validateItemContentInvariants(
-        [item(), item({ id: "another-item", source: "items/another-item/item.yaml" })],
+        [
+          item(),
+          item({ id: "another-item", source: "items/another-item/item.yaml" }),
+        ],
         [],
       ),
     ).toThrow('Duplicate Item slug "ai-engineering-path"');
@@ -67,7 +70,9 @@ describe("validateItemContentInvariants", () => {
         [item({ published: false })],
         [content(), content({ source: "items/other/en.mdx" })],
       ),
-    ).toThrow('Duplicate localized content for Item "ai-engineering-path" and locale "en"');
+    ).toThrow(
+      'Duplicate localized content for Item "ai-engineering-path" and locale "en"',
+    );
   });
 
   it("rejects structural-slug collisions", () => {
@@ -80,7 +85,11 @@ describe("validateItemContentInvariants", () => {
     expect(() =>
       validateItemContentInvariants(
         [item({ published: false })],
-        [content({ body: 'import InternalThing from "../../components/InternalThing.astro"' })],
+        [
+          content({
+            body: 'import InternalThing from "../../components/InternalThing.astro"',
+          }),
+        ],
       ),
     ).toThrow("must not import application components");
   });

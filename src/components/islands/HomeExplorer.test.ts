@@ -1,8 +1,18 @@
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import HomeExplorer, { type ExplorerCard, type ExplorerLabels } from "./HomeExplorer";
-import { getExplorerState, getNextInterest, initialExplorerState, reduceExplorerInteraction, shouldResetExplorerOnFocusExit, shouldResetExplorerOnPointerExit } from "./home-explorer-state";
+import HomeExplorer, {
+  type ExplorerCard,
+  type ExplorerLabels,
+} from "./HomeExplorer";
+import {
+  getExplorerState,
+  getNextInterest,
+  initialExplorerState,
+  reduceExplorerInteraction,
+  shouldResetExplorerOnFocusExit,
+  shouldResetExplorerOnPointerExit,
+} from "./home-explorer-state";
 
 const labels: ExplorerLabels = {
   heading: "Explore the deck",
@@ -12,12 +22,33 @@ const labels: ExplorerLabels = {
   touchHint: "Tap or swipe to explore",
 };
 
-const linkedCard: ExplorerCard = { id: "linked", label: "Linked", title: "Linked Item", meta: "A living practice", tone: "a", href: "/en/linked" };
-const plainCard: ExplorerCard = { id: "plain", label: "Plain", title: "Plain Item", meta: "No destination yet", tone: "b" };
-const decorativeCard: ExplorerCard = { id: "decor", label: "", title: "", meta: "", tone: "c" };
+const linkedCard: ExplorerCard = {
+  id: "linked",
+  label: "Linked",
+  title: "Linked Item",
+  meta: "A living practice",
+  tone: "a",
+  href: "/en/linked",
+};
+const plainCard: ExplorerCard = {
+  id: "plain",
+  label: "Plain",
+  title: "Plain Item",
+  meta: "No destination yet",
+  tone: "b",
+};
+const decorativeCard: ExplorerCard = {
+  id: "decor",
+  label: "",
+  title: "",
+  meta: "",
+  tone: "c",
+};
 
 const render = (cards: ExplorerCard[], showInterests?: boolean) =>
-  renderToStaticMarkup(createElement(HomeExplorer, { cards, labels, showInterests }));
+  renderToStaticMarkup(
+    createElement(HomeExplorer, { cards, labels, showInterests }),
+  );
 
 describe("explorer interaction state", () => {
   it("keeps the deck at rest until an interest is active", () => {
@@ -29,7 +60,9 @@ describe("explorer interaction state", () => {
   });
 
   it("marks an active interest as an interaction", () => {
-    expect(getExplorerState({ activeInterest: "ai", committedInterest: null })).toEqual({
+    expect(
+      getExplorerState({ activeInterest: "ai", committedInterest: null }),
+    ).toEqual({
       activeInterest: "ai",
       committedInterest: null,
       isInteractive: true,
@@ -37,24 +70,47 @@ describe("explorer interaction state", () => {
   });
 
   it("previews on hover and commits the same artifact on click instead of toggling it off", () => {
-    const previewed = reduceExplorerInteraction(initialExplorerState, { type: "preview", id: "ai" });
-    const clicked = reduceExplorerInteraction(previewed, { type: "activate", id: "ai" });
+    const previewed = reduceExplorerInteraction(initialExplorerState, {
+      type: "preview",
+      id: "ai",
+    });
+    const clicked = reduceExplorerInteraction(previewed, {
+      type: "activate",
+      id: "ai",
+    });
 
-    expect(previewed).toEqual({ activeInterest: "ai", committedInterest: null });
+    expect(previewed).toEqual({
+      activeInterest: "ai",
+      committedInterest: null,
+    });
     expect(clicked).toEqual({ activeInterest: "ai", committedInterest: "ai" });
   });
 
   it("previews on keyboard focus and commits on Enter's click event", () => {
-    const focused = reduceExplorerInteraction(initialExplorerState, { type: "preview", id: "design-systems" });
-    const entered = reduceExplorerInteraction(focused, { type: "activate", id: "design-systems" });
+    const focused = reduceExplorerInteraction(initialExplorerState, {
+      type: "preview",
+      id: "design-systems",
+    });
+    const entered = reduceExplorerInteraction(focused, {
+      type: "activate",
+      id: "design-systems",
+    });
 
-    expect(entered).toEqual({ activeInterest: "design-systems", committedInterest: "design-systems" });
+    expect(entered).toEqual({
+      activeInterest: "design-systems",
+      committedInterest: "design-systems",
+    });
   });
 
   it("only toggles an artifact off after it is intentionally committed", () => {
-    const committed = reduceExplorerInteraction(initialExplorerState, { type: "activate", id: "travel" });
+    const committed = reduceExplorerInteraction(initialExplorerState, {
+      type: "activate",
+      id: "travel",
+    });
 
-    expect(reduceExplorerInteraction(committed, { type: "activate", id: "travel" })).toEqual(initialExplorerState);
+    expect(
+      reduceExplorerInteraction(committed, { type: "activate", id: "travel" }),
+    ).toEqual(initialExplorerState);
   });
 
   it("returns to rest only when focus leaves the explorer scope", () => {
@@ -71,7 +127,9 @@ describe("explorer interaction state", () => {
     const focusedInterest = {} as Element;
     const scope = { contains: (node: Node) => node === focusedInterest };
 
-    expect(shouldResetExplorerOnPointerExit(scope, focusedInterest)).toBe(false);
+    expect(shouldResetExplorerOnPointerExit(scope, focusedInterest)).toBe(
+      false,
+    );
     expect(shouldResetExplorerOnPointerExit(scope, null)).toBe(true);
   });
 });
@@ -95,7 +153,13 @@ describe("swipe cycling", () => {
   it("leaves the state untouched when a swipe has no cards to cycle", () => {
     const committed = { activeInterest: "ai", committedInterest: "ai" };
 
-    expect(reduceExplorerInteraction(committed, { type: "swipe", direction: 1, ids: [] })).toBe(committed);
+    expect(
+      reduceExplorerInteraction(committed, {
+        type: "swipe",
+        direction: 1,
+        ids: [],
+      }),
+    ).toBe(committed);
   });
 });
 
@@ -147,8 +211,12 @@ describe("explorer rendering", () => {
     const html = render([linkedCard, plainCard], false);
 
     // The link and the toggle are now the artifacts, so the reveal stays reachable.
-    expect(html.match(/<a [^>]*href="\/en\/linked"[^>]*class="explorer__artifact/g)).toHaveLength(1);
-    expect(html.match(/<button [^>]*class="explorer__artifact/g)).toHaveLength(1);
+    expect(
+      html.match(/<a [^>]*href="\/en\/linked"[^>]*class="explorer__artifact/g),
+    ).toHaveLength(1);
+    expect(html.match(/<button [^>]*class="explorer__artifact/g)).toHaveLength(
+      1,
+    );
     expect(html).not.toContain("explorer__interest ");
   });
 
@@ -165,7 +233,11 @@ describe("explorer rendering", () => {
   it("renders configured media instead of the placeholder", () => {
     const withMedia: ExplorerCard = {
       ...plainCard,
-      media: { src: "/photo-480.webp", srcSet: "/photo-480.webp 480w", alt: "A described photo" },
+      media: {
+        src: "/photo-480.webp",
+        srcSet: "/photo-480.webp 480w",
+        alt: "A described photo",
+      },
     };
     const html = render([withMedia]);
 

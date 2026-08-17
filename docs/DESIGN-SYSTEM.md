@@ -24,6 +24,7 @@ Do not wrap ordinary copy, headings and navigation in cards by default.
 ## Typography
 
 ### Display
+
 Geist Sans, semibold/heavy feel.
 
 Large headings use tight leading and negative tracking.
@@ -31,16 +32,19 @@ Large headings use tight leading and negative tracking.
 Exact values: inspect Figma.
 
 ### Body
+
 Geist Sans Regular.
 
 Keep long-form lines comfortably readable.
 
 ### Metadata
+
 Geist Mono.
 
 Often uppercase, subtle tracking, neutral secondary contrast.
 
 Examples:
+
 - CURRENTLY
 - PHASE 01 / FOUNDATIONS
 - ACTIVE
@@ -50,6 +54,7 @@ Examples:
 ## Color
 
 Monochromatic:
+
 - warm off-white background
 - near-black primary text
 - neutral gray secondary text
@@ -60,6 +65,7 @@ Avoid stark pure white + pure black everywhere unless intentionally used.
 ## Radius
 
 Conceptual ranges:
+
 - small object ~12px
 - image/inner object ~14–16px
 - artifact/card ~20–24px
@@ -89,18 +95,21 @@ Do not compress layouts simply to fit more content above the fold.
 > Fast interaction. Slow atmosphere.
 
 Hero:
+
 - rest
 - interest hover
 - artifact focus
 - exit
 
 Desktop:
+
 - ambient deck motion
 - Interest interaction takes control
 - focus reveals metadata
 - exit returns smoothly
 
 Mobile:
+
 - tap/swipe behavior
 - no hover simulation
 
@@ -113,10 +122,12 @@ Should feel like a collection of objects, not an obvious carousel.
 Avoid conventional dot pagination if possible.
 
 At rest:
+
 - slight positional/rotational differences
 - ambient depth movement
 
 On Interest interaction:
+
 - related artifact emerges
 - others recede
 - metadata resolves
@@ -224,9 +235,10 @@ reducing duplication and just added a layer of indirection.
 
 Per `AGENTS.md` ("do not invent abstractions before needed"), that tradeoff
 isn't worth it yet. Instead, this pass:
+
 - kept each component's own radius/shadow choice, applying `--radius-artifact`
   directly where it was already an exact match (the Currently object),
-- moved every tone's colors into the token scales above, so the *palette*
+- moved every tone's colors into the token scales above, so the _palette_
   layer is already shared and ready if a real shared primitive becomes
   worth building later (e.g. once Item cards need the same look).
 

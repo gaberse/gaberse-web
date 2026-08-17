@@ -4,10 +4,7 @@ import { defineConfig } from "astro/config";
 
 export default defineConfig({
   site: "https://gaberse.tech",
-  integrations: [
-    mdx(),
-    react(),
-  ],
+  integrations: [mdx(), react()],
   i18n: {
     locales: ["en", "es"],
     defaultLocale: "en",

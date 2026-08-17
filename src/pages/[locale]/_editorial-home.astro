@@ -30,7 +30,8 @@ const copy = isEnglish
       currently: "Ahora mismo",
       path: "AI Engineering\nPath",
       phase: "Fase 01\nFundamentos",
-      pathText: "Estoy explorando hasta dónde puedo llevar mi forma de resolver problemas con AI.",
+      pathText:
+        "Estoy explorando hasta dónde puedo llevar mi forma de resolver problemas con AI.",
       unavailable: "Aún no publicado",
       selectedLabel: "Del universo",
       placeholder: "Media provisional",
@@ -51,19 +52,75 @@ const glacier = {
 };
 
 const explorerLabels = isEnglish
-  ? { heading: "Explore what keeps pulling me in", interests: "Interests", unavailable: "Not published yet", placeholder: "Placeholder media", touchHint: "Tap or swipe to explore" }
-  : { heading: "Últimamente, por acá", interests: "Intereses", unavailable: "Aún no publicado", placeholder: "Media provisional", touchHint: "Toca o desliza para explorar" };
+  ? {
+      heading: "Explore what keeps pulling me in",
+      interests: "Interests",
+      unavailable: "Not published yet",
+      placeholder: "Placeholder media",
+      touchHint: "Tap or swipe to explore",
+    }
+  : {
+      heading: "Últimamente, por acá",
+      interests: "Intereses",
+      unavailable: "Aún no publicado",
+      placeholder: "Media provisional",
+      touchHint: "Toca o desliza para explorar",
+    };
 
 const explorerCards = isEnglish
   ? [
-      { id: "ai", label: "AI", title: "AI Engineering Path", meta: "A living practice · Active", tone: "a" as const, href: localizedPath(locale, "ai-engineering-path") },
-      { id: "design-systems", label: "Design Systems", title: "Design System", meta: "A library in progress", tone: "b" as const, href: localizedPath(locale, "design-system") },
-      { id: "travel-photography", label: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: glacier },
+      {
+        id: "ai",
+        label: "AI",
+        title: "AI Engineering Path",
+        meta: "A living practice · Active",
+        tone: "a" as const,
+        href: localizedPath(locale, "ai-engineering-path"),
+      },
+      {
+        id: "design-systems",
+        label: "Design Systems",
+        title: "Design System",
+        meta: "A library in progress",
+        tone: "b" as const,
+        href: localizedPath(locale, "design-system"),
+      },
+      {
+        id: "travel-photography",
+        label: "Travel Photography",
+        title: "Travel Photography",
+        meta: "Places kept close",
+        tone: "c" as const,
+        href: localizedPath(locale, "travel-photography"),
+        media: glacier,
+      },
     ]
   : [
-      { id: "ai", label: "AI", title: "AI Engineering Path", meta: "Una práctica viva · Activa", tone: "a" as const, href: localizedPath(locale, "ai-engineering-path") },
-      { id: "design-systems", label: "Sistemas de diseño", title: "Design System", meta: "Una biblioteca en progreso", tone: "b" as const, href: localizedPath(locale, "design-system") },
-      { id: "travel-photography", label: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: glacier },
+      {
+        id: "ai",
+        label: "AI",
+        title: "AI Engineering Path",
+        meta: "Una práctica viva · Activa",
+        tone: "a" as const,
+        href: localizedPath(locale, "ai-engineering-path"),
+      },
+      {
+        id: "design-systems",
+        label: "Sistemas de diseño",
+        title: "Design System",
+        meta: "Una biblioteca en progreso",
+        tone: "b" as const,
+        href: localizedPath(locale, "design-system"),
+      },
+      {
+        id: "travel-photography",
+        label: "Fotografía de viajes",
+        title: "Fotografía de viajes",
+        meta: "Lugares que permanecen",
+        tone: "c" as const,
+        href: localizedPath(locale, "travel-photography"),
+        media: glacier,
+      },
     ];
 
 const featured = isEnglish
@@ -81,7 +138,11 @@ const featured = isEnglish
     ];
 ---
 
-<BaseLayout locale={locale} description={copy.intro.replaceAll("\n", " ")} path="">
+<BaseLayout
+  locale={locale}
+  description={copy.intro.replaceAll("\n", " ")}
+  path=""
+>
   <Header locale={locale} />
   <main class="home site-shell">
     <section class="home__hero">
@@ -103,23 +164,34 @@ const featured = isEnglish
     <section class="selected home__section">
       <p class="home__eyebrow">{copy.selectedLabel}</p>
       <div class="selected__list">
-        {featured.map(([title, metadata, tone, slug]) => (
-          <a class={`selected__entry selected__entry--${tone}`} href={localizedPath(locale, slug)}>
-            <div class="selected__object" aria-label={copy.placeholder}><span aria-hidden="true"></span></div>
-            <strong>{title}</strong>
-            <small>{metadata}</small>
-          </a>
-        ))}
+        {
+          featured.map(([title, metadata, tone, slug]) => (
+            <a
+              class={`selected__entry selected__entry--${tone}`}
+              href={localizedPath(locale, slug)}
+            >
+              <div class="selected__object" aria-label={copy.placeholder}>
+                <span aria-hidden="true" />
+              </div>
+              <strong>{title}</strong>
+              <small>{metadata}</small>
+            </a>
+          ))
+        }
       </div>
       <div class="archive-transition">
         <p class="home__eyebrow">{copy.archiveLabel}</p>
-        <a href={localizedPath(locale, "archive")}>{copy.archiveText} <span aria-hidden="true">↗</span></a>
+        <a href={localizedPath(locale, "archive")}
+          >{copy.archiveText} <span aria-hidden="true">↗</span></a
+        >
       </div>
     </section>
 
     <section class="contact home__section">
       <h2>{copy.contact}</h2>
-      <a class="contact__email" href="mailto:hello@gaberse.tech">hello@gaberse.tech <span aria-hidden="true">↗</span></a>
+      <a class="contact__email" href="mailto:hello@gaberse.tech"
+        >hello@gaberse.tech <span aria-hidden="true">↗</span></a
+      >
     </section>
   </main>
 </BaseLayout>
@@ -127,62 +199,283 @@ const featured = isEnglish
 <style>
   /* Keep wide editorial objects from creating horizontal scroll without
      clipping the Hero deck when its rotation/drift crosses the top edge. */
-  .home { overflow-x: clip; overflow-y: visible; container-type: inline-size; }
-  .home__hero, .home__section { width: 100%; max-width: none; margin-inline: 0; }
-  .home__hero { min-height: 662px; position: relative; padding: 4.85rem var(--space-page) 0; }
-  .home__hero-copy { position: relative; z-index: 1; width: 43%; pointer-events: none; }
-  .home__hero h1 { white-space: pre-line; margin: 0; font-size: clamp(4.75rem, 7.3cqw, 7.4rem); letter-spacing: -.09em; line-height: .88; font-weight: 620; }
-  .home__hero :global(.explorer) { position: absolute; inset: 0; padding: 0 var(--space-page); }
-  .home__eyebrow { font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); margin: 0; }
-  .home__section { padding: clamp(6rem, 10cqw, 10rem) var(--space-page); }
-  .currently { display: grid; grid-template-columns: minmax(0, .95fr) minmax(32rem, 1.05fr); gap: clamp(4.5rem, 15cqw, 15rem); align-items: center; }
-  .currently__copy h2, .contact h2 { white-space: pre-line; font-size: clamp(3.3rem, 5cqw, 5.3rem); line-height: .9; letter-spacing: -.075em; font-weight: 600; margin: 2.4rem 0 2.7rem; }
-  .currently__copy > p:last-child { white-space: pre-line; font-size: clamp(1.05rem, 1.5cqw, 1.3rem); line-height: 1.36; margin: 0; color: var(--color-ink-soft); }
-  :global(.currently__object) { width: 100%; aspect-ratio: 1.65 / 1; min-height: 16rem; }
-  .currently__phase-text { white-space: pre-line; font: 500 var(--text-meta)/1.25 var(--font-mono); text-transform: uppercase; }
-  .selected { padding-top: clamp(7rem, 12cqw, 12rem); }
-  .selected__list { display: grid; grid-template-columns: 1.08fr .94fr 1.03fr .95fr; gap: clamp(.85rem, 1.35cqw, 1.35rem); align-items: start; margin-top: 2.4rem; }
-  .selected__entry { min-width: 0; min-height: 18rem; padding: .8rem; border-radius: var(--radius-object); display: flex; flex-direction: column; text-decoration: none; color: inherit; }
-  .selected__entry:nth-child(2) { margin-top: 1.8rem; min-height: 19.5rem; }
-  .selected__entry:nth-child(3) { margin-top: .65rem; min-height: 17.25rem; }
-  .selected__entry:nth-child(4) { margin-top: 2.5rem; min-height: 18.75rem; }
-  .selected__entry--dark, .selected__entry--ink { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
-  .selected__entry--mid { background: var(--tone-mid-bg); color: var(--tone-mid-fg); }
-  .selected__entry--light { background: var(--tone-light-bg); color: var(--tone-light-fg); }
-  .selected__object { min-height: 11.5rem; border-radius: .7rem; }
-  .selected__object > span { display: block; width: 100%; height: 100%; min-height: 10.3rem; border-radius: .55rem; background: var(--tone-dark-surface); }
-  .selected__entry--mid .selected__object > span { background: var(--tone-mid-surface); }
-  .selected__entry--light .selected__object > span { background: var(--tone-light-surface); }
-  .selected__entry strong { margin-top: 1.1rem; font-size: .98rem; letter-spacing: -.04em; font-weight: 510; }
-  .selected__entry small { margin-top: auto; font: 500 .58rem/1.25 var(--font-mono); letter-spacing: .055em; text-transform: uppercase; color: currentColor; opacity: .7; }
-  .archive-transition { margin-top: clamp(6rem, 10cqw, 10rem); max-width: 52rem; }
-  .archive-transition > a { display: block; max-width: 14ch; margin: 1.2rem 0 0; font-size: clamp(3rem, 5.7cqw, 6rem); line-height: .92; letter-spacing: -.07em; font-weight: 580; text-decoration: none; color: inherit; transition: color 160ms ease; }
-  .archive-transition > a:hover { color: var(--color-muted); }
-  .archive-transition > a span { display: inline-block; margin-left: .08em; font-size: .7em; vertical-align: .08em; }
-  .contact { margin-top: clamp(3rem, 6cqw, 6rem); margin-bottom: 3.8rem; padding-top: clamp(5rem, 8cqw, 8rem); padding-bottom: clamp(5rem, 8cqw, 8rem); min-height: 18rem; border-top: 1px solid var(--color-border-muted); display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; }
-  .contact h2 { margin: 0; font-size: clamp(2.6rem, 3.5cqw, 4rem); max-width: 13ch; }
-  .contact__email { justify-self: start; font: 500 clamp(.9rem, 1.25cqw, 1.15rem) var(--font-mono); text-decoration: none; }
-  @container (min-width: 100rem) { .home__hero-copy { width: 50%; } }
-  @media (min-width: 70rem) { .home__hero { padding-top: 5.55rem; } }
+  .home {
+    overflow-x: clip;
+    overflow-y: visible;
+    container-type: inline-size;
+  }
+  .home__hero,
+  .home__section {
+    width: 100%;
+    max-width: none;
+    margin-inline: 0;
+  }
+  .home__hero {
+    min-height: 662px;
+    position: relative;
+    padding: 4.85rem var(--space-page) 0;
+  }
+  .home__hero-copy {
+    position: relative;
+    z-index: 1;
+    width: 43%;
+    pointer-events: none;
+  }
+  .home__hero h1 {
+    white-space: pre-line;
+    margin: 0;
+    font-size: clamp(4.75rem, 7.3cqw, 7.4rem);
+    letter-spacing: -0.09em;
+    line-height: 0.88;
+    font-weight: 620;
+  }
+  .home__hero :global(.explorer) {
+    position: absolute;
+    inset: 0;
+    padding: 0 var(--space-page);
+  }
+  .home__eyebrow {
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0;
+  }
+  .home__section {
+    padding: clamp(6rem, 10cqw, 10rem) var(--space-page);
+  }
+  .currently {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(32rem, 1.05fr);
+    gap: clamp(4.5rem, 15cqw, 15rem);
+    align-items: center;
+  }
+  .currently__copy h2,
+  .contact h2 {
+    white-space: pre-line;
+    font-size: clamp(3.3rem, 5cqw, 5.3rem);
+    line-height: 0.9;
+    letter-spacing: -0.075em;
+    font-weight: 600;
+    margin: 2.4rem 0 2.7rem;
+  }
+  .currently__copy > p:last-child {
+    white-space: pre-line;
+    font-size: clamp(1.05rem, 1.5cqw, 1.3rem);
+    line-height: 1.36;
+    margin: 0;
+    color: var(--color-ink-soft);
+  }
+  :global(.currently__object) {
+    width: 100%;
+    aspect-ratio: 1.65 / 1;
+    min-height: 16rem;
+  }
+  .currently__phase-text {
+    white-space: pre-line;
+    font: 500 var(--text-meta)/1.25 var(--font-mono);
+    text-transform: uppercase;
+  }
+  .selected {
+    padding-top: clamp(7rem, 12cqw, 12rem);
+  }
+  .selected__list {
+    display: grid;
+    grid-template-columns: 1.08fr 0.94fr 1.03fr 0.95fr;
+    gap: clamp(0.85rem, 1.35cqw, 1.35rem);
+    align-items: start;
+    margin-top: 2.4rem;
+  }
+  .selected__entry {
+    min-width: 0;
+    min-height: 18rem;
+    padding: 0.8rem;
+    border-radius: var(--radius-object);
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .selected__entry:nth-child(2) {
+    margin-top: 1.8rem;
+    min-height: 19.5rem;
+  }
+  .selected__entry:nth-child(3) {
+    margin-top: 0.65rem;
+    min-height: 17.25rem;
+  }
+  .selected__entry:nth-child(4) {
+    margin-top: 2.5rem;
+    min-height: 18.75rem;
+  }
+  .selected__entry--dark,
+  .selected__entry--ink {
+    background: var(--tone-dark-bg);
+    color: var(--tone-dark-fg);
+  }
+  .selected__entry--mid {
+    background: var(--tone-mid-bg);
+    color: var(--tone-mid-fg);
+  }
+  .selected__entry--light {
+    background: var(--tone-light-bg);
+    color: var(--tone-light-fg);
+  }
+  .selected__object {
+    min-height: 11.5rem;
+    border-radius: 0.7rem;
+  }
+  .selected__object > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    min-height: 10.3rem;
+    border-radius: 0.55rem;
+    background: var(--tone-dark-surface);
+  }
+  .selected__entry--mid .selected__object > span {
+    background: var(--tone-mid-surface);
+  }
+  .selected__entry--light .selected__object > span {
+    background: var(--tone-light-surface);
+  }
+  .selected__entry strong {
+    margin-top: 1.1rem;
+    font-size: 0.98rem;
+    letter-spacing: -0.04em;
+    font-weight: 510;
+  }
+  .selected__entry small {
+    margin-top: auto;
+    font: 500 0.58rem/1.25 var(--font-mono);
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    color: currentColor;
+    opacity: 0.7;
+  }
+  .archive-transition {
+    margin-top: clamp(6rem, 10cqw, 10rem);
+    max-width: 52rem;
+  }
+  .archive-transition > a {
+    display: block;
+    max-width: 14ch;
+    margin: 1.2rem 0 0;
+    font-size: clamp(3rem, 5.7cqw, 6rem);
+    line-height: 0.92;
+    letter-spacing: -0.07em;
+    font-weight: 580;
+    text-decoration: none;
+    color: inherit;
+    transition: color 160ms ease;
+  }
+  .archive-transition > a:hover {
+    color: var(--color-muted);
+  }
+  .archive-transition > a span {
+    display: inline-block;
+    margin-left: 0.08em;
+    font-size: 0.7em;
+    vertical-align: 0.08em;
+  }
+  .contact {
+    margin-top: clamp(3rem, 6cqw, 6rem);
+    margin-bottom: 3.8rem;
+    padding-top: clamp(5rem, 8cqw, 8rem);
+    padding-bottom: clamp(5rem, 8cqw, 8rem);
+    min-height: 18rem;
+    border-top: 1px solid var(--color-border-muted);
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+  }
+  .contact h2 {
+    margin: 0;
+    font-size: clamp(2.6rem, 3.5cqw, 4rem);
+    max-width: 13ch;
+  }
+  .contact__email {
+    justify-self: start;
+    font: 500 clamp(0.9rem, 1.25cqw, 1.15rem) var(--font-mono);
+    text-decoration: none;
+  }
+  @container (min-width: 100rem) {
+    .home__hero-copy {
+      width: 50%;
+    }
+  }
+  @media (min-width: 70rem) {
+    .home__hero {
+      padding-top: 5.55rem;
+    }
+  }
   @media (max-width: 44rem) {
-    .home__hero { min-height: 0; padding-top: 3.5rem; }
-    .home__hero-copy { width: 100%; }
-    .home__hero h1 { font-size: clamp(3.7rem, 16.5cqw, 5rem); }
-    .home__hero :global(.explorer) { position: relative; inset: auto; padding: 3rem 0 2.8rem; }
-    .currently { padding-top: 4.4rem; }
-    .currently { grid-template-columns: 1fr; gap: 2.3rem; }
-    .currently__copy h2 { margin: 1.7rem 0 1.8rem; }
-    :global(.currently__object) { max-width: 32rem; }
-    .selected__list { grid-template-columns: 1.05fr .95fr; gap: .85rem; }
-    .selected__entry { min-height: 15.5rem; margin-top: 0; }
-    .selected__entry:nth-child(2) { min-height: 17rem; margin-top: 2rem; }
-    .selected__entry:nth-child(3) { min-height: 14.75rem; margin-top: -1rem; }
-    .selected__entry:nth-child(4) { min-height: 16.25rem; margin-top: 1.25rem; }
-    .selected__object { min-height: 9rem; }
-    .selected__object > span { min-height: 7.8rem; }
-    .archive-transition { margin-top: 5.5rem; }
-    .archive-transition > a { font-size: clamp(2.9rem, 13cqw, 4.3rem); }
-    .contact { display: block; }
-    .contact__email { display: block; margin-top: 2.7rem; }
+    .home__hero {
+      min-height: 0;
+      padding-top: 3.5rem;
+    }
+    .home__hero-copy {
+      width: 100%;
+    }
+    .home__hero h1 {
+      font-size: clamp(3.7rem, 16.5cqw, 5rem);
+    }
+    .home__hero :global(.explorer) {
+      position: relative;
+      inset: auto;
+      padding: 3rem 0 2.8rem;
+    }
+    .currently {
+      padding-top: 4.4rem;
+    }
+    .currently {
+      grid-template-columns: 1fr;
+      gap: 2.3rem;
+    }
+    .currently__copy h2 {
+      margin: 1.7rem 0 1.8rem;
+    }
+    :global(.currently__object) {
+      max-width: 32rem;
+    }
+    .selected__list {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 0.85rem;
+    }
+    .selected__entry {
+      min-height: 15.5rem;
+      margin-top: 0;
+    }
+    .selected__entry:nth-child(2) {
+      min-height: 17rem;
+      margin-top: 2rem;
+    }
+    .selected__entry:nth-child(3) {
+      min-height: 14.75rem;
+      margin-top: -1rem;
+    }
+    .selected__entry:nth-child(4) {
+      min-height: 16.25rem;
+      margin-top: 1.25rem;
+    }
+    .selected__object {
+      min-height: 9rem;
+    }
+    .selected__object > span {
+      min-height: 7.8rem;
+    }
+    .archive-transition {
+      margin-top: 5.5rem;
+    }
+    .archive-transition > a {
+      font-size: clamp(2.9rem, 13cqw, 4.3rem);
+    }
+    .contact {
+      display: block;
+    }
+    .contact__email {
+      display: block;
+      margin-top: 2.7rem;
+    }
   }
 </style>

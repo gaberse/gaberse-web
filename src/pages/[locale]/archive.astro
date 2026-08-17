@@ -16,7 +16,8 @@ const copy = isEnglish
   ? {
       eyebrow: "ARCHIVE / INDEX",
       title: "everything that ended up here.",
-      intro: "No single narrative. Different things that kept pulling my attention — together, Gaberse.",
+      intro:
+        "No single narrative. Different things that kept pulling my attention — together, Gaberse.",
       countLabel: "06 ITEMS",
       placeholder: "Placeholder media",
       footerTag: "THE INDEX IS NEVER FINISHED.",
@@ -25,7 +26,8 @@ const copy = isEnglish
   : {
       eyebrow: "ARCHIVO / ÍNDICE",
       title: "todo lo que fue llegando hasta acá.",
-      intro: "Ninguna narrativa única. Distintas cosas que fueron llamando mi atención — juntas, Gaberse.",
+      intro:
+        "Ninguna narrativa única. Distintas cosas que fueron llamando mi atención — juntas, Gaberse.",
       countLabel: "06 ÍTEMS",
       placeholder: "Media provisional",
       footerTag: "EL ÍNDICE NUNCA ESTÁ TERMINADO.",
@@ -46,24 +48,121 @@ const travelPhoto = {
 
 const items = isEnglish
   ? [
-      { index: "01", title: "AI ENGINEERING PATH", status: "ACTIVE / LEARNING", description: "A living path of learning, experiments and things built along the way.", tone: "dark" as const, slug: "ai-engineering-path" },
-      { index: "02", title: "DESIGN SYSTEM", status: "BUILDING / SYSTEM", description: "A living library of components, patterns and reusable decisions.", tone: "light" as const, slug: "design-system" },
-      { index: "03", title: "TRAVEL PHOTOGRAPHY", status: "VISUAL ARCHIVE", description: "Selected frames from places that stayed with me.", tone: "mid" as const, slug: "travel-photography", media: travelPhoto },
-      { index: "04", title: "REACT MIAMI 2025", status: "EXPERIENCE / 2025", description: "First time in the US. Developers, English, conversations and a lot to remember.", tone: "dark" as const, slug: "react-miami-2025" },
-      { index: "05", title: "LABORATORIA", status: "ORIGIN / TECH", description: "The door that changed the direction of my work.", tone: "mid" as const, slug: "laboratoria" },
-      { index: "06", title: "GABRIELA", status: "PERSON / OPEN", description: "The person behind all of these things.", tone: "light" as const, slug: "gabriela" },
+      {
+        index: "01",
+        title: "AI ENGINEERING PATH",
+        status: "ACTIVE / LEARNING",
+        description:
+          "A living path of learning, experiments and things built along the way.",
+        tone: "dark" as const,
+        slug: "ai-engineering-path",
+      },
+      {
+        index: "02",
+        title: "DESIGN SYSTEM",
+        status: "BUILDING / SYSTEM",
+        description:
+          "A living library of components, patterns and reusable decisions.",
+        tone: "light" as const,
+        slug: "design-system",
+      },
+      {
+        index: "03",
+        title: "TRAVEL PHOTOGRAPHY",
+        status: "VISUAL ARCHIVE",
+        description: "Selected frames from places that stayed with me.",
+        tone: "mid" as const,
+        slug: "travel-photography",
+        media: travelPhoto,
+      },
+      {
+        index: "04",
+        title: "REACT MIAMI 2025",
+        status: "EXPERIENCE / 2025",
+        description:
+          "First time in the US. Developers, English, conversations and a lot to remember.",
+        tone: "dark" as const,
+        slug: "react-miami-2025",
+      },
+      {
+        index: "05",
+        title: "LABORATORIA",
+        status: "ORIGIN / TECH",
+        description: "The door that changed the direction of my work.",
+        tone: "mid" as const,
+        slug: "laboratoria",
+      },
+      {
+        index: "06",
+        title: "GABRIELA",
+        status: "PERSON / OPEN",
+        description: "The person behind all of these things.",
+        tone: "light" as const,
+        slug: "gabriela",
+      },
     ]
   : [
-      { index: "01", title: "AI ENGINEERING PATH", status: "ACTIVA / APRENDIZAJE", description: "Un camino vivo de aprendizaje, experimentos y cosas que fui construyendo en el camino.", tone: "dark" as const, slug: "ai-engineering-path" },
-      { index: "02", title: "DESIGN SYSTEM", status: "EN CONSTRUCCIÓN / SISTEMA", description: "Una biblioteca viva de componentes, patrones y decisiones reutilizables.", tone: "light" as const, slug: "design-system" },
-      { index: "03", title: "FOTOGRAFÍA DE VIAJES", status: "ARCHIVO VISUAL", description: "Fotos elegidas de lugares que se me quedaron grabados.", tone: "mid" as const, slug: "travel-photography", media: travelPhoto },
-      { index: "04", title: "REACT MIAMI 2025", status: "EXPERIENCIA / 2025", description: "Primera vez en Estados Unidos. Developers, inglés, conversaciones y mucho para recordar.", tone: "dark" as const, slug: "react-miami-2025" },
-      { index: "05", title: "LABORATORIA", status: "ORIGEN / TECH", description: "La puerta que cambió el rumbo de mi trabajo.", tone: "mid" as const, slug: "laboratoria" },
-      { index: "06", title: "GABRIELA", status: "PERSONA / ABIERTO", description: "La persona detrás de todas estas cosas.", tone: "light" as const, slug: "gabriela" },
+      {
+        index: "01",
+        title: "AI ENGINEERING PATH",
+        status: "ACTIVA / APRENDIZAJE",
+        description:
+          "Un camino vivo de aprendizaje, experimentos y cosas que fui construyendo en el camino.",
+        tone: "dark" as const,
+        slug: "ai-engineering-path",
+      },
+      {
+        index: "02",
+        title: "DESIGN SYSTEM",
+        status: "EN CONSTRUCCIÓN / SISTEMA",
+        description:
+          "Una biblioteca viva de componentes, patrones y decisiones reutilizables.",
+        tone: "light" as const,
+        slug: "design-system",
+      },
+      {
+        index: "03",
+        title: "FOTOGRAFÍA DE VIAJES",
+        status: "ARCHIVO VISUAL",
+        description: "Fotos elegidas de lugares que se me quedaron grabados.",
+        tone: "mid" as const,
+        slug: "travel-photography",
+        media: travelPhoto,
+      },
+      {
+        index: "04",
+        title: "REACT MIAMI 2025",
+        status: "EXPERIENCIA / 2025",
+        description:
+          "Primera vez en Estados Unidos. Developers, inglés, conversaciones y mucho para recordar.",
+        tone: "dark" as const,
+        slug: "react-miami-2025",
+      },
+      {
+        index: "05",
+        title: "LABORATORIA",
+        status: "ORIGEN / TECH",
+        description: "La puerta que cambió el rumbo de mi trabajo.",
+        tone: "mid" as const,
+        slug: "laboratoria",
+      },
+      {
+        index: "06",
+        title: "GABRIELA",
+        status: "PERSONA / ABIERTO",
+        description: "La persona detrás de todas estas cosas.",
+        tone: "light" as const,
+        slug: "gabriela",
+      },
     ];
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="archive">
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.intro}
+  path="archive"
+>
   <Header locale={locale} />
   <main class="item site-shell archive">
     <section class="item__hero archive__hero">
@@ -78,70 +177,210 @@ const items = isEnglish
     </section>
 
     <ul class="archive__list">
-      {items.map((item) => (
-        <li>
-          <a class="archive__row" href={localizedPath(locale, item.slug)}>
-            <span class="archive__row-index">{item.index}</span>
-            <span class="archive__row-copy">
-              <strong>{item.title}</strong>
-              <span class="archive__row-status">{item.status}</span>
-            </span>
-            <p class="archive__row-description">{item.description}</p>
-            <span class="archive__row-arrow" aria-hidden="true">↗</span>
-            <PhotoFrame class="archive__row-photo" tone={item.tone} ariaLabel={copy.placeholder} {...(item.media ?? {})} />
-          </a>
-        </li>
-      ))}
+      {
+        items.map((item) => (
+          <li>
+            <a class="archive__row" href={localizedPath(locale, item.slug)}>
+              <span class="archive__row-index">{item.index}</span>
+              <span class="archive__row-copy">
+                <strong>{item.title}</strong>
+                <span class="archive__row-status">{item.status}</span>
+              </span>
+              <p class="archive__row-description">{item.description}</p>
+              <span class="archive__row-arrow" aria-hidden="true">
+                ↗
+              </span>
+              <PhotoFrame
+                class="archive__row-photo"
+                tone={item.tone}
+                ariaLabel={copy.placeholder}
+                {...(item.media ?? {})}
+              />
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
     <section class="archive__contact">
       <p class="archive__contact-tag">{copy.footerTag}</p>
       <div class="archive__contact-row">
         <h2>{copy.footerTitle}</h2>
-        <a class="archive__contact-email" href="mailto:hello@gaberse.tech">hello@gaberse.tech <span aria-hidden="true">↗</span></a>
+        <a class="archive__contact-email" href="mailto:hello@gaberse.tech"
+          >hello@gaberse.tech <span aria-hidden="true">↗</span></a
+        >
       </div>
     </section>
   </main>
 </BaseLayout>
 
 <style>
-  .archive { padding-bottom: 5rem; }
-  .archive__hero { grid-template-columns: minmax(0, 1fr) minmax(18rem, .7fr); align-items: end; }
-  .archive__hero-copy h1 { text-transform: lowercase; }
-  .archive__meta { display: flex; flex-direction: column; align-items: flex-start; gap: 1.4rem; }
-  .archive__meta p:first-child { margin: 0; max-width: 34ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
-  .archive__count { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
+  .archive {
+    padding-bottom: 5rem;
+  }
+  .archive__hero {
+    grid-template-columns: minmax(0, 1fr) minmax(18rem, 0.7fr);
+    align-items: end;
+  }
+  .archive__hero-copy h1 {
+    text-transform: lowercase;
+  }
+  .archive__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+  .archive__meta p:first-child {
+    margin: 0;
+    max-width: 34ch;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .archive__count {
+    margin: 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
 
-  .archive__list { list-style: none; margin: clamp(3rem, 6cqw, 5rem) 0 0; padding: 0 var(--space-page); }
-  .archive__list li { border-top: 1px solid var(--color-border-muted); }
-  .archive__list li:last-child { border-bottom: 1px solid var(--color-border-muted); }
-  .archive__row { display: grid; grid-template-columns: 3rem minmax(14rem, 18rem) minmax(0, 1fr) 2rem 8rem; align-items: center; gap: 1.8rem; padding: 2.2rem 0; text-decoration: none; color: inherit; }
-  .archive__row-index { font: 500 var(--text-meta) var(--font-mono); color: var(--color-muted); }
-  .archive__row-copy { display: flex; flex-direction: column; gap: .5rem; }
-  .archive__row-copy strong { font-size: clamp(1.3rem, 2.2cqw, 1.9rem); letter-spacing: -.03em; font-weight: 640; }
-  .archive__row-status { font: 500 .68rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-  .archive__row-description { margin: 0; max-width: 46ch; font-size: .98rem; line-height: 1.5; color: var(--color-ink-soft); }
-  .archive__row-arrow { font-size: 1.3rem; color: var(--color-muted); transition: color 160ms ease; }
-  .archive__row:hover .archive__row-arrow { color: var(--color-ink); }
-  :global(.archive__row-photo) { width: 8rem; aspect-ratio: 1.2 / 1; }
+  .archive__list {
+    list-style: none;
+    margin: clamp(3rem, 6cqw, 5rem) 0 0;
+    padding: 0 var(--space-page);
+  }
+  .archive__list li {
+    border-top: 1px solid var(--color-border-muted);
+  }
+  .archive__list li:last-child {
+    border-bottom: 1px solid var(--color-border-muted);
+  }
+  .archive__row {
+    display: grid;
+    grid-template-columns: 3rem minmax(14rem, 18rem) minmax(0, 1fr) 2rem 8rem;
+    align-items: center;
+    gap: 1.8rem;
+    padding: 2.2rem 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .archive__row-index {
+    font: 500 var(--text-meta) var(--font-mono);
+    color: var(--color-muted);
+  }
+  .archive__row-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .archive__row-copy strong {
+    font-size: clamp(1.3rem, 2.2cqw, 1.9rem);
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .archive__row-status {
+    font: 500 0.68rem/1.25 var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+  .archive__row-description {
+    margin: 0;
+    max-width: 46ch;
+    font-size: 0.98rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .archive__row-arrow {
+    font-size: 1.3rem;
+    color: var(--color-muted);
+    transition: color 160ms ease;
+  }
+  .archive__row:hover .archive__row-arrow {
+    color: var(--color-ink);
+  }
+  :global(.archive__row-photo) {
+    width: 8rem;
+    aspect-ratio: 1.2 / 1;
+  }
 
-  .archive__contact { margin: clamp(5rem, 9cqw, 8rem) var(--space-page) 0; padding: clamp(2.4rem, 5cqw, 3.6rem); border-radius: var(--radius-artifact); background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
-  .archive__contact-tag { margin: 0 0 1.4rem; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .75; }
-  .archive__contact-row { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 1.5rem; }
-  .archive__contact-row h2 { margin: 0; max-width: 22ch; font-size: clamp(1.8rem, 3.4cqw, 2.8rem); letter-spacing: -.03em; font-weight: 620; line-height: 1.05; }
-  .archive__contact-email { font: 500 clamp(.9rem, 1.25cqw, 1.15rem) var(--font-mono); text-decoration: none; color: inherit; }
+  .archive__contact {
+    margin: clamp(5rem, 9cqw, 8rem) var(--space-page) 0;
+    padding: clamp(2.4rem, 5cqw, 3.6rem);
+    border-radius: var(--radius-artifact);
+    background: var(--tone-dark-bg);
+    color: var(--tone-dark-fg);
+  }
+  .archive__contact-tag {
+    margin: 0 0 1.4rem;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+  .archive__contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.5rem;
+  }
+  .archive__contact-row h2 {
+    margin: 0;
+    max-width: 22ch;
+    font-size: clamp(1.8rem, 3.4cqw, 2.8rem);
+    letter-spacing: -0.03em;
+    font-weight: 620;
+    line-height: 1.05;
+  }
+  .archive__contact-email {
+    font: 500 clamp(0.9rem, 1.25cqw, 1.15rem) var(--font-mono);
+    text-decoration: none;
+    color: inherit;
+  }
 
   @media (max-width: 44rem) {
-    .archive__hero { grid-template-columns: 1fr; }
-    .archive__meta { margin-top: 1.6rem; }
-    .archive__list { padding: 0 var(--space-page); }
-    .archive__row { grid-template-columns: 2.2rem 1fr; grid-template-areas: "index copy" "desc desc" "photo photo"; row-gap: 1rem; padding: 1.6rem 0; }
-    .archive__row-index { grid-area: index; }
-    .archive__row-copy { grid-area: copy; }
-    .archive__row-description { grid-area: desc; max-width: none; }
-    .archive__row-arrow { display: none; }
-    :global(.archive__row-photo) { grid-area: photo; width: 100%; aspect-ratio: 16 / 9; }
-    .archive__contact-row { display: block; }
-    .archive__contact-email { display: block; margin-top: 1.4rem; }
+    .archive__hero {
+      grid-template-columns: 1fr;
+    }
+    .archive__meta {
+      margin-top: 1.6rem;
+    }
+    .archive__list {
+      padding: 0 var(--space-page);
+    }
+    .archive__row {
+      grid-template-columns: 2.2rem 1fr;
+      grid-template-areas: "index copy" "desc desc" "photo photo";
+      row-gap: 1rem;
+      padding: 1.6rem 0;
+    }
+    .archive__row-index {
+      grid-area: index;
+    }
+    .archive__row-copy {
+      grid-area: copy;
+    }
+    .archive__row-description {
+      grid-area: desc;
+      max-width: none;
+    }
+    .archive__row-arrow {
+      display: none;
+    }
+    :global(.archive__row-photo) {
+      grid-area: photo;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+    .archive__contact-row {
+      display: block;
+    }
+    .archive__contact-email {
+      display: block;
+      margin-top: 1.4rem;
+    }
   }
 </style>

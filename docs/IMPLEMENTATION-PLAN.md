@@ -5,6 +5,7 @@ This file should be finalized by Codex after architecture approval.
 ## Phase 0 — Architecture
 
 Decide:
+
 - framework
 - content representation
 - i18n
@@ -18,6 +19,7 @@ Decide:
 ## Phase 1 — Foundation
 
 Expected:
+
 - project scaffold
 - formatting/linting/typechecking
 - typography

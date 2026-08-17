@@ -7,14 +7,29 @@ import { isLocale, supportedLocales } from "../../lib/i18n";
 
 export async function getStaticPaths() {
   const items = await getPublishedItems();
-  return items.flatMap((item) => supportedLocales.map((locale) => ({ params: { locale, slug: item.data.slug } })));
+  return items.flatMap((item) =>
+    supportedLocales.map((locale) => ({
+      params: { locale, slug: item.data.slug },
+    })),
+  );
 }
 const { locale: localeParam, slug } = Astro.params;
-if (!localeParam || !slug || !isLocale(localeParam)) return new Response(null, { status: 404 });
+if (!localeParam || !slug || !isLocale(localeParam))
+  return new Response(null, { status: 404 });
 const entry = await getLocalizedItem(slug, localeParam);
 if (!entry) return new Response(null, { status: 404 });
 const { Content } = await render(entry.localized);
 ---
-<ItemLayout locale={localeParam} title={entry.localized.data.title} description={entry.localized.data.description} slug={slug}>
-  <article><h1>{entry.localized.data.title}</h1><Content components={editorialComponents} /></article>
+
+<ItemLayout
+  locale={localeParam}
+  title={entry.localized.data.title}
+  description={entry.localized.data.description}
+  slug={slug}
+>
+  <article>
+    <h1>{entry.localized.data.title}</h1><Content
+      components={editorialComponents}
+    />
+  </article>
 </ItemLayout>

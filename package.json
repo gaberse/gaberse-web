@@ -11,7 +11,10 @@
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
     "test": "vitest run",
     "test:watch": "vitest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check"
   },
   "dependencies": {
     "@astrojs/mdx": "latest",
@@ -33,6 +36,8 @@
     "eslint": "latest",
     "eslint-plugin-astro": "latest",
     "globals": "latest",
+    "prettier": "3.9.6",
+    "prettier-plugin-astro": "0.14.1",
     "typescript": "^6.0.0",
     "typescript-eslint": "latest",
     "vitest": "latest"

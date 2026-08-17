@@ -15,23 +15,30 @@ import "../styles/global.css";
    Locale-less on purpose: it is one document in one language, so it carries both
    labels rather than picking a side or duplicating the route. */
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <title>CV — Gabriela López</title>
-    {/* A waypoint, not a page: keeping it out of the index stops it from ever
-        outranking the real thing in search results. */}
+    {
+      /* A waypoint, not a page: keeping it out of the index stops it from ever
+        outranking the real thing in search results. */
+    }
     <meta name="robots" content="noindex, nofollow" />
     <link rel="canonical" href="https://gaberse.tech/cv" />
   </head>
   <body>
     <main class="cv">
       <p class="cv__brand">gaberse<sup aria-hidden="true">©</sup></p>
-      <p class="cv__status" role="status">Descargando CV <span aria-hidden="true">/</span> Downloading CV</p>
-      {/* Also the whole experience without JavaScript, and the way out if the
-          redirect is blocked — never a dead end. */}
+      <p class="cv__status" role="status">
+        Descargando CV <span aria-hidden="true">/</span> Downloading CV
+      </p>
+      {
+        /* Also the whole experience without JavaScript, and the way out if the
+          redirect is blocked — never a dead end. */
+      }
       <a class="cv__fallback" href={cvDocumentUrl} data-cv-link>
         Si no empieza sola, descárgala aquí <span aria-hidden="true">↓</span>
         <small>If it does not start, download it here</small>
@@ -55,12 +62,48 @@ import "../styles/global.css";
       setTimeout(go, 2500);
     </script>
     <style>
-      .cv { min-height: 100svh; display: grid; align-content: center; justify-items: start; gap: 1.6rem; padding: var(--space-page); }
-      .cv__brand { margin: 0; font: 620 1.5rem/1 var(--font-sans); letter-spacing: -.045em; }
-      .cv__brand sup { position: relative; top: -.54em; margin-left: .08em; font: 500 .42em/1 var(--font-sans); }
-      .cv__status { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); }
-      .cv__fallback { display: block; text-decoration: none; color: inherit; font-size: clamp(1.4rem, 3cqw, 2rem); line-height: 1.1; letter-spacing: -.04em; font-weight: 620; }
-      .cv__fallback small { display: block; margin-top: .7rem; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); letter-spacing: 0; color: var(--color-ink-soft); }
+      .cv {
+        min-height: 100svh;
+        display: grid;
+        align-content: center;
+        justify-items: start;
+        gap: 1.6rem;
+        padding: var(--space-page);
+      }
+      .cv__brand {
+        margin: 0;
+        font: 620 1.5rem/1 var(--font-sans);
+        letter-spacing: -0.045em;
+      }
+      .cv__brand sup {
+        position: relative;
+        top: -0.54em;
+        margin-left: 0.08em;
+        font: 500 0.42em/1 var(--font-sans);
+      }
+      .cv__status {
+        margin: 0;
+        font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+        letter-spacing: var(--tracking-meta);
+        text-transform: uppercase;
+        color: var(--color-muted);
+      }
+      .cv__fallback {
+        display: block;
+        text-decoration: none;
+        color: inherit;
+        font-size: clamp(1.4rem, 3cqw, 2rem);
+        line-height: 1.1;
+        letter-spacing: -0.04em;
+        font-weight: 620;
+      }
+      .cv__fallback small {
+        display: block;
+        margin-top: 0.7rem;
+        font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans);
+        letter-spacing: 0;
+        color: var(--color-ink-soft);
+      }
     </style>
   </body>
 </html>

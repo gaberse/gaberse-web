@@ -4,10 +4,16 @@ import "../styles/global.css";
 import type { Locale } from "../lib/i18n";
 import { createSeo } from "../lib/seo";
 
-interface Props { locale: Locale; title?: string; description?: string; path?: string; }
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  path?: string;
+}
 const { locale, title, description, path } = Astro.props;
 const seo = createSeo({ locale, title, description, path });
 ---
+
 <!doctype html>
 <html lang={locale}>
   <head>
@@ -22,8 +28,10 @@ const seo = createSeo({ locale, title, description, path });
   </head>
   <body>
     <slot />
-    {/* Cookieless, so the site needs no consent banner. It reports nothing when
-        the page is not served from Vercel, which is why it stays quiet in dev. */}
+    {
+      /* Cookieless, so the site needs no consent banner. It reports nothing when
+        the page is not served from Vercel, which is why it stays quiet in dev. */
+    }
     <Analytics />
   </body>
 </html>

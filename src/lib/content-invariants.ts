@@ -30,7 +30,11 @@ export function validateItemContentInvariants(
       throw new Error(`Duplicate Item id "${item.id}" (${item.source}).`);
     }
 
-    if (reservedItemSlugs.includes(item.slug as (typeof reservedItemSlugs)[number])) {
+    if (
+      reservedItemSlugs.includes(
+        item.slug as (typeof reservedItemSlugs)[number],
+      )
+    ) {
       throw new Error(
         `Item "${item.id}" uses reserved structural slug "${item.slug}" (${item.source}).`,
       );

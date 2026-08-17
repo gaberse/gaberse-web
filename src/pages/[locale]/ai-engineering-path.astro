@@ -18,22 +18,26 @@ const copy = isEnglish
   ? {
       itemEyebrow: "ACTIVE",
       title: "AI Engineering Path",
-      intro: "A living path for expanding how I solve problems with AI — learning, building, testing, repeating.",
+      intro:
+        "A living path for expanding how I solve problems with AI — learning, building, testing, repeating.",
       stateEyebrow: "CURRENT STATE",
       phaseNumber: "Phase 01",
       phaseName: "Foundations",
       placeholder: "Placeholder media",
       whyEyebrow: "WHY THIS EXISTS",
       whyTitle: "I'm not trying to “learn AI” as a finish line.",
-      whyText: "The point is to make AI part of how I think and build — to amplify problem solving, explore new approaches, and turn what I learn into small things that actually work.",
+      whyText:
+        "The point is to make AI part of how I think and build — to amplify problem solving, explore new approaches, and turn what I learn into small things that actually work.",
       pathEyebrow: "THE PATH",
       buildingEyebrow: "WHAT I'M BUILDING",
       buildingTitle: "Learning leaves artifacts.",
-      buildingText: "Every project below exists because something in the path made me curious enough to build it.",
+      buildingText:
+        "Every project below exists because something in the path made me curious enough to build it.",
       updateEyebrow: "LATEST UPDATE",
       updateDate: "12 AUG 2026",
       updateTitle: "Learning to evaluate before optimizing.",
-      updateText: "The most useful shift so far has been treating outputs as something to inspect systematically — not just asking whether an answer “looks good.”",
+      updateText:
+        "The most useful shift so far has been treating outputs as something to inspect systematically — not just asking whether an answer “looks good.”",
       pathLogLabel: "PATH LOG",
       nextEyebrow: "NEXT IN THE UNIVERSE",
       nextTitle: "Design System",
@@ -42,22 +46,27 @@ const copy = isEnglish
   : {
       itemEyebrow: "ACTIVO",
       title: "AI Engineering Path",
-      intro: "Un camino vivo para expandir la forma en la que resuelvo problemas con AI — aprendiendo, construyendo, probando, repitiendo.",
+      intro:
+        "Un camino vivo para expandir la forma en la que resuelvo problemas con AI — aprendiendo, construyendo, probando, repitiendo.",
       stateEyebrow: "ESTADO ACTUAL",
       phaseNumber: "Fase 01",
       phaseName: "Fundamentos",
       placeholder: "Media provisional",
       whyEyebrow: "POR QUÉ EXISTE ESTO",
-      whyTitle: "No estoy tratando de “aprender AI” como si fuera una meta final.",
-      whyText: "La idea es que AI sea parte de cómo pienso y construyo — para potenciar cómo resuelvo problemas, explorar nuevas formas de hacer las cosas, y convertir lo que voy aprendiendo en cosas pequeñas que de verdad funcionan.",
+      whyTitle:
+        "No estoy tratando de “aprender AI” como si fuera una meta final.",
+      whyText:
+        "La idea es que AI sea parte de cómo pienso y construyo — para potenciar cómo resuelvo problemas, explorar nuevas formas de hacer las cosas, y convertir lo que voy aprendiendo en cosas pequeñas que de verdad funcionan.",
       pathEyebrow: "EL CAMINO",
       buildingEyebrow: "LO QUE ESTOY CONSTRUYENDO",
       buildingTitle: "Aprender deja artefactos.",
-      buildingText: "Cada proyecto de acá abajo existe porque algo en el camino me dio suficiente curiosidad como para construirlo.",
+      buildingText:
+        "Cada proyecto de acá abajo existe porque algo en el camino me dio suficiente curiosidad como para construirlo.",
       updateEyebrow: "ÚLTIMA ACTUALIZACIÓN",
       updateDate: "12 AGO 2026",
       updateTitle: "Aprendiendo a evaluar antes de optimizar.",
-      updateText: "El cambio más útil hasta ahora ha sido tratar los resultados como algo que se inspecciona de forma sistemática — no solo preguntárme si una respuesta “se ve bien”.",
+      updateText:
+        "El cambio más útil hasta ahora ha sido tratar los resultados como algo que se inspecciona de forma sistemática — no solo preguntárme si una respuesta “se ve bien”.",
       pathLogLabel: "REGISTRO DEL CAMINO",
       nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
       nextTitle: "Design System",
@@ -66,28 +75,122 @@ const copy = isEnglish
 
 const pathPhases = isEnglish
   ? [
-      { index: "01", status: "ACTIVE", title: "FOUNDATIONS", description: "Models, prompting, context, evaluation and the primitives behind useful AI systems.", current: true, currentLabel: "YOU ARE HERE" },
-      { index: "02", status: "NEXT", title: "BUILDING", description: "Small tools and experiments. Learning by shipping instead of collecting theory." },
-      { index: "03", status: "PLANNED", title: "AGENTS", description: "Tool use, memory, orchestration and systems that can act." },
-      { index: "04", status: "OPEN", title: "SYSTEMS", description: "Architecture, reliability and integrating AI into real products." },
+      {
+        index: "01",
+        status: "ACTIVE",
+        title: "FOUNDATIONS",
+        description:
+          "Models, prompting, context, evaluation and the primitives behind useful AI systems.",
+        current: true,
+        currentLabel: "YOU ARE HERE",
+      },
+      {
+        index: "02",
+        status: "NEXT",
+        title: "BUILDING",
+        description:
+          "Small tools and experiments. Learning by shipping instead of collecting theory.",
+      },
+      {
+        index: "03",
+        status: "PLANNED",
+        title: "AGENTS",
+        description:
+          "Tool use, memory, orchestration and systems that can act.",
+      },
+      {
+        index: "04",
+        status: "OPEN",
+        title: "SYSTEMS",
+        description:
+          "Architecture, reliability and integrating AI into real products.",
+      },
     ]
   : [
-      { index: "01", status: "ACTIVA", title: "FUNDAMENTOS", description: "Modelos, prompting, contexto, evaluación y los primitivos detrás de sistemas de AI que realmente sirven.", current: true, currentLabel: "ESTÁS ACÁ" },
-      { index: "02", status: "SIGUIENTE", title: "CONSTRUCCIÓN", description: "Herramientas chiquitas y experimentos. Aprendiendo mientras voy lanzando cosas, no acumulando teoría." },
-      { index: "03", status: "PLANEADA", title: "AGENTES", description: "Uso de herramientas, memoria, orquestación y sistemas que pueden actuar por su cuenta." },
-      { index: "04", status: "ABIERTA", title: "SISTEMAS", description: "Arquitectura, confiabilidad e integrar AI en productos reales." },
+      {
+        index: "01",
+        status: "ACTIVA",
+        title: "FUNDAMENTOS",
+        description:
+          "Modelos, prompting, contexto, evaluación y los primitivos detrás de sistemas de AI que realmente sirven.",
+        current: true,
+        currentLabel: "ESTÁS ACÁ",
+      },
+      {
+        index: "02",
+        status: "SIGUIENTE",
+        title: "CONSTRUCCIÓN",
+        description:
+          "Herramientas chiquitas y experimentos. Aprendiendo mientras voy lanzando cosas, no acumulando teoría.",
+      },
+      {
+        index: "03",
+        status: "PLANEADA",
+        title: "AGENTES",
+        description:
+          "Uso de herramientas, memoria, orquestación y sistemas que pueden actuar por su cuenta.",
+      },
+      {
+        index: "04",
+        status: "ABIERTA",
+        title: "SISTEMAS",
+        description:
+          "Arquitectura, confiabilidad e integrar AI en productos reales.",
+      },
     ];
 
 const artifacts = isEnglish
   ? [
-      { index: "01", status: "EXPERIMENT", title: "CONTEXT EXPLORER", description: "A small interface for seeing how context changes an AI response.", tone: "dark" as const },
-      { index: "02", status: "TOOL", title: "EVAL NOTES", description: "A personal way to compare prompts and outputs instead of trusting vibes.", tone: "mid" as const },
-      { index: "03", status: "COMING NEXT", title: "AGENT LAB", description: "A place for the first agent experiments when the path reaches that phase.", tone: "light" as const },
+      {
+        index: "01",
+        status: "EXPERIMENT",
+        title: "CONTEXT EXPLORER",
+        description:
+          "A small interface for seeing how context changes an AI response.",
+        tone: "dark" as const,
+      },
+      {
+        index: "02",
+        status: "TOOL",
+        title: "EVAL NOTES",
+        description:
+          "A personal way to compare prompts and outputs instead of trusting vibes.",
+        tone: "mid" as const,
+      },
+      {
+        index: "03",
+        status: "COMING NEXT",
+        title: "AGENT LAB",
+        description:
+          "A place for the first agent experiments when the path reaches that phase.",
+        tone: "light" as const,
+      },
     ]
   : [
-      { index: "01", status: "EXPERIMENTO", title: "CONTEXT EXPLORER", description: "Una interfaz pequeña para ver cómo el contexto cambia la respuesta de un modelo.", tone: "dark" as const },
-      { index: "02", status: "HERRAMIENTA", title: "EVAL NOTES", description: "Una forma personal de comparar prompts y resultados, en vez de guiarme solo por el feeling.", tone: "mid" as const },
-      { index: "03", status: "PRÓXIMO", title: "AGENT LAB", description: "Un lugar para los primeros experimentos con agentes cuando el camino llegue a esa fase.", tone: "light" as const },
+      {
+        index: "01",
+        status: "EXPERIMENTO",
+        title: "CONTEXT EXPLORER",
+        description:
+          "Una interfaz pequeña para ver cómo el contexto cambia la respuesta de un modelo.",
+        tone: "dark" as const,
+      },
+      {
+        index: "02",
+        status: "HERRAMIENTA",
+        title: "EVAL NOTES",
+        description:
+          "Una forma personal de comparar prompts y resultados, en vez de guiarme solo por el feeling.",
+        tone: "mid" as const,
+      },
+      {
+        index: "03",
+        status: "PRÓXIMO",
+        title: "AGENT LAB",
+        description:
+          "Un lugar para los primeros experimentos con agentes cuando el camino llegue a esa fase.",
+        tone: "light" as const,
+      },
     ];
 
 const pathLog = isEnglish
@@ -103,7 +206,12 @@ const pathLog = isEnglish
     ];
 ---
 
-<BaseLayout locale={locale} title={copy.title} description={copy.intro} path="ai-engineering-path">
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.intro}
+  path="ai-engineering-path"
+>
   <Header locale={locale} />
   <main class="item site-shell">
     <section class="item__hero">
@@ -137,7 +245,11 @@ const pathLog = isEnglish
       <h2>{copy.buildingTitle}</h2>
       <p class="item__building-text">{copy.buildingText}</p>
       <div class="item__artifact-grid">
-        {artifacts.map((artifact) => <ArtifactCard {...artifact} placeholderLabel={copy.placeholder} />)}
+        {
+          artifacts.map((artifact) => (
+            <ArtifactCard {...artifact} placeholderLabel={copy.placeholder} />
+          ))
+        }
       </div>
     </section>
 
@@ -153,9 +265,16 @@ const pathLog = isEnglish
       <div class="item__path-log">
         <p class="item__eyebrow">{copy.pathLogLabel}</p>
         <ul>
-          {pathLog.map((entry) => (
-            <li><span class="item__path-log-date">{entry.date}</span><span>{entry.label}</span></li>
-          ))}
+          {
+            pathLog.map((entry) => (
+              <li>
+                <>
+                  <span class="item__path-log-date">{entry.date}</span>
+                  <span>{entry.label}</span>
+                </>
+              </li>
+            ))
+          }
         </ul>
       </div>
     </section>
@@ -171,34 +290,140 @@ const pathLog = isEnglish
 </BaseLayout>
 
 <style>
-  :global(.item__hero-phase) { aspect-ratio: 1.32 / 1; min-height: 22rem; }
-  .item__hero-phase-eyebrow { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
-  .item__hero-phase-number { margin: 1.7rem 0 0; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1; letter-spacing: -.03em; font-weight: 640; }
-  .item__hero-phase-name { margin: .5rem 0 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; }
+  :global(.item__hero-phase) {
+    aspect-ratio: 1.32 / 1;
+    min-height: 22rem;
+  }
+  .item__hero-phase-eyebrow {
+    margin: 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+  }
+  .item__hero-phase-number {
+    margin: 1.7rem 0 0;
+    font-size: clamp(2rem, 3.4cqw, 3.1rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    font-weight: 640;
+  }
+  .item__hero-phase-name {
+    margin: 0.5rem 0 0;
+    font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono);
+    letter-spacing: var(--tracking-meta);
+    text-transform: uppercase;
+  }
 
-  .item__why h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .item__why p:last-child { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
+  .item__why h2 {
+    margin: 1.4rem 0 0;
+    max-width: 22ch;
+    font-size: clamp(2rem, 3.4cqw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .item__why p:last-child {
+    margin: 1.6rem 0 0;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
 
-  .item__path-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+  .item__path-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: clamp(0.85rem, 1.35cqw, 1.35rem);
+    margin-top: 2.4rem;
+  }
 
-  .item__building-text { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
-  .item__building h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .item__artifact-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
+  .item__building-text {
+    margin: 1.6rem 0 0;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .item__building h2 {
+    margin: 1.4rem 0 0;
+    max-width: 22ch;
+    font-size: clamp(2rem, 3.4cqw, 3.1rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .item__artifact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(0.85rem, 1.35cqw, 1.35rem);
+    margin-top: 2.4rem;
+  }
 
-  .item__update { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
-  .item__update-head { display: flex; justify-content: space-between; align-items: baseline; }
-  .item__update h2 { margin: 1.4rem 0 0; font-size: clamp(1.8rem, 3cqw, 2.7rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .item__update-copy > p:last-child { margin: 1.4rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
-  .item__path-log { margin-top: 3.4rem; padding: 1.4rem; border-radius: var(--radius-object); background: var(--color-surface); }
-  .item__path-log ul { list-style: none; margin: 1.1rem 0 0; padding: 0; display: grid; gap: .9rem; }
-  .item__path-log li { display: flex; gap: 1.2rem; font-size: .92rem; }
-  .item__path-log-date { min-width: 4ch; color: var(--color-muted); font: 500 var(--text-meta) var(--font-mono); }
+  .item__update {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(18rem, 0.8fr);
+    gap: clamp(2rem, 6cqw, 5rem);
+    align-items: start;
+  }
+  .item__update-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .item__update h2 {
+    margin: 1.4rem 0 0;
+    font-size: clamp(1.8rem, 3cqw, 2.7rem);
+    line-height: 1.05;
+    letter-spacing: -0.04em;
+    font-weight: 600;
+  }
+  .item__update-copy > p:last-child {
+    margin: 1.4rem 0 0;
+    max-width: 46ch;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .item__path-log {
+    margin-top: 3.4rem;
+    padding: 1.4rem;
+    border-radius: var(--radius-object);
+    background: var(--color-surface);
+  }
+  .item__path-log ul {
+    list-style: none;
+    margin: 1.1rem 0 0;
+    padding: 0;
+    display: grid;
+    gap: 0.9rem;
+  }
+  .item__path-log li {
+    display: flex;
+    gap: 1.2rem;
+    font-size: 0.92rem;
+  }
+  .item__path-log-date {
+    min-width: 4ch;
+    color: var(--color-muted);
+    font: 500 var(--text-meta) var(--font-mono);
+  }
 
   @media (max-width: 44rem) {
-    :global(.item__hero-phase) { margin-top: 1rem; min-height: 18rem; }
-    .item__path-grid { grid-template-columns: 1fr; }
-    .item__artifact-grid { grid-template-columns: 1fr; }
-    .item__update { grid-template-columns: 1fr; }
-    .item__path-log { margin-top: 1.6rem; }
+    :global(.item__hero-phase) {
+      margin-top: 1rem;
+      min-height: 18rem;
+    }
+    .item__path-grid {
+      grid-template-columns: 1fr;
+    }
+    .item__artifact-grid {
+      grid-template-columns: 1fr;
+    }
+    .item__update {
+      grid-template-columns: 1fr;
+    }
+    .item__path-log {
+      margin-top: 1.6rem;
+    }
   }
 </style>

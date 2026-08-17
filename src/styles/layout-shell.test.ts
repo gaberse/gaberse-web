@@ -32,7 +32,9 @@ describe("site shell layout system", () => {
   it("scales Home against its capped shell while keeping the dialog viewport-relative", () => {
     const home = readSource("../pages/[locale]/index.astro");
     const explorer = readSource("../components/islands/home-explorer.css");
-    const contactProfile = readSource("../components/islands/contact-profile.css");
+    const contactProfile = readSource(
+      "../components/islands/contact-profile.css",
+    );
 
     expect(withoutSizesAttributes(home)).not.toMatch(/\d(?:\.\d+)?vw/);
     expect(withoutSizesAttributes(explorer)).not.toMatch(/\d(?:\.\d+)?vw/);
@@ -47,7 +49,9 @@ describe("site shell layout system", () => {
 
   it("preserves reduced-motion fallbacks for the explorer and Contact overlay", () => {
     const explorer = readSource("../components/islands/home-explorer.css");
-    const contactProfile = readSource("../components/islands/contact-profile.css");
+    const contactProfile = readSource(
+      "../components/islands/contact-profile.css",
+    );
 
     expect(explorer).toMatch(
       /@media \(prefers-reduced-motion: reduce\)[^{]*{.*?\.explorer__artifact-drift\s*{\s*animation:\s*none;/s,

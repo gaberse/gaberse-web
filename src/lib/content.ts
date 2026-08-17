@@ -40,7 +40,8 @@ export async function getLocalizedItem(slug: string, locale: Locale) {
   ]);
   const item = items.find((entry) => entry.data.slug === slug);
   const localized = content.find(
-    (entry) => entry.data.itemId === item?.data.id && entry.data.locale === locale,
+    (entry) =>
+      entry.data.itemId === item?.data.id && entry.data.locale === locale,
   );
 
   return item && localized ? { item, localized } : undefined;

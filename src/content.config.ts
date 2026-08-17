@@ -12,15 +12,28 @@ const items = defineCollection({
     slug,
     published: z.boolean().default(false),
     interests: z.array(slug).min(1),
-    kind: z.enum(["living", "project", "experience", "visual", "story", "person"]).optional(),
-    status: z.enum(["active", "building", "ongoing", "completed", "paused", "archived"]).optional(),
-    featuredMedia: z.object({
-      id: slug,
-      type: z.enum(["image", "video"]),
-      src: z.string().startsWith("/"),
-      width: z.number().int().positive().optional(),
-      height: z.number().int().positive().optional(),
-    }).optional(),
+    kind: z
+      .enum(["living", "project", "experience", "visual", "story", "person"])
+      .optional(),
+    status: z
+      .enum([
+        "active",
+        "building",
+        "ongoing",
+        "completed",
+        "paused",
+        "archived",
+      ])
+      .optional(),
+    featuredMedia: z
+      .object({
+        id: slug,
+        type: z.enum(["image", "video"]),
+        src: z.string().startsWith("/"),
+        width: z.number().int().positive().optional(),
+        height: z.number().int().positive().optional(),
+      })
+      .optional(),
   }),
 });
 
