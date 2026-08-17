@@ -1,6 +1,5 @@
 ---
 import Header from "../../components/home/Header.astro";
-import ContactProfile from "../../components/islands/ContactProfile";
 import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { supportedLocales, type Locale } from "../../lib/i18n";
@@ -31,8 +30,8 @@ const copy = isEnglish
       afterTitle: "My first job in tech came out of that.",
       afterText: "And then another. And another. Six years later I'm still doing the same thing I started doing there: building things and trying to understand them a little better.",
       nextEyebrow: "NEXT IN THE UNIVERSE",
-      nextTitle: "Gabriela",
-      nextText: "The person behind all of this.",
+      nextTitle: "Travel Photography",
+      nextText: "Selected frames from places that stayed with me.",
     }
   : {
       itemEyebrow: "EL ORIGEN",
@@ -49,8 +48,8 @@ const copy = isEnglish
       afterTitle: "De ahí salió mi primer trabajo en tech.",
       afterText: "Y después otro. Y otro. Seis años más tarde sigo haciendo lo mismo que empecé a hacer ahí: construir cosas y tratar de entenderlas un poco mejor.",
       nextEyebrow: "SIGUIENTE EN EL UNIVERSO",
-      nextTitle: "Gabriela",
-      nextText: "La persona detrás de todo esto.",
+      nextTitle: "Fotografía de viajes",
+      nextText: "Fotos elegidas de lugares que se me quedaron grabados.",
     };
 
 const media = (name: string, widths: number[]) => ({
@@ -123,7 +122,10 @@ const photos = {
 
     <section class="item__next">
       <p class="item__eyebrow">{copy.nextEyebrow}</p>
-      <ContactProfile client:load locale={locale} variant="block" title={copy.nextTitle} description={copy.nextText} />
+      <a class="item__next-link" href={`/${locale}/travel-photography`}>
+        <span>{copy.nextTitle} <span aria-hidden="true">→</span></span>
+        <small>{copy.nextText}</small>
+      </a>
     </section>
   </main>
 </BaseLayout>
