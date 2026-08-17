@@ -15,7 +15,7 @@ const isEnglish = locale === "en";
 const copy = isEnglish
   ? {
       name: "GABRIELA LÓPEZ / FRONTEND ENGINEER",
-      headline: "I build for the web.\nAnd I always end up\nlooking underneath.",
+      headline: "A living index\nof a curious person.",
       territory: "REACT · REACT NATIVE · ARCHITECTURE · AI-ASSISTED ENGINEERING",
       placeholder: "Placeholder media",
       workLabel: "SELECTED WORK",
@@ -32,7 +32,7 @@ const copy = isEnglish
     }
   : {
       name: "GABRIELA LÓPEZ / FRONTEND ENGINEER",
-      headline: "Construyo para la web.\nY siempre termino\nmirando qué hay debajo.",
+      headline: "A living index\nof a curious person.",
       territory: "FRONTEND · REACT · REACT NATIVE · ARQUITECTURA · AI-ASSISTED ENGINEERING",
       placeholder: "Media provisional",
       workLabel: "TRABAJO SELECCIONADO",
@@ -101,22 +101,26 @@ const universeMedia = {
   },
 } as const;
 
-/* Abstract objects with placeholder names, pending real content. They carry no
-   destination on purpose — the hero must not imply projects it does not have. */
+/* Each card carries a framed photograph over its own title and meta, and opens
+   the page it comes from — the treatment the editorial Home used. A title and
+   meta are what take the card out of its bare state, so the frame and the
+   caption appear together; they also give it an accessible name, which a bare
+   card cannot have. Photographs are deliberately not the ones in "From the
+   universe" below, so the hero teases rather than repeats. */
 const heroDeck = isEnglish
   ? [
-      { id: "one", label: "Placeholder 01", title: "Placeholder 01", meta: "", tone: "a" as const },
-      { id: "two", label: "Placeholder 02", title: "Placeholder 02", meta: "", tone: "b" as const },
-      { id: "three", label: "Placeholder 03", title: "Placeholder 03", meta: "", tone: "c" as const },
+      { id: "react-miami-2025", label: "React Miami 2025", title: "React Miami 2025", meta: "The first time abroad", tone: "a" as const, href: localizedPath(locale, "react-miami-2025"), media: { ...media("react-miami", "rm-gabriela", [480, 800, 1024]), alt: "Gabriela smiling among other attendees at React Miami 2025." } },
+      { id: "laboratoria", label: "Laboratoria", title: "Laboratoria", meta: "Where it started", tone: "b" as const, href: localizedPath(locale, "laboratoria"), media: { ...media("laboratoria", "laboratoria-people", [480, 800, 1200]), alt: "Gabriela and one of the Laboratoria coaches posing together in the workspace." } },
+      { id: "travel-photography", label: "Travel Photography", title: "Travel Photography", meta: "Places kept close", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: { ...media("travel", "travel-surfer", [480, 800, 1200]), alt: "A lone surfer riding a small breaking wave on a wide calm sea." } },
     ]
   : [
-      { id: "one", label: "Provisional 01", title: "Provisional 01", meta: "", tone: "a" as const },
-      { id: "two", label: "Provisional 02", title: "Provisional 02", meta: "", tone: "b" as const },
-      { id: "three", label: "Provisional 03", title: "Provisional 03", meta: "", tone: "c" as const },
+      { id: "react-miami-2025", label: "React Miami 2025", title: "React Miami 2025", meta: "La primera vez afuera", tone: "a" as const, href: localizedPath(locale, "react-miami-2025"), media: { ...media("react-miami", "rm-gabriela", [480, 800, 1024]), alt: "Gabriela sonriendo entre otros asistentes en React Miami 2025." } },
+      { id: "laboratoria", label: "Laboratoria", title: "Laboratoria", meta: "Donde empezó todo", tone: "b" as const, href: localizedPath(locale, "laboratoria"), media: { ...media("laboratoria", "laboratoria-people", [480, 800, 1200]), alt: "Gabriela y uno de los coaches de Laboratoria posando juntos en el espacio de trabajo." } },
+      { id: "travel-photography", label: "Fotografía de viajes", title: "Fotografía de viajes", meta: "Lugares que permanecen", tone: "c" as const, href: localizedPath(locale, "travel-photography"), media: { ...media("travel", "travel-surfer", [480, 800, 1200]), alt: "Un surfista solo sobre una ola pequeña que rompe en un mar amplio y calmo." } },
     ];
 
 const heroDeckLabels = {
-  heading: isEnglish ? "Editorial objects" : "Objetos editoriales",
+  heading: isEnglish ? "From the universe" : "Del universo",
   interests: "",
   unavailable: "",
   placeholder: "",
