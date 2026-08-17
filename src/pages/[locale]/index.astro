@@ -28,7 +28,7 @@ const copy = isEnglish
       cvLink: "Download CV",
       cvNote: "The full working history, as a PDF.",
       skillsRepoCta: "See the skills on GitHub",
-      skillsRepoLabel: "See the skills on GitHub — opens github.com/gaberse/skills in a new tab.",
+      skillsRepoLabel: "See my skills on GitHub — opens github.com/gaberse/skills in a new tab.",
       universeLabel: "From the universe",
       contact: "Something caught\nyour attention?",
     }
@@ -47,7 +47,7 @@ const copy = isEnglish
       cvLink: "Descargar CV",
       cvNote: "Todo el recorrido, en PDF.",
       skillsRepoCta: "Ver las skills en GitHub",
-      skillsRepoLabel: "Ver las skills en GitHub — abre github.com/gaberse/skills en una pestaña nueva.",
+      skillsRepoLabel: "Ver mis skills en GitHub — abre github.com/gaberse/skills en una pestaña nueva.",
       universeLabel: "Del universo",
       contact: "¿Te llamó la atención algo?",
     };
@@ -171,20 +171,18 @@ const universe = isEnglish
     <section class="pivot__section work">
       <p class="pivot__eyebrow">{copy.workLabel}</p>
       <div class="work__list">
-        <article class="work__entry work__entry--lead">
-          <PhotoFrame class="work__object work__object--lead" tone="dark" ariaLabel={copy.placeholder} />
-          <p class="work__label">{work[0].label}</p>
-          <h2 class="work__title">{work[0].title}</h2>
-          <p class="work__body">{work[0].body}</p>
-          <p class="work__attribution">{work[0].attribution}</p>
-        </article>
-        <article class="work__entry work__entry--counter">
-          <p class="work__label">{work[1].label}</p>
-          <h2 class="work__title">{work[1].title}</h2>
-          <p class="work__body">{work[1].body}</p>
-          <p class="work__attribution">{work[1].attribution}</p>
-          <PhotoFrame class="work__object work__object--counter" tone="light" ariaLabel={copy.placeholder} />
-        </article>
+        {/* No media slot. These are client products under NDA, so there is no
+            screenshot to show, and an empty frame reads as nothing to show rather
+            than nothing to publish. The writing carries the entries instead. */}
+        {work.map(({ label, title, body, attribution }, index) => (
+          <article class={`work__entry work__entry--${index === 0 ? "lead" : "counter"}`}>
+            <p class="work__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</p>
+            <p class="work__label">{label}</p>
+            <h2 class="work__title">{title}</h2>
+            <p class="work__body">{body}</p>
+            <p class="work__attribution">{attribution}</p>
+          </article>
+        ))}
       </div>
     </section>
 
@@ -289,25 +287,29 @@ const universe = isEnglish
     .pivot__deck :global(.explorer__artifact--c) { left: .5%; top: 1%; }
   }
 
-  /* Selected work — two hand-composed entries, deliberately not one card twice. */
+  /* Selected work — two hand-composed entries, deliberately not one card twice.
+     With the media slot gone the type carries them, so the cards get room to
+     breathe and the title takes the space the image used to. */
   .work__list { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(0, .82fr); gap: clamp(1.5rem, 3.5cqw, 3.5rem); align-items: start; margin-top: 2.6rem; }
-  .work__entry { min-width: 0; padding: clamp(1.1rem, 1.9cqw, 1.7rem); border-radius: var(--radius-artifact); display: flex; flex-direction: column; }
+  .work__entry { min-width: 0; padding: clamp(1.8rem, 3.1cqw, 3rem); border-radius: var(--radius-artifact); display: flex; flex-direction: column; min-height: clamp(20rem, 30cqw, 27rem); }
   .work__entry--lead { background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
   .work__entry--counter { background: var(--tone-light-bg); color: var(--tone-light-fg); margin-top: clamp(2rem, 5cqw, 5rem); }
+  /* A quiet marker where the frame used to sit: it gives the card something to
+     start on without pretending to be a picture of the product. */
+  .work__index { margin: 0 0 auto; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); opacity: .45; }
   .work__label { margin: 0; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .7; }
-  .work__entry--lead .work__label { margin-top: 1.5rem; }
-  /* The title now carries the entry; the body drops to a supporting weight so the
-     two do not compete. Opacity rather than a token, so it works on both tones. */
-  .work__title { margin: .9rem 0 0; font-size: clamp(1.35rem, 2.05cqw, 1.95rem); line-height: 1.12; letter-spacing: -.04em; font-weight: 620; }
-  .work__entry--lead .work__title { max-width: 18ch; }
-  .work__entry--counter .work__title { max-width: 16ch; }
-  .work__body { margin: .9rem 0 0; font-size: clamp(.98rem, 1.2cqw, 1.12rem); line-height: 1.45; opacity: .78; }
-  .work__entry--lead .work__body { max-width: 34ch; }
-  .work__entry--counter .work__body { max-width: 30ch; }
-  .work__attribution { margin: 1.4rem 0 0; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .55; }
-  .work__entry--counter .work__attribution { margin-bottom: 2rem; }
-  :global(.work__object--lead) { width: 100%; aspect-ratio: 1.62 / 1; }
-  :global(.work__object--counter) { width: 100%; aspect-ratio: 1.08 / 1; margin-top: auto; }
+  /* The title carries the entry now that nothing sits above it; the body drops to
+     a supporting weight so the two do not compete. Opacity rather than a token,
+     so it works on both tones. */
+  .work__title { margin: 1.1rem 0 0; font-size: clamp(1.7rem, 2.7cqw, 2.6rem); line-height: 1.06; letter-spacing: -.045em; font-weight: 620; }
+  .work__entry--lead .work__title { max-width: 16ch; }
+  .work__entry--counter .work__title { max-width: 14ch; }
+  .work__body { margin: 1.3rem 0 0; font-size: clamp(.98rem, 1.2cqw, 1.12rem); line-height: 1.45; opacity: .78; }
+  .work__entry--lead .work__body { max-width: 38ch; }
+  .work__entry--counter .work__body { max-width: 32ch; }
+  /* auto margin pins the attribution to the bottom of the card, so both entries
+     end on the same line regardless of how much copy sits above it. */
+  .work__attribution { margin: auto 0 0; padding-top: 2rem; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; opacity: .55; }
 
   /* Capabilities — three territories as editorial column headers. A mental model,
      never a logo wall, a meter or a keyword cloud. */
@@ -389,10 +391,9 @@ const universe = isEnglish
     .pivot__territory { line-height: 1.7; }
 
     .work__list { grid-template-columns: 1fr; gap: 1.5rem; }
+    .work__entry { min-height: 0; }
     .work__entry--counter { margin-top: 0; }
     .work__title, .work__body { max-width: none; }
-    .work__entry--counter .work__attribution { margin-bottom: 1.5rem; }
-    :global(.work__object--counter) { aspect-ratio: 1.4 / 1; }
 
     .capabilities__list { grid-template-columns: 1fr; gap: 2.6rem; }
     .capabilities__territory span:first-of-type { margin-top: 1rem; }
