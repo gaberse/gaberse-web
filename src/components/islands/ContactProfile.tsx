@@ -28,7 +28,16 @@ const socialLinks = [
   { name: "Instagram", href: "https://www.instagram.com/gaberse_/" },
 ] as const;
 
-export default function ContactProfile({ locale }: { locale: Locale }) {
+type Props = {
+  locale: Locale;
+  /** "inline" is the header pill. "block" renders the trigger as a full CTA block. */
+  variant?: "inline" | "block";
+  /** Block variant only: the headline and supporting line shown on the trigger. */
+  title?: string;
+  description?: string;
+};
+
+export default function ContactProfile({ locale, variant = "inline", title, description }: Props) {
   const copy = profileCopy[locale];
   const dialogRef = useRef<HTMLDialogElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -62,16 +71,29 @@ export default function ContactProfile({ locale }: { locale: Locale }) {
   }, []);
 
   return (
-    <div className="contact-profile">
-      <button
-        ref={triggerRef}
-        className="contact-profile__trigger"
-        type="button"
-        aria-haspopup="dialog"
-        onClick={openDialog}
-      >
-        {copy.trigger} <span aria-hidden="true">↗</span>
-      </button>
+    <div className={variant === "block" ? "contact-profile contact-profile--block" : "contact-profile"}>
+      {variant === "block" ? (
+        <button
+          ref={triggerRef}
+          className="item__next-link contact-profile__block-trigger"
+          type="button"
+          aria-haspopup="dialog"
+          onClick={openDialog}
+        >
+          <span>{title} <span aria-hidden="true">→</span></span>
+          <small>{description}</small>
+        </button>
+      ) : (
+        <button
+          ref={triggerRef}
+          className="contact-profile__trigger"
+          type="button"
+          aria-haspopup="dialog"
+          onClick={openDialog}
+        >
+          {copy.trigger} <span aria-hidden="true">↗</span>
+        </button>
+      )}
 
       <dialog
         ref={dialogRef}
