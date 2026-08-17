@@ -25,5 +25,7 @@ const { label, tone = "mid", src, srcSet, sizes, alt, ariaLabel, class: classNam
   .photo-frame__inner--mid { background: var(--tone-mid-surface); }
   .photo-frame__inner--light { background: var(--tone-light-surface); }
   .photo-frame__inner--muted { background: var(--color-media-placeholder); }
-  .photo-frame__label { position: absolute; top: .9rem; left: 1rem; margin: 0; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--tone-dark-fg); opacity: .85; }
+  /* The label sits over whatever the frame holds, so it carries its own contrast
+     rather than assuming a dark surface underneath. */
+  .photo-frame__label { position: absolute; top: .9rem; left: 1rem; margin: 0; font: 500 .62rem/1.25 var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--tone-dark-fg); opacity: .85; text-shadow: 0 1px 4px rgb(0 0 0 / .6); }
 </style>
