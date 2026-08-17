@@ -4,6 +4,9 @@ import HomeExplorer from "../../components/islands/HomeExplorer";
 import PhotoFrame from "../../components/primitives/PhotoFrame.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { localizedPath, supportedLocales, type Locale } from "../../lib/i18n";
+/* /cv rather than the document itself: the hop makes the download countable
+   and keeps the address stable. See src/lib/links.ts. */
+import { cvPath, skillsRepoUrl } from "../../lib/links";
 
 export function getStaticPaths() {
   return supportedLocales.map((locale) => ({ params: { locale } }));
@@ -75,16 +78,6 @@ const capabilities = isEnglish
       { name: "Pensar", lines: ["Arquitectura frontend", "Sistemas y patrones"] },
       { name: "Explorar", lines: ["AI-assisted engineering", "Nuevas formas de construir"] },
     ];
-
-/* The CV lives in Google Docs rather than in this repo, so updating it is an
-   edit to the document instead of a commit and a deploy. `export?format=pdf`
-   renders the current document on request. The sharing link's `ouid` parameter
-   is left out on purpose: it identifies the Google account and does not belong
-   in published markup. */
-const cvUrl = "https://docs.google.com/document/d/1ko5YryUu-yBkDhIhSjMPuDmrxiXpXuHb/export?format=pdf";
-
-/* Where the skills behind this section are published. */
-const skillsRepoUrl = "https://github.com/gaberse/skills";
 
 const media = (dir: string, name: string, widths: number[]) => ({
   src: `/media/${dir}/${name}-${widths[0]}.webp`,
@@ -221,11 +214,9 @@ const universe = isEnglish
     {/* The CV carries the working history; the page does not repeat it. */}
     <section class="pivot__section experience">
       <p class="pivot__eyebrow">{copy.experienceLabel}</p>
-      {/* Google Docs renders the PDF from the live document on every request, so
-          editing the document updates this download with no deploy. No `download`
-          attribute: it is ignored cross-origin, and the export endpoint already
-          sends Content-Disposition: attachment. */}
-      <a class="experience__cv" href={cvUrl}>
+      {/* No `download` attribute: the file is cross-origin, where the attribute is
+          ignored, and Google already serves it as an attachment. */}
+      <a class="experience__cv" href={cvPath}>
         <span>{copy.cvLink} <span aria-hidden="true">↓</span></span>
         <small>{copy.cvNote}</small>
       </a>
