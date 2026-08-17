@@ -12,6 +12,9 @@
 .item__next-link small { max-width: 32ch; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); opacity: .78; }
 
 @media (max-width: 44rem) {
-  .item__hero { grid-template-columns: 1fr; padding-top: 2.5rem; }
+  /* minmax(0,1fr), not 1fr: a hero photograph's intrinsic width would otherwise
+     push the track past a narrow viewport, since grid items default to
+     min-width: auto. */
+  .item__hero { grid-template-columns: minmax(0, 1fr); padding-top: 2.5rem; }
   .item__next-link { justify-content: flex-start; }
 }

@@ -7,18 +7,31 @@ interface Props {
   sizes?: string;
   alt?: string;
   ariaLabel?: string;
+  /** Set on frames above the fold: they are the LCP and must not be deferred. */
+  priority?: boolean;
   class?: string;
 }
-const { label, tone = "mid", src, srcSet, sizes, alt, ariaLabel, class: className } = Astro.props;
+const { label, tone = "mid", src, srcSet, sizes, alt, ariaLabel, priority = false, class: className } = Astro.props;
 ---
 <div class:list={["photo-frame", className]} aria-label={!src ? ariaLabel : undefined}>
   <div class={`photo-frame__inner photo-frame__inner--${tone}`} aria-hidden={!src}>
-    {src && <img src={src} srcset={srcSet} sizes={sizes} alt={alt ?? ""} loading="lazy" decoding="async" />}
+    {src && <img
+      src={src}
+      srcset={srcSet}
+      sizes={sizes}
+      alt={alt ?? ""}
+      loading={priority ? "eager" : "lazy"}
+      fetchpriority={priority ? "high" : undefined}
+      decoding={priority ? "sync" : "async"}
+    />}
     {label && <p class="photo-frame__label">{label}</p>}
   </div>
 </div>
 <style>
-  .photo-frame { padding: .5rem; border-radius: var(--radius-artifact); background: var(--color-surface-soft); box-shadow: var(--shadow-object); height: 100%; }
+  /* max-width guards the aspect-ratio: as a stretched grid item the frame gets a
+     definite height, and the ratio would otherwise derive a width from it that
+     overruns the column. The cap keeps the frame inside whatever holds it. */
+  .photo-frame { padding: .5rem; border-radius: var(--radius-artifact); background: var(--color-surface-soft); box-shadow: var(--shadow-object); height: 100%; max-width: 100%; }
   .photo-frame__inner { position: relative; overflow: hidden; width: 100%; height: 100%; border-radius: calc(var(--radius-artifact) - .4rem); }
   .photo-frame__inner img { display: block; width: 100%; height: 100%; object-fit: cover; }
   .photo-frame__inner--dark { background: var(--tone-dark-surface); }
