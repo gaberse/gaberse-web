@@ -18,6 +18,7 @@
     "@astrojs/react": "latest",
     "@fontsource-variable/geist": "latest",
     "@fontsource-variable/geist-mono": "latest",
+    "@vercel/analytics": "^2.0.1",
     "@vitejs/plugin-react": "latest",
     "astro": "latest",
     "react": "latest",
