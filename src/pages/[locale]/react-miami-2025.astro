@@ -13,13 +13,62 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const isEnglish = locale === "en";
 
+/* Every source is 1024px wide, so that is the ceiling — nothing is upscaled. */
+const media = (name: string) => ({
+  src: `/media/react-miami/${name}-480.webp`,
+  srcSet: [480, 800, 1024].map((w) => `/media/react-miami/${name}-${w}.webp ${w}w`).join(", "),
+});
+
+/* The event's own photographs, credited and linked below the frames. Alt text
+   describes only what is visible, and names nobody but Gabriela. */
+const photos = {
+  gabriela: {
+    ...media("rm-gabriela"),
+    alt: isEnglish
+      ? "Gabriela smiling at an outdoor conference gathering, holding a tall drink."
+      : "Gabriela sonriendo en un encuentro al aire libre de la conferencia, con un trago alto en la mano.",
+  },
+  skyline: {
+    ...media("rm-skyline"),
+    alt: isEnglish
+      ? "Miami towers lit up at night, seen from above with a metro track curving below."
+      : "Las torres de Miami iluminadas de noche, vistas desde arriba, con una vía de metro curvándose abajo.",
+  },
+  rooftop: {
+    ...media("rm-rooftop"),
+    alt: isEnglish
+      ? "Attendees mingling around a rooftop pool at dusk."
+      : "Asistentes conversando alrededor de una piscina en una azotea al atardecer.",
+  },
+  people: {
+    ...media("rm-people"),
+    alt: isEnglish
+      ? "Gabriela and two other attendees at the Tech Oasis entrance, holding React Miami stickers."
+      : "Gabriela y otras dos asistentes en la entrada del Tech Oasis, con stickers de React Miami en la mano.",
+  },
+  panel: {
+    ...media("rm-panel"),
+    alt: isEnglish
+      ? "Three speakers seated on stage during a panel, under blue and purple light, with the React Miami banner behind them."
+      : "Tres ponentes sentados en el escenario durante un panel, bajo luz azul y violeta, con el banner de React Miami detrás.",
+  },
+  audience: {
+    ...media("rm-audience"),
+    alt: isEnglish
+      ? "A full session hall seen from the side, rows of attendees under purple light."
+      : "Una sala llena vista de costado, con filas de asistentes bajo luz violeta.",
+  },
+};
+
+const galleryHref = "https://2025gallery.reactmiami.com/";
+
 const copy = isEnglish
   ? {
-      itemEyebrow: "ITEM / EXPERIENCE / 2025",
+      itemEyebrow: "EXPERIENCE / 2025",
       title: "React Miami 2025",
       intro: "My first time in the United States, surrounded by people from the industry I had only known from a screen.",
       heroLabel: "MIAMI / 2025",
-      placeholder: "Placeholder media",
+      galleryCredit: "PHOTOS / REACT MIAMI 2025 GALLERY ↗",
       arrivalEyebrow: "THE ARRIVAL",
       arrivalTitle: "A conference, but also a threshold.",
       arrivalText: "I went for React. What stayed with me was everything around it: being in a new country, speaking English all day, meeting people whose work I respected, and realizing that this world felt much closer than it had from home.",
@@ -36,11 +85,11 @@ const copy = isEnglish
       nextText: "The door that changed the direction of my work.",
     }
   : {
-      itemEyebrow: "ITEM / EXPERIENCIA / 2025",
+      itemEyebrow: "EXPERIENCIA / 2025",
       title: "React Miami 2025",
       intro: "Mi primera vez en Estados Unidos, rodeada de gente de la industria que solo conocía a través de una pantalla.",
       heroLabel: "MIAMI / 2025",
-      placeholder: "Media provisional",
+      galleryCredit: "FOTOS / GALERÍA REACT MIAMI 2025 ↗",
       arrivalEyebrow: "LA LLEGADA",
       arrivalTitle: "Una conferencia, pero también un umbral.",
       arrivalText: "Fui por React. Lo que se me quedó fue todo lo que estaba alrededor: estar en un país nuevo, hablar inglés todo el día, conocer a gente cuyo trabajo respetaba, y darme cuenta de que ese mundo estaba mucho más cerca de lo que parecía desde casa.",
@@ -93,7 +142,7 @@ const details = isEnglish
         <h1>{copy.title}</h1>
         <p class="item__intro">{copy.intro}</p>
       </div>
-      <PhotoFrame class="rm__hero-photo" tone="mid" label={copy.heroLabel} ariaLabel={copy.placeholder} />
+      <PhotoFrame class="rm__hero-photo" priority label={copy.heroLabel} sizes="(max-width: 44rem) 88vw, 24rem" {...photos.gabriela} />
     </section>
 
     <section class="item__section rm__arrival">
@@ -103,8 +152,8 @@ const details = isEnglish
         <p>{copy.arrivalText}</p>
       </div>
       <div class="rm__arrival-photos">
-        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--tall" tone="dark" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--short" tone="light" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--tall" sizes="(max-width: 44rem) 62vw, 22rem" {...photos.skyline} />
+        <PhotoFrame class="rm__arrival-photo rm__arrival-photo--short" sizes="(max-width: 44rem) 56vw, 20rem" {...photos.rooftop} />
       </div>
     </section>
 
@@ -117,12 +166,18 @@ const details = isEnglish
 
     <section class="item__section rm__frames">
       <p class="item__eyebrow">{copy.framesEyebrow}</p>
-      <div class="rm__frames-grid">
-        <PhotoFrame class="rm__frame rm__frame--main" tone="dark" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="rm__frame rm__frame--wide" tone="mid" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="rm__frame rm__frame--small" tone="dark" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="rm__frame rm__frame--small" tone="light" ariaLabel={copy.placeholder} />
+      <div class="rm__frames-wall">
+        <div class="rm__frames-cell rm__frames-cell--people">
+          <PhotoFrame class="rm__frame rm__frame--landscape" sizes="(max-width: 44rem) 92vw, 30rem" {...photos.people} />
+        </div>
+        <div class="rm__frames-cell rm__frames-cell--panel">
+          <PhotoFrame class="rm__frame rm__frame--portrait" sizes="(max-width: 44rem) 92vw, 17rem" {...photos.panel} />
+        </div>
+        <div class="rm__frames-cell rm__frames-cell--audience">
+          <PhotoFrame class="rm__frame rm__frame--landscape" sizes="(max-width: 44rem) 92vw, 42rem" {...photos.audience} />
+        </div>
       </div>
+      <a class="rm__credit" href={galleryHref} target="_blank" rel="noopener noreferrer">{copy.galleryCredit}</a>
     </section>
 
     <section class="item__section rm__changed">
@@ -159,26 +214,36 @@ const details = isEnglish
 </BaseLayout>
 
 <style>
-  :global(.rm__hero-photo) { aspect-ratio: 1.05 / 1; min-height: 20rem; }
+  /* Every ratio below is the photograph's native one, so object-fit: cover never
+     actually crops. No min-height: it would force a width the column cannot hold. */
+  :global(.rm__hero-photo) { width: min(100%, 24rem); margin-left: auto; aspect-ratio: .772 / 1; }
 
   .rm__arrival { display: grid; grid-template-columns: minmax(0, 1fr) minmax(20rem, .85fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
   .rm__arrival-copy h2 { margin: 1.4rem 0 0; max-width: 22ch; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
   .rm__arrival-copy p:last-child { margin: 1.6rem 0 0; max-width: 46ch; font-size: 1.05rem; line-height: 1.5; color: var(--color-ink-soft); }
   .rm__arrival-photos { position: relative; display: grid; }
   :global(.rm__arrival-photo) { position: relative; }
-  :global(.rm__arrival-photo--tall) { width: 68%; aspect-ratio: .8 / 1; }
-  :global(.rm__arrival-photo--short) { width: 62%; aspect-ratio: 1 / 1; margin: -3rem 0 0 auto; }
+  :global(.rm__arrival-photo--tall) { width: 68%; aspect-ratio: .667 / 1; }
+  :global(.rm__arrival-photo--short) { width: 62%; aspect-ratio: 1.5 / 1; margin: -3rem 0 0 auto; }
 
   .rm__remember-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
 
-  .rm__frames-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: clamp(.85rem, 1.35cqw, 1.35rem); margin-top: 2.4rem; }
-  :global(.rm__frame--main) { grid-row: 1 / 3; min-height: 34rem; }
-  :global(.rm__frame--wide) { min-height: 16.5rem; }
-  .rm__frames-grid > :global(.rm__frame--small) { min-height: 16.5rem; }
-  .rm__frames-grid { grid-template-rows: repeat(2, auto); }
-  .rm__frames-grid > :nth-child(3),
-  .rm__frames-grid > :nth-child(4) { grid-column: 2 / 3; }
-  .rm__frames-grid > :nth-child(3) { display: grid; }
+  /* Three photographs across a twelve-column field, each offset from the last,
+     rather than a tight mosaic: the week was a handful of moments, not a set. */
+  /* The offset is padding on the cell, not margin on the photograph: a grid
+     item's margin does not size its row, so the lowest picture would hang out
+     of the grid and the credit line would ride up beside it. */
+  .rm__frames-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1.1rem, 2cqw, 2rem); align-items: start; margin-top: clamp(2.4rem, 4cqw, 3.6rem); }
+  .rm__frames-cell { min-width: 0; }
+  .rm__frames-cell--people { grid-column: 1 / span 5; grid-row: 1; }
+  .rm__frames-cell--panel { grid-column: 8 / span 3; grid-row: 1; padding-top: clamp(3rem, 6cqw, 6rem); }
+  .rm__frames-cell--audience { grid-column: 4 / span 7; grid-row: 2; padding-top: clamp(2rem, 4cqw, 4rem); }
+  :global(.rm__frame--landscape) { aspect-ratio: 1.5 / 1; }
+  :global(.rm__frame--portrait) { aspect-ratio: .624 / 1; }
+
+  /* The photographs are React Miami's, not mine — the credit is the link. */
+  .rm__credit { display: inline-block; margin-top: clamp(1.6rem, 3cqw, 2.4rem); font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: .2rem; transition: color 160ms ease; }
+  .rm__credit:hover, .rm__credit:focus-visible { color: var(--color-ink); }
 
   .rm__changed { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(18rem, .8fr); gap: clamp(2rem, 6cqw, 5rem); align-items: start; }
   .rm__changed-copy h2 { margin: 1.4rem 0 0; font-size: clamp(1.8rem, 3cqw, 2.7rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
@@ -191,15 +256,19 @@ const details = isEnglish
   .rm__detail strong { display: block; margin-top: .9rem; font-size: 1.05rem; letter-spacing: -.02em; font-weight: 600; }
 
   @media (max-width: 44rem) {
-    .rm__arrival { grid-template-columns: 1fr; }
-    .rm__arrival-photos { margin-top: 1.5rem; height: 20rem; }
-    :global(.rm__arrival-photo--tall) { width: 62%; }
-    :global(.rm__arrival-photo--short) { width: 56%; margin-top: -2rem; }
+    .rm__arrival { grid-template-columns: minmax(0, 1fr); }
+    /* No fixed height: the photographs size the stack themselves now that they
+       carry their native ratios, and 20rem clipped the taller one. */
+    .rm__arrival-photos { margin-top: 1.5rem; }
+    :global(.rm__hero-photo) { width: 100%; margin-left: 0; }
+    :global(.rm__arrival-photo--tall) { width: 78%; }
+    :global(.rm__arrival-photo--short) { width: 62%; margin-top: -2rem; }
     .rm__remember-grid { grid-template-columns: 1fr; }
-    .rm__frames-grid { grid-template-columns: 1fr; }
-    :global(.rm__frame--main) { grid-row: auto; min-height: 18rem; }
-    .rm__frames-grid > :nth-child(3),
-    .rm__frames-grid > :nth-child(4) { grid-column: auto; }
+    /* One reading column: the wall stacks and every offset is dropped. */
+    .rm__frames-wall { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; }
+    .rm__frames-cell--people, .rm__frames-cell--panel, .rm__frames-cell--audience {
+      grid-column: 1 / -1; grid-row: auto; padding-top: 0;
+    }
     .rm__changed { grid-template-columns: 1fr; }
     .rm__details-panel { grid-template-columns: repeat(2, 1fr); }
   }
