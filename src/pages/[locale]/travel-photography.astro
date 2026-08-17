@@ -12,25 +12,64 @@ export function getStaticPaths() {
 const locale = Astro.params.locale as Locale;
 const isEnglish = locale === "en";
 
-const heroPhoto = {
-  src: "/media/travel/patagonia-glacier-480.webp",
-  srcSet: [
-    "/media/travel/patagonia-glacier-480.webp 480w",
-    "/media/travel/patagonia-glacier-800.webp 800w",
-    "/media/travel/patagonia-glacier-1200.webp 1200w",
-  ].join(", "),
-  alt: isEnglish
-    ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
-    : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+const media = (name: string, widths: number[]) => ({
+  src: `/media/travel/${name}-${widths[0]}.webp`,
+  srcSet: widths.map((w) => `/media/travel/${name}-${w}.webp ${w}w`).join(", "),
+});
+
+/* Every frame holds a real photograph. Alt text describes only what is visible:
+   the glacier and the Sphinx are the only places named, because they are the
+   only ones on record. */
+const photos = {
+  surfer: {
+    ...media("travel-surfer", [480, 800, 1200, 1600]),
+    alt: isEnglish
+      ? "A lone surfer riding a small breaking wave on a wide calm sea, with two boats far off on the horizon under a pale sky."
+      : "Un surfista solo sobre una ola pequeña que rompe en un mar amplio y calmo, con dos botes lejos en el horizonte bajo un cielo pálido.",
+  },
+  balloons: {
+    ...media("travel-balloons", [480, 800, 1200, 1600]),
+    alt: isEnglish
+      ? "A dozen hot-air balloons drifting over a hazy valley at sunrise, with the sun low on the horizon."
+      : "Una docena de globos aerostáticos sobre un valle brumoso al amanecer, con el sol bajo en el horizonte.",
+  },
+  coast: {
+    ...media("travel-coast", [480, 800, 1200, 1600]),
+    alt: isEnglish
+      ? "A long sweep of beach and turquoise sea seen from a green headland."
+      : "Una playa larga y el mar turquesa vistos desde un promontorio verde.",
+  },
+  tomb: {
+    ...media("travel-tomb", [480, 800, 1200, 1600]),
+    alt: isEnglish
+      ? "Gabriela standing on a wooden walkway inside a painted tomb corridor, hieroglyphs and figures covering the walls and ceiling."
+      : "Gabriela de pie sobre una pasarela de madera dentro de un corredor funerario pintado, con jeroglíficos y figuras cubriendo las paredes y el techo.",
+  },
+  sphinx: {
+    ...media("travel-sphinx", [480, 800, 1200]),
+    alt: isEnglish
+      ? "A hand holding a pair of sunglasses up in front of the Great Sphinx, as if putting them on it."
+      : "Una mano sosteniendo unos lentes de sol frente a la Gran Esfinge, como si se los estuviera poniendo.",
+  },
+  falls: {
+    ...media("travel-falls", [480, 800, 1200, 1600]),
+    alt: isEnglish
+      ? "Wide multi-tier waterfalls throwing spray, with green vegetation in the foreground and scattered cloud in a blue sky."
+      : "Cataratas anchas de varios niveles levantando rocío, con vegetación verde en primer plano y nubes dispersas en un cielo azul.",
+  },
+  glacier: {
+    ...media("patagonia-glacier", [480, 800, 1200]),
+    alt: isEnglish
+      ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
+      : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+  },
 };
 
 const copy = isEnglish
   ? {
-      itemEyebrow: "ITEM / VISUAL ARCHIVE",
+      itemEyebrow: "VISUAL ARCHIVE",
       title: "Travel Photography",
       intro: "Selected frames from places that stayed with me.",
-      heroMeta: "PLACE / YEAR",
-      placeholder: "Placeholder media",
       memoryTitle: "Sometimes a place becomes a memory before the trip is even over.",
       memoryText: "I keep the photographs that feel like fragments — not proof that I was somewhere, just the pieces I still want to look at.",
       selectedEyebrow: "SELECTED FRAMES",
@@ -40,11 +79,9 @@ const copy = isEnglish
       nextText: "A first trip to the US, developers I admired, and a lot of English.",
     }
   : {
-      itemEyebrow: "ITEM / ARCHIVO VISUAL",
+      itemEyebrow: "ARCHIVO VISUAL",
       title: "Fotografía de viajes",
       intro: "Fotos elegidas de lugares que se me quedaron grabados.",
-      heroMeta: "LUGAR / AÑO",
-      placeholder: "Media provisional",
       memoryTitle: "A veces un lugar se vuelve un recuerdo antes de que el viaje termine.",
       memoryText: "Me quedo con las fotos que se sienten como fragmentos — no como prueba de que estuve en un lugar, sino como los pedazos que todavía quiero volver a mirar.",
       selectedEyebrow: "FOTOS SELECCIONADAS",
@@ -58,16 +95,13 @@ const copy = isEnglish
 <BaseLayout locale={locale} title={copy.title} description={copy.intro} path="travel-photography">
   <Header locale={locale} />
   <main class="item site-shell">
-    <section class="item__hero tp__hero">
+    <section class="item__hero">
       <div class="item__hero-copy">
         <p class="item__eyebrow">{copy.itemEyebrow}</p>
         <h1>{copy.title}</h1>
-        <div class="tp__hero-row">
-          <p class="item__intro">{copy.intro}</p>
-          <p class="tp__hero-meta">{copy.heroMeta}</p>
-        </div>
+        <p class="item__intro">{copy.intro}</p>
       </div>
-      <PhotoFrame class="tp__hero-photo" {...heroPhoto} />
+      <PhotoFrame class="tp__hero-photo" priority sizes="(max-width: 44rem) 88vw, 24rem" {...photos.surfer} />
     </section>
 
     <section class="item__section tp__memory">
@@ -76,20 +110,26 @@ const copy = isEnglish
         <p>{copy.memoryText}</p>
       </div>
       <div class="tp__memory-photos">
-        <PhotoFrame class="tp__memory-photo tp__memory-photo--tall" tone="dark" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__memory-photo tp__memory-photo--short" tone="light" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__memory-photo tp__memory-photo--extra" tone="mid" ariaLabel={copy.placeholder} />
+        <PhotoFrame class="tp__memory-photo tp__memory-photo--lead" sizes="(max-width: 44rem) 92vw, 44rem" {...photos.balloons} />
+        <PhotoFrame class="tp__memory-photo tp__memory-photo--counter" sizes="(max-width: 44rem) 88vw, 30rem" {...photos.coast} />
       </div>
     </section>
 
     <section class="item__section tp__selected">
       <p class="item__eyebrow">{copy.selectedEyebrow}</p>
-      <div class="tp__filmstrip">
-        <PhotoFrame class="tp__filmstrip-frame" tone="dark" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__filmstrip-frame" tone="mid" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__filmstrip-frame" tone="light" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__filmstrip-frame" tone="light" ariaLabel={copy.placeholder} />
-        <PhotoFrame class="tp__filmstrip-frame" tone="mid" ariaLabel={copy.placeholder} />
+      <div class="tp__wall">
+        <div class="tp__wall-cell tp__wall-cell--tomb">
+          <PhotoFrame class="tp__wall-photo tp__wall-photo--portrait" sizes="(max-width: 44rem) 92vw, 27rem" {...photos.tomb} />
+        </div>
+        <div class="tp__wall-cell tp__wall-cell--sphinx">
+          <PhotoFrame class="tp__wall-photo tp__wall-photo--landscape" sizes="(max-width: 44rem) 92vw, 46rem" {...photos.sphinx} />
+        </div>
+        <div class="tp__wall-cell tp__wall-cell--falls">
+          <PhotoFrame class="tp__wall-photo tp__wall-photo--landscape" sizes="(max-width: 44rem) 92vw, 46rem" {...photos.falls} />
+        </div>
+        <div class="tp__wall-cell tp__wall-cell--glacier">
+          <PhotoFrame class="tp__wall-photo tp__wall-photo--portrait" sizes="(max-width: 44rem) 92vw, 27rem" {...photos.glacier} />
+        </div>
       </div>
       <p class="tp__closing">{copy.closing}</p>
     </section>
@@ -105,32 +145,45 @@ const copy = isEnglish
 </BaseLayout>
 
 <style>
-  .tp__hero { grid-template-columns: 1fr; row-gap: 2.5rem; }
-  .tp__hero-row { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 1rem 2rem; }
-  .tp__hero-row .item__intro { margin: 0; }
-  .tp__hero-meta { margin: 0; font: 500 var(--text-meta)/var(--leading-meta) var(--font-mono); letter-spacing: var(--tracking-meta); text-transform: uppercase; color: var(--color-muted); white-space: nowrap; }
-  :global(.tp__hero-photo) { aspect-ratio: 1.75 / 1; min-height: 22rem; }
+  /* Frames are capped by width, never by height: the aspect ratios match each
+     photograph's native ratio, so object-fit never crops one. The surfer in
+     particular is mostly sky and sea and dies if it is squared off. */
+  :global(.tp__hero-photo) { width: min(100%, 24rem); margin-left: auto; aspect-ratio: .667 / 1; }
 
   .tp__memory-head { display: flex; gap: clamp(2rem, 6cqw, 5rem); align-items: baseline; }
   .tp__memory-head h2 { flex: 1.2 1 0; margin: 1.4rem 0 0; font-size: clamp(2rem, 3.4cqw, 3.1rem); line-height: 1.05; letter-spacing: -.04em; font-weight: 600; }
-  .tp__memory-head p { flex: .8 1 0; margin: 1.4rem 0 0; max-width: 34ch; font-size: 1rem; line-height: 1.5; color: var(--color-ink-soft); }
-  .tp__memory-photos { position: relative; display: grid; margin-top: 3rem; min-height: 26rem; }
-  :global(.tp__memory-photo) { position: relative; }
-  :global(.tp__memory-photo--tall) { width: 58%; aspect-ratio: .8 / 1; }
-  :global(.tp__memory-photo--short) { width: 44%; aspect-ratio: 1 / 1; margin: -3rem 0 0 auto; }
-  :global(.tp__memory-photo--extra) { width: 38%; aspect-ratio: .9 / 1; margin: -2.5rem 0 0 38%; }
+  .tp__memory-head p { flex: .8 1 0; margin: 1.4rem 0 0; max-width: 34ch; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); color: var(--color-ink-soft); }
+  .tp__memory-photos { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(2.5rem, 5cqw, 4.5rem); margin-top: clamp(2.4rem, 4cqw, 3.6rem); }
+  :global(.tp__memory-photo) { min-width: 0; aspect-ratio: 1.334 / 1; }
+  :global(.tp__memory-photo--lead) { width: min(100%, 44rem); }
+  :global(.tp__memory-photo--counter) { width: min(100%, 30rem); margin-left: auto; }
 
-  .tp__filmstrip { display: grid; grid-template-columns: repeat(5, 1fr); gap: clamp(.7rem, 1.2cqw, 1.2rem); margin-top: 2.4rem; }
-  :global(.tp__filmstrip-frame) { aspect-ratio: .78 / 1; }
-  .tp__closing { margin: 2.2rem 0 0; font-size: .98rem; color: var(--color-ink-soft); }
+  /* An archive wall, not a filmstrip: a twelve-column field the photographs sit
+     across at different spans, each offset from its neighbour. Portraits take
+     narrow spans, landscapes wide ones, so nothing is forced into a shape. */
+  .tp__wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: clamp(1.1rem, 2cqw, 2rem); align-items: start; margin-top: clamp(2.4rem, 4cqw, 3.6rem); }
+  /* The offset is padding on the cell, not margin on the photograph: a grid
+     item's margin does not size its row, so the lowest picture would hang out
+     of the grid and the closing line would ride up beside it. */
+  .tp__wall-cell { min-width: 0; }
+  .tp__wall-cell--tomb { grid-column: 1 / span 3; grid-row: 1; }
+  .tp__wall-cell--sphinx { grid-column: 7 / span 5; grid-row: 1; padding-top: clamp(3rem, 6cqw, 6rem); }
+  .tp__wall-cell--falls { grid-column: 1 / span 5; grid-row: 2; padding-top: clamp(1.5rem, 3cqw, 3rem); }
+  .tp__wall-cell--glacier { grid-column: 9 / span 3; grid-row: 2; padding-top: clamp(3.5rem, 7cqw, 7rem); }
+  :global(.tp__wall-photo--portrait) { aspect-ratio: .75 / 1; }
+  :global(.tp__wall-photo--landscape) { aspect-ratio: 1.334 / 1; }
+
+  .tp__closing { margin: clamp(2.4rem, 4cqw, 3.6rem) 0 0; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); color: var(--color-ink-soft); }
 
   @media (max-width: 44rem) {
-    :global(.tp__hero-photo) { aspect-ratio: 1.2 / 1; min-height: 16rem; }
+    :global(.tp__hero-photo) { width: 100%; margin-left: 0; }
     .tp__memory-head { flex-direction: column; gap: 1.5rem; }
-    .tp__memory-photos { margin-top: 1.5rem; min-height: 20rem; }
-    :global(.tp__memory-photo--tall) { width: 62%; }
-    :global(.tp__memory-photo--short) { width: 52%; margin-top: -2rem; }
-    :global(.tp__memory-photo--extra) { width: 46%; margin-left: 30%; }
-    .tp__filmstrip { grid-template-columns: 1fr; }
+    :global(.tp__memory-photo--lead), :global(.tp__memory-photo--counter) { width: 100%; margin-left: 0; }
+    /* One reading column: the wall stacks and every offset is dropped. */
+    .tp__wall { grid-template-columns: minmax(0, 1fr); gap: 2.2rem; }
+    .tp__wall-cell--tomb, .tp__wall-cell--sphinx,
+    .tp__wall-cell--falls, .tp__wall-cell--glacier {
+      grid-column: 1 / -1; grid-row: auto; padding-top: 0;
+    }
   }
 </style>
