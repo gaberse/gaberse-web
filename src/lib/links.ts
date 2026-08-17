@@ -18,14 +18,29 @@ const googleDocPdf = (id: string) =>
  *
  * /cv renders whatever this list holds, so adding a language is one line.
  */
-export const cvVersions = [
+const cvCatalogue = [
   {
     lang: "es",
     label: "Español",
     note: "PDF · 2 páginas",
-    url: googleDocPdf("1ko5YryUu-yBkDhIhSjMPuDmrxiXpXuHb"),
+    url: googleDocPdf("1kz-wspvPwlq6Hpwn4YdPj2C33tMMnXmR"),
+    ready: true,
+  },
+  {
+    lang: "en",
+    label: "English",
+    note: "PDF · 2 pages",
+    url: googleDocPdf("1mp-mcfgXBZWm17-Glgses_IADo3nZW4l"),
+    /* The document exists and this is its final address, but it still holds the
+       Spanish text. Offering it under an English label would hand a recruiter a
+       CV in a language they did not choose, which is worse than not offering it.
+       Flip to true once it is translated; nothing else needs to change. */
+    ready: false,
   },
 ] as const;
+
+/** Only what can honestly be handed to someone. */
+export const cvVersions = cvCatalogue.filter((version) => version.ready);
 
 /**
  * What the site links to for the CV. The hop through this origin is what makes
