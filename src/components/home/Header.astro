@@ -1,9 +1,13 @@
 ---
 import ContactProfile from "../islands/ContactProfile";
-import { localizedPath, type Locale } from "../../lib/i18n";
+import { equivalentPath, localizedPath, type Locale } from "../../lib/i18n";
 
 const { locale } = Astro.props as { locale: Locale };
 const otherLocale = locale === "en" ? "es" : "en";
+/* Derived from the URL rather than passed in: every page would otherwise have to
+   repeat the slug it already gives BaseLayout, and one that forgot would send the
+   reader back to the home. */
+const otherLocaleHref = equivalentPath(Astro.url.pathname, otherLocale);
 const labels = locale === "en"
   ? { home: "Gaberse home", navigation: "Primary navigation" }
   : { home: "Inicio de Gaberse", navigation: "Navegación principal" };
@@ -14,7 +18,7 @@ const labels = locale === "en"
   <a class="site-header__brand" href={localizedPath(locale)} aria-label={labels.home}>gaberse<sup aria-hidden="true">©</sup></a>
   <nav aria-label={labels.navigation}>
     <ContactProfile client:load locale={locale} />
-    <span class="site-header__locales"><span aria-current="page">{locale.toUpperCase()}</span><span aria-hidden="true">/</span><a href={localizedPath(otherLocale)} lang={otherLocale}>{otherLocale.toUpperCase()}</a></span>
+    <span class="site-header__locales"><span aria-current="page">{locale.toUpperCase()}</span><span aria-hidden="true">/</span><a href={otherLocaleHref} lang={otherLocale}>{otherLocale.toUpperCase()}</a></span>
   </nav>
 </header>
 
