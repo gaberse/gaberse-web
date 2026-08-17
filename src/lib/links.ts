@@ -4,15 +4,28 @@
  * linked from the home and served by /cv, and both must agree.
  */
 
+/** Google renders the PDF from the live document on request, so editing the
+ *  document updates the download with no deploy. */
+const googleDocPdf = (id: string) =>
+  `https://docs.google.com/document/d/${id}/export?format=pdf`;
+
 /**
- * The CV, rendered from the live Google Doc on every request, so editing the
- * document updates the download with no deploy.
+ * The CV, one entry per language.
  *
- * The sharing URL's `ouid` parameter is deliberately absent — it identifies the
- * Google account — and so is `/edit`, which would hand out an editing link.
+ * Sharing URLs from Drive carry an `ouid` parameter that identifies the Google
+ * account, and point at `/edit`, which hands out an editing link. Only the
+ * document id belongs here; the export URL is built from it.
+ *
+ * /cv renders whatever this list holds, so adding a language is one line.
  */
-export const cvDocumentUrl =
-  "https://docs.google.com/document/d/1ko5YryUu-yBkDhIhSjMPuDmrxiXpXuHb/export?format=pdf";
+export const cvVersions = [
+  {
+    lang: "es",
+    label: "Español",
+    note: "PDF · 2 páginas",
+    url: googleDocPdf("1ko5YryUu-yBkDhIhSjMPuDmrxiXpXuHb"),
+  },
+] as const;
 
 /**
  * What the site links to for the CV. The hop through this origin is what makes
