@@ -9,7 +9,7 @@
 .item__next { margin: clamp(4rem, 8cqw, 7rem) var(--space-page) 0; padding: clamp(2.4rem, 5cqw, 3.6rem); border-radius: var(--radius-artifact); background: var(--tone-dark-bg); color: var(--tone-dark-fg); }
 .item__next-link { display: flex; flex-wrap: wrap; gap: 1rem 2.5rem; align-items: baseline; justify-content: space-between; text-decoration: none; color: inherit; }
 .item__next-link span { font-size: clamp(1.8rem, 3.4cqw, 2.8rem); letter-spacing: -.03em; font-weight: 620; }
-.item__next-link small { max-width: 32ch; font-size: .95rem; opacity: .75; }
+.item__next-link small { max-width: 32ch; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); opacity: .78; }
 
 @media (max-width: 44rem) {
   .item__hero { grid-template-columns: 1fr; padding-top: 2.5rem; }

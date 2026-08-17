@@ -11,6 +11,9 @@
   --shadow-artifact: 0 18px 54px rgb(41 38 31 / 0.12), 0 3px 10px rgb(41 38 31 / 0.06);
   --text-meta: 0.8125rem;
   --leading-meta: 1.45;
+  /* The step between meta and body: supporting lines under a heading. */
+  --text-caption: 1rem;
+  --leading-caption: 1.45;
   --tracking-meta: 0.085em;
   --space-page: clamp(1.25rem, 3.89vw, 3.5rem);
   --content-max-width: 112.5rem;
