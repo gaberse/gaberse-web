@@ -155,7 +155,9 @@ const photos = {
   .lab__annotation-note { display: block; margin-top: .55rem; font: 400 var(--text-caption)/var(--leading-caption) var(--font-sans); letter-spacing: 0; text-transform: none; color: var(--color-ink-soft); }
 
   .lab__after h2 { margin: 1.4rem 0 0; max-width: 18ch; font-size: clamp(2.4rem, 4.2cqw, 4rem); line-height: 1; letter-spacing: -.05em; font-weight: 620; }
-  .lab__after p { margin: 1.8rem 0 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.45; color: var(--color-ink-soft); }
+  /* :not(.item__eyebrow) because the eyebrow is a <p> in this section too, and a
+     bare `p` rule was rendering "03 / DESPUÉS" at body size instead of meta size. */
+  .lab__after p:not(.item__eyebrow) { margin: 1.8rem 0 0; max-width: 46ch; font-size: clamp(1.05rem, 1.4cqw, 1.25rem); line-height: 1.45; color: var(--color-ink-soft); }
 
   @media (max-width: 44rem) {
     .lab__plates { gap: 2.8rem; }
