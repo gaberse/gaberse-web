@@ -72,17 +72,34 @@ const capabilities = isEnglish
       { name: "Explorar", lines: ["AI-assisted engineering", "Nuevas formas de construir"] },
     ];
 
-const glacier = {
-  src: "/media/travel/patagonia-glacier-480.webp",
-  srcSet: [
-    "/media/travel/patagonia-glacier-480.webp 480w",
-    "/media/travel/patagonia-glacier-800.webp 800w",
-    "/media/travel/patagonia-glacier-1200.webp 1200w",
-  ].join(", "),
-  alt: isEnglish
-    ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
-    : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
-};
+const media = (dir: string, name: string, widths: number[]) => ({
+  src: `/media/${dir}/${name}-${widths[0]}.webp`,
+  srcSet: widths.map((w) => `/media/${dir}/${name}-${w}.webp ${w}w`).join(", "),
+});
+
+/* One real photograph per universe entry, each taken from the page it opens.
+   Every aspect ratio below matches its photograph's native ratio, so object-fit
+   never actually crops one. */
+const universeMedia = {
+  "react-miami-2025": {
+    ...media("react-miami", "rm-audience", [480, 800, 1024]),
+    alt: isEnglish
+      ? "A crowd under the venue's lit ceiling during React Miami 2025."
+      : "Público bajo el techo iluminado del venue durante React Miami 2025.",
+  },
+  laboratoria: {
+    ...media("laboratoria", "laboratoria-portrait", [480, 800, 960]),
+    alt: isEnglish
+      ? "Gabriela resting her chin on her hand by a window, in black and white, during the bootcamp."
+      : "Gabriela apoyando el mentón en la mano junto a una ventana, en blanco y negro, durante el bootcamp.",
+  },
+  "travel-photography": {
+    ...media("travel", "patagonia-glacier", [480, 800, 1200]),
+    alt: isEnglish
+      ? "Standing beside Perito Moreno Glacier in Los Glaciares National Park, Argentina, with the Argentine flag flying overhead."
+      : "De pie junto al glaciar Perito Moreno, en el Parque Nacional Los Glaciares, Argentina, con la bandera argentina ondeando.",
+  },
+} as const;
 
 /* Abstract objects with placeholder names, pending real content. They carry no
    destination on purpose — the hero must not imply projects it does not have. */
@@ -108,14 +125,14 @@ const heroDeckLabels = {
 
 const universe = isEnglish
   ? [
-      { title: "React Miami 2025", meta: "Experience / 2025", slug: "react-miami-2025", tone: "dark" as const },
-      { title: "Laboratoria", meta: "Origin / 2019", slug: "laboratoria", tone: "light" as const },
-      { title: "Travel Photography", meta: "Photo / Visual", slug: "travel-photography", tone: "mid" as const },
+      { title: "React Miami 2025", meta: "Experience / 2025", slug: "react-miami-2025" as const },
+      { title: "Laboratoria", meta: "Origin / 2019", slug: "laboratoria" as const },
+      { title: "Travel Photography", meta: "Photo / Visual", slug: "travel-photography" as const },
     ]
   : [
-      { title: "React Miami 2025", meta: "Experiencia / 2025", slug: "react-miami-2025", tone: "dark" as const },
-      { title: "Laboratoria", meta: "Origen / 2019", slug: "laboratoria", tone: "light" as const },
-      { title: "Fotografía de viajes", meta: "Foto / Visual", slug: "travel-photography", tone: "mid" as const },
+      { title: "React Miami 2025", meta: "Experiencia / 2025", slug: "react-miami-2025" as const },
+      { title: "Laboratoria", meta: "Origen / 2019", slug: "laboratoria" as const },
+      { title: "Fotografía de viajes", meta: "Foto / Visual", slug: "travel-photography" as const },
     ];
 ---
 
@@ -194,19 +211,9 @@ const universe = isEnglish
     <section class="pivot__section universe">
       <p class="pivot__eyebrow">{copy.universeLabel}</p>
       <div class="universe__list">
-        {universe.map(({ title, meta, slug, tone }) => (
+        {universe.map(({ title, meta, slug }) => (
           <a class={`universe__entry universe__entry--${slug}`} href={localizedPath(locale, slug)}>
-            {slug === "travel-photography" ? (
-              <PhotoFrame
-                class="universe__object"
-                src={glacier.src}
-                srcSet={glacier.srcSet}
-                sizes="(max-width: 44rem) 100vw, 26rem"
-                alt={glacier.alt}
-              />
-            ) : (
-              <PhotoFrame class="universe__object" tone={tone} ariaLabel={copy.placeholder} />
-            )}
+            <PhotoFrame class="universe__object" sizes="(max-width: 44rem) 100vw, 42vw" {...universeMedia[slug]} />
             <strong>{title} <span aria-hidden="true">↗</span></strong>
             <small>{meta}</small>
           </a>
@@ -322,8 +329,10 @@ const universe = isEnglish
   .universe__entry { min-width: 0; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
   .universe__entry--react-miami-2025 { margin-top: clamp(1.5rem, 3.5cqw, 3.5rem); }
   .universe__entry--laboratoria { margin-top: clamp(5rem, 11cqw, 11rem); }
-  :global(.universe__entry--react-miami-2025 .universe__object) { aspect-ratio: 1.62 / 1; }
-  :global(.universe__entry--laboratoria .universe__object) { aspect-ratio: .95 / 1; }
+  /* Ratios track each photograph's native ratio, so object-fit never crops one.
+     The row stays uneven because the column widths differ, not the crops. */
+  :global(.universe__entry--react-miami-2025 .universe__object) { aspect-ratio: 1.498 / 1; }
+  :global(.universe__entry--laboratoria .universe__object) { aspect-ratio: 1 / 1; }
   :global(.universe__entry--travel-photography .universe__object) { aspect-ratio: .62 / 1; }
   .universe__entry strong { margin-top: 1.2rem; font-size: clamp(1.05rem, 1.45cqw, 1.35rem); letter-spacing: -.035em; font-weight: 560; transition: color 160ms ease; }
   .universe__entry strong span { display: inline-block; margin-left: .1em; font-size: .78em; vertical-align: .06em; }
