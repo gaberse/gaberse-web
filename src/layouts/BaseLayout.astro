@@ -19,6 +19,7 @@ const seo = createSeo({ locale, title, description, path });
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
     <title>{seo.pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={seo.canonical} />
