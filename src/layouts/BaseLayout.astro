@@ -19,7 +19,12 @@ const seo = createSeo({ locale, title, description, path });
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+    {/* Both tab sizes, because 16 is a hand-tuned drawing rather than a scaled
+        one, and the Apple icon for a saved home-screen shortcut — its white
+        background is deliberate, since iOS composites transparency onto black. */}
+    <link rel="icon" href="/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="/favicon-16.png" type="image/png" sizes="16x16" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
     <title>{seo.pageTitle}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={seo.canonical} />
